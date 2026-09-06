@@ -15,25 +15,27 @@ export function generateStaticParams() {
   ];
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { locale: string };
-}): Metadata {
-  if (!isLocale(params.locale)) return {};
-  return buildLocaleMetadata(params.locale);
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return buildLocaleMetadata(locale);
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  if (!isLocale(params.locale)) notFound();
+  const { locale: localeParam } = await params;
+  if (!isLocale(localeParam)) notFound();
 
-  const locale = params.locale as Locale;
+  const locale = localeParam as Locale;
   const lang = htmlLang[locale] ?? htmlLang[defaultLocale];
 
   return (
