@@ -1,0 +1,747 @@
+import type { Locale } from "./config";
+
+export type Dictionary = {
+  meta: {
+    title: string;
+    description: string;
+    keywords: string[];
+  };
+  nav: {
+    home: string;
+    categories: string;
+    telegram: string;
+    forWhom: string;
+    product: string;
+    location: string;
+    start: string;
+    menu: string;
+    close: string;
+    join: string;
+  };
+  hero: {
+    line1: string;
+    line2: string;
+    subtitle: string;
+    cta: string;
+    cardAll: string;
+    cardStats: string;
+    cardStatsDesc: string;
+    cardTg: string;
+    cardTgDesc: string;
+    tagGoods: string;
+    tagServices: string;
+    tagAds: string;
+    tagCommunity: string;
+  };
+  categories: {
+    title: string;
+    subtitle: string;
+    openMarketplace: string;
+    back: string;
+    labels: Record<string, string>;
+  };
+  telegram: {
+    powered: string;
+    title: string;
+    titleAccent: string;
+    desc: string;
+    open: string;
+    features: { icon: string; title: string; desc: string }[];
+  };
+  audience: {
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    items: {
+      id: string;
+      label: string;
+      desc: string;
+      image: string;
+    }[];
+  };
+  product: {
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    mainBadge: string;
+    mainTitle: string;
+    mainDesc: string;
+    choiceTitle: string;
+    choiceDesc: string;
+    zonesBadge: string;
+    zonesLines: string[];
+    audienceNum: string;
+    audienceDesc: string;
+    hrLabel: string;
+    hrTitle: string;
+    hrDesc: string;
+    chillEyebrow: string;
+    chillTitle: string;
+  };
+  map: {
+    title: string;
+    titleAccent: string;
+    headline: string;
+    headlineAccent: string;
+    desc: string;
+    activeUsers: string;
+    coverage: string;
+    activeCity: string;
+    otherCity: string;
+    ads: string;
+    newWeek: string;
+    viewCity: string;
+  };
+  footer: {
+    desc: string;
+    join: string;
+    start: string;
+    rights: string;
+    privacy: string;
+    terms: string;
+  };
+  notFound: {
+    title: string;
+    description: string;
+    back: string;
+    home: string;
+  };
+};
+
+const ua: Dictionary = {
+  meta: {
+    title: "TradeGround — Marketplace у Telegram",
+    description:
+      "Marketplace для життя в Німеччині. Товари, послуги й можливості прямо в Telegram. Купуйте та продавайте без зайвих додатків.",
+    keywords: [
+      "TradeGround",
+      "маркетплейс Telegram",
+      "українці в Німеччині",
+      "оголошення Німеччина",
+      "купити продати Telegram",
+      "marketplace Germany",
+      "TradeGroundBot",
+    ],
+  },
+  nav: {
+    home: "Головна",
+    categories: "Категорії",
+    telegram: "Telegram",
+    forWhom: "Для кого",
+    product: "Що всередині",
+    location: "Локація",
+    start: "Почати",
+    menu: "Menu",
+    close: "Close",
+    join: "Приєднатись зараз",
+  },
+  hero: {
+    line1: "Trade",
+    line2: "Ground",
+    subtitle:
+      "Єдина платформа товарів, послуг і можливостей для життя в Німеччині — прямо в Telegram. Купуйте, продавайте та знаходьте поруч без зайвих додатків.",
+    cta: "Відкрити маркетплейс",
+    cardAll: "Все в одному місці",
+    cardStats: "50K+",
+    cardStatsDesc: "оголошень у десятках категорій по всій Німеччині",
+    cardTg: "Працює в Telegram",
+    cardTgDesc: "Без завантажень — відкривай маркетплейс і починай користуватись",
+    tagGoods: "Товари",
+    tagServices: "Послуги",
+    tagAds: "Оголошення",
+    tagCommunity: "Спільнота",
+  },
+  categories: {
+    title: "ONE PLACE. ALL YOU NEED.",
+    subtitle: "Товари, послуги й можливості в одному просторі.",
+    openMarketplace: "Відкрити в маркетплейсі",
+    back: "Назад",
+    labels: {
+      all: "Всі категорії",
+      services: "Послуги та робота",
+      fashion: "Мода та стиль",
+      furniture: "Меблі",
+      electronics: "Електроніка",
+      appliances: "Побутова техніка",
+      kids: "Дитячі товари",
+      home: "Для дому",
+      beauty: "Краса та здоров'я",
+      auto: "Авто",
+      hobby: "Хобі / Спорт",
+      pets: "Улюбленці",
+      realestate: "Нерухомість",
+      free: "Безкоштовно / Віддам",
+    },
+  },
+  telegram: {
+    powered: "Powered by Telegram",
+    title: "Marketplace у звичному",
+    titleAccent: "месенджері.",
+    desc: "TradeGround працює прямо в Telegram. Жодних додаткових додатків — відкривайте Marketplace і починайте користуватись.",
+    open: "Відкрити\nTradeGround",
+    features: [
+      {
+        icon: "📦",
+        title: "Без завантажень",
+        desc: "Не потрібно встановлювати ще один додаток.",
+      },
+      {
+        icon: "💬",
+        title: "Прямий контакт",
+        desc: "Знайшли потрібне — одразу напишіть продавцю або спеціалісту.",
+      },
+      {
+        icon: "🌐",
+        title: "Зрозуміла мова",
+        desc: "Шукайте, продавайте й спілкуйтесь без мовного бар'єру.",
+      },
+    ],
+  },
+  audience: {
+    title: "Private /",
+    titleAccent: "Business",
+    subtitle: "Для кожного — свій рівень.",
+    items: [
+      {
+        id: "private",
+        label: "Для приватних осіб",
+        desc: "Купуйте. Продавайте. Знаходьте поруч. Усе необхідне у вашому місті — з прямим зв'язком через Telegram.",
+        image: "/media/plan-start.jpg",
+      },
+      {
+        id: "business",
+        label: "Для бізнесу",
+        desc: "Більше можливостей для продажів і росту. Професійний профіль, просування та інструменти для роботи з клієнтами.",
+        image: "/media/plan-business.jpg",
+      },
+    ],
+  },
+  product: {
+    title: "Що всередині",
+    titleAccent: "TradeGround",
+    subtitle: "Усе, що потрібно для життя, торгівлі й розвитку в Німеччині",
+    mainBadge: "TradeGround",
+    mainTitle: "Простір, створений для росту",
+    mainDesc:
+      "Оголошення, угоди та спільнота — усе для торгівлі серед українців у Німеччині.",
+    choiceTitle: "Великий вибір",
+    choiceDesc: "50K+ оголошень у десятках категорій",
+    zonesBadge: "Робочі зони",
+    zonesLines: ["Фокус", "Швидкість", "Результат"],
+    audienceNum: "2",
+    audienceDesc: "млн+ українців у Німеччині",
+    hrLabel: "TradeGround HR",
+    hrTitle: "Кар'єрний центр & HR",
+    hrDesc: "З'єднуємо кандидатів з роботодавцями",
+    chillEyebrow: "Баланс роботи та енергії",
+    chillTitle: "Спільнота & нетворкінг",
+  },
+  map: {
+    title: "Germany",
+    titleAccent: "Map",
+    headline: "Ми вже там,",
+    headlineAccent: "де ти.",
+    desc: "TradeGround доступний у всіх великих містах Німеччини. Знаходьте товари та послуги поруч із вами.",
+    activeUsers: "активних оголошень",
+    coverage: "Покриття",
+    activeCity: "Активне місто",
+    otherCity: "Інше місто",
+    ads: "активних оголошень",
+    newWeek: "нових за тиждень",
+    viewCity: "Дивитись",
+  },
+  footer: {
+    desc: "Єдина екосистема товарів, послуг і можливостей для життя в Німеччині.",
+    join: "Приєднатись зараз",
+    start: "Почати",
+    rights: "©2026 TradeGround | ALL RIGHTS RESERVED",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+  },
+  notFound: {
+    title: "Сторінку не знайдено",
+    description: "Схоже, цієї сторінки не існує. Поверніться на головну TradeGround.",
+    back: "Назад",
+    home: "На головну",
+  },
+};
+
+const ru: Dictionary = {
+  meta: {
+    title: "TradeGround — Marketplace в Telegram",
+    description:
+      "Marketplace для жизни в Германии. Товары, услуги и возможности прямо в Telegram. Покупайте и продавайте без лишних приложений.",
+    keywords: [
+      "TradeGround",
+      "маркетплейс Telegram",
+      "украинцы в Германии",
+      "объявления Германия",
+      "купить продать Telegram",
+      "marketplace Germany",
+      "TradeGroundBot",
+    ],
+  },
+  nav: {
+    home: "Главная",
+    categories: "Категории",
+    telegram: "Telegram",
+    forWhom: "Для кого",
+    product: "Что внутри",
+    location: "Локация",
+    start: "Начать",
+    menu: "Menu",
+    close: "Close",
+    join: "Присоединиться сейчас",
+  },
+  hero: {
+    line1: "Trade",
+    line2: "Ground",
+    subtitle:
+      "Единая платформа товаров, услуг и возможностей для жизни в Германии — прямо в Telegram. Покупайте, продавайте и находите рядом без лишних приложений.",
+    cta: "Открыть маркетплейс",
+    cardAll: "Всё в одном месте",
+    cardStats: "50K+",
+    cardStatsDesc: "объявлений в десятках категорий по всей Германии",
+    cardTg: "Работает в Telegram",
+    cardTgDesc: "Без загрузок — открывайте маркетплейс и начинайте пользоваться",
+    tagGoods: "Товары",
+    tagServices: "Услуги",
+    tagAds: "Объявления",
+    tagCommunity: "Сообщество",
+  },
+  categories: {
+    title: "ONE PLACE. ALL YOU NEED.",
+    subtitle: "Товары, услуги и возможности в одном пространстве.",
+    openMarketplace: "Открыть в маркетплейсе",
+    back: "Назад",
+    labels: {
+      all: "Все категории",
+      services: "Услуги и работа",
+      fashion: "Мода и стиль",
+      furniture: "Мебель",
+      electronics: "Электроника",
+      appliances: "Бытовая техника",
+      kids: "Детские товары",
+      home: "Для дома",
+      beauty: "Красота и здоровье",
+      auto: "Авто",
+      hobby: "Хобби / Спорт",
+      pets: "Питомцы",
+      realestate: "Недвижимость",
+      free: "Бесплатно / Отдам",
+    },
+  },
+  telegram: {
+    powered: "Powered by Telegram",
+    title: "Marketplace в привычном",
+    titleAccent: "мессенджере.",
+    desc: "TradeGround работает прямо в Telegram. Никаких дополнительных приложений — открывайте Marketplace и начинайте пользоваться.",
+    open: "Открыть\nTradeGround",
+    features: [
+      {
+        icon: "📦",
+        title: "Без загрузок",
+        desc: "Не нужно устанавливать ещё одно приложение.",
+      },
+      {
+        icon: "💬",
+        title: "Прямой контакт",
+        desc: "Нашли нужное — сразу напишите продавцу или специалисту.",
+      },
+      {
+        icon: "🌐",
+        title: "Понятный язык",
+        desc: "Ищите, продавайте и общайтесь без языкового барьера.",
+      },
+    ],
+  },
+  audience: {
+    title: "Private /",
+    titleAccent: "Business",
+    subtitle: "Для каждого — свой уровень.",
+    items: [
+      {
+        id: "private",
+        label: "Для частных лиц",
+        desc: "Покупайте. Продавайте. Находите рядом. Всё необходимое в вашем городе — с прямой связью через Telegram.",
+        image: "/media/plan-start.jpg",
+      },
+      {
+        id: "business",
+        label: "Для бизнеса",
+        desc: "Больше возможностей для продаж и роста. Профессиональный профиль, продвижение и инструменты для работы с клиентами.",
+        image: "/media/plan-business.jpg",
+      },
+    ],
+  },
+  product: {
+    title: "Что внутри",
+    titleAccent: "TradeGround",
+    subtitle: "Всё, что нужно для жизни, торговли и развития в Германии",
+    mainBadge: "TradeGround",
+    mainTitle: "Пространство, созданное для роста",
+    mainDesc:
+      "Объявления, сделки и сообщество — всё для торговли среди украинцев в Германии.",
+    choiceTitle: "Большой выбор",
+    choiceDesc: "50K+ объявлений в десятках категорий",
+    zonesBadge: "Рабочие зоны",
+    zonesLines: ["Фокус", "Скорость", "Результат"],
+    audienceNum: "2",
+    audienceDesc: "млн+ украинцев в Германии",
+    hrLabel: "TradeGround HR",
+    hrTitle: "Карьерный центр & HR",
+    hrDesc: "Соединяем кандидатов с работодателями",
+    chillEyebrow: "Баланс работы и энергии",
+    chillTitle: "Сообщество & нетворкинг",
+  },
+  map: {
+    title: "Germany",
+    titleAccent: "Map",
+    headline: "Мы уже там,",
+    headlineAccent: "где ты.",
+    desc: "TradeGround доступен во всех крупных городах Германии. Находите товары и услуги рядом с вами.",
+    activeUsers: "активных объявлений",
+    coverage: "Покрытие",
+    activeCity: "Активный город",
+    otherCity: "Другой город",
+    ads: "активных объявлений",
+    newWeek: "новых за неделю",
+    viewCity: "Смотреть",
+  },
+  footer: {
+    desc: "Единая экосистема товаров, услуг и возможностей для жизни в Германии.",
+    join: "Присоединиться сейчас",
+    start: "Начать",
+    rights: "©2026 TradeGround | ALL RIGHTS RESERVED",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+  },
+  notFound: {
+    title: "Страница не найдена",
+    description: "Похоже, этой страницы не существует. Вернитесь на главную TradeGround.",
+    back: "Назад",
+    home: "На главную",
+  },
+};
+
+const en: Dictionary = {
+  meta: {
+    title: "TradeGround — Marketplace in Telegram",
+    description:
+      "Marketplace for life in Germany. Goods, services and opportunities right in Telegram. Buy and sell without extra apps.",
+    keywords: [
+      "TradeGround",
+      "Telegram marketplace",
+      "Ukrainians in Germany",
+      "classifieds Germany",
+      "buy sell Telegram",
+      "marketplace Germany",
+      "TradeGroundBot",
+    ],
+  },
+  nav: {
+    home: "Home",
+    categories: "Categories",
+    telegram: "Telegram",
+    forWhom: "For whom",
+    product: "What's inside",
+    location: "Location",
+    start: "Start",
+    menu: "Menu",
+    close: "Close",
+    join: "Join now",
+  },
+  hero: {
+    line1: "Trade",
+    line2: "Ground",
+    subtitle:
+      "One platform for goods, services and opportunities for life in Germany — right in Telegram. Buy, sell and find nearby without extra apps.",
+    cta: "Open marketplace",
+    cardAll: "Everything in one place",
+    cardStats: "50K+",
+    cardStatsDesc: "listings across dozens of categories all over Germany",
+    cardTg: "Works in Telegram",
+    cardTgDesc: "No downloads — open the marketplace and start using it",
+    tagGoods: "Goods",
+    tagServices: "Services",
+    tagAds: "Listings",
+    tagCommunity: "Community",
+  },
+  categories: {
+    title: "ONE PLACE. ALL YOU NEED.",
+    subtitle: "Goods, services and opportunities in one space.",
+    openMarketplace: "Open in marketplace",
+    back: "Back",
+    labels: {
+      all: "All categories",
+      services: "Services & jobs",
+      fashion: "Fashion & style",
+      furniture: "Furniture",
+      electronics: "Electronics",
+      appliances: "Appliances",
+      kids: "Kids",
+      home: "Home",
+      beauty: "Beauty & health",
+      auto: "Auto",
+      hobby: "Hobby / Sports",
+      pets: "Pets",
+      realestate: "Real estate",
+      free: "Free / Giveaway",
+    },
+  },
+  telegram: {
+    powered: "Powered by Telegram",
+    title: "Marketplace in your familiar",
+    titleAccent: "messenger.",
+    desc: "TradeGround works right inside Telegram. No extra apps — open the Marketplace and start using it.",
+    open: "Open\nTradeGround",
+    features: [
+      {
+        icon: "📦",
+        title: "No downloads",
+        desc: "No need to install yet another app.",
+      },
+      {
+        icon: "💬",
+        title: "Direct contact",
+        desc: "Found what you need — message the seller or specialist right away.",
+      },
+      {
+        icon: "🌐",
+        title: "Clear language",
+        desc: "Search, sell and chat without a language barrier.",
+      },
+    ],
+  },
+  audience: {
+    title: "Private /",
+    titleAccent: "Business",
+    subtitle: "A level for everyone.",
+    items: [
+      {
+        id: "private",
+        label: "For individuals",
+        desc: "Buy. Sell. Find nearby. Everything you need in your city — with direct Telegram contact.",
+        image: "/media/plan-start.jpg",
+      },
+      {
+        id: "business",
+        label: "For business",
+        desc: "More opportunities for sales and growth. Professional profile, promotion and tools to work with clients.",
+        image: "/media/plan-business.jpg",
+      },
+    ],
+  },
+  product: {
+    title: "What's inside",
+    titleAccent: "TradeGround",
+    subtitle: "Everything you need for life, trade and growth in Germany",
+    mainBadge: "TradeGround",
+    mainTitle: "A space built for growth",
+    mainDesc:
+      "Listings, deals and community — everything for trading among Ukrainians in Germany.",
+    choiceTitle: "Huge selection",
+    choiceDesc: "50K+ listings across dozens of categories",
+    zonesBadge: "Work zones",
+    zonesLines: ["Focus", "Speed", "Results"],
+    audienceNum: "2",
+    audienceDesc: "M+ Ukrainians in Germany",
+    hrLabel: "TradeGround HR",
+    hrTitle: "Career center & HR",
+    hrDesc: "Connecting candidates with employers",
+    chillEyebrow: "Balance of work and energy",
+    chillTitle: "Community & networking",
+  },
+  map: {
+    title: "Germany",
+    titleAccent: "Map",
+    headline: "We're already there,",
+    headlineAccent: "where you are.",
+    desc: "TradeGround is available in all major German cities. Find goods and services near you.",
+    activeUsers: "active listings",
+    coverage: "Coverage",
+    activeCity: "Active city",
+    otherCity: "Other city",
+    ads: "active listings",
+    newWeek: "new this week",
+    viewCity: "View",
+  },
+  footer: {
+    desc: "A unified ecosystem of goods, services and opportunities for life in Germany.",
+    join: "Join now",
+    start: "Start",
+    rights: "©2026 TradeGround | ALL RIGHTS RESERVED",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+  },
+  notFound: {
+    title: "Page not found",
+    description: "This page doesn’t exist. Head back to the TradeGround home page.",
+    back: "Back",
+    home: "Go home",
+  },
+};
+
+const de: Dictionary = {
+  meta: {
+    title: "TradeGround — Marketplace in Telegram",
+    description:
+      "Marketplace für das Leben in Deutschland. Waren, Services und Möglichkeiten direkt in Telegram. Kaufen und verkaufen ohne Extra-Apps.",
+    keywords: [
+      "TradeGround",
+      "Telegram Marketplace",
+      "Ukrainer in Deutschland",
+      "Kleinanzeigen Deutschland",
+      "kaufen verkaufen Telegram",
+      "marketplace Germany",
+      "TradeGroundBot",
+    ],
+  },
+  nav: {
+    home: "Start",
+    categories: "Kategorien",
+    telegram: "Telegram",
+    forWhom: "Für wen",
+    product: "Was steckt drin",
+    location: "Standort",
+    start: "Starten",
+    menu: "Menu",
+    close: "Close",
+    join: "Jetzt beitreten",
+  },
+  hero: {
+    line1: "Trade",
+    line2: "Ground",
+    subtitle:
+      "Eine Plattform für Waren, Services und Möglichkeiten für das Leben in Deutschland — direkt in Telegram. Kaufen, verkaufen und in der Nähe finden ohne Extra-Apps.",
+    cta: "Marketplace öffnen",
+    cardAll: "Alles an einem Ort",
+    cardStats: "50K+",
+    cardStatsDesc: "Anzeigen in Dutzenden Kategorien in ganz Deutschland",
+    cardTg: "Läuft in Telegram",
+    cardTgDesc: "Kein Download — Marketplace öffnen und loslegen",
+    tagGoods: "Waren",
+    tagServices: "Services",
+    tagAds: "Anzeigen",
+    tagCommunity: "Community",
+  },
+  categories: {
+    title: "ONE PLACE. ALL YOU NEED.",
+    subtitle: "Waren, Services und Möglichkeiten in einem Raum.",
+    openMarketplace: "Im Marketplace öffnen",
+    back: "Zurück",
+    labels: {
+      all: "Alle Kategorien",
+      services: "Services & Jobs",
+      fashion: "Mode & Style",
+      furniture: "Möbel",
+      electronics: "Elektronik",
+      appliances: "Haushaltsgeräte",
+      kids: "Kinder",
+      home: "Zuhause",
+      beauty: "Beauty & Gesundheit",
+      auto: "Auto",
+      hobby: "Hobby / Sport",
+      pets: "Haustiere",
+      realestate: "Immobilien",
+      free: "Kostenlos / Abzugeben",
+    },
+  },
+  telegram: {
+    powered: "Powered by Telegram",
+    title: "Marketplace im gewohnten",
+    titleAccent: "Messenger.",
+    desc: "TradeGround läuft direkt in Telegram. Keine Extra-Apps — Marketplace öffnen und loslegen.",
+    open: "TradeGround\nöffnen",
+    features: [
+      {
+        icon: "📦",
+        title: "Ohne Downloads",
+        desc: "Kein weiteres App-Install nötig.",
+      },
+      {
+        icon: "💬",
+        title: "Direkter Kontakt",
+        desc: "Gefunden — sofort dem Verkäufer oder Spezialisten schreiben.",
+      },
+      {
+        icon: "🌐",
+        title: "Klare Sprache",
+        desc: "Suchen, verkaufen und chatten ohne Sprachbarriere.",
+      },
+    ],
+  },
+  audience: {
+    title: "Private /",
+    titleAccent: "Business",
+    subtitle: "Für jeden das richtige Level.",
+    items: [
+      {
+        id: "private",
+        label: "Für Privatpersonen",
+        desc: "Kaufen. Verkaufen. In der Nähe finden. Alles Nötige in Ihrer Stadt — mit direktem Telegram-Kontakt.",
+        image: "/media/plan-start.jpg",
+      },
+      {
+        id: "business",
+        label: "Für Business",
+        desc: "Mehr Möglichkeiten für Verkauf und Wachstum. Professionelles Profil, Promotion und Tools für die Kundenarbeit.",
+        image: "/media/plan-business.jpg",
+      },
+    ],
+  },
+  product: {
+    title: "Was steckt in",
+    titleAccent: "TradeGround",
+    subtitle: "Alles für Leben, Handel und Wachstum in Deutschland",
+    mainBadge: "TradeGround",
+    mainTitle: "Ein Raum für Wachstum",
+    mainDesc:
+      "Anzeigen, Deals und Community — alles für den Handel unter Ukrainern in Deutschland.",
+    choiceTitle: "Große Auswahl",
+    choiceDesc: "50K+ Anzeigen in Dutzenden Kategorien",
+    zonesBadge: "Arbeitszonen",
+    zonesLines: ["Fokus", "Tempo", "Ergebnis"],
+    audienceNum: "2",
+    audienceDesc: "Mio.+ Ukrainer in Deutschland",
+    hrLabel: "TradeGround HR",
+    hrTitle: "Karrierezentrum & HR",
+    hrDesc: "Wir verbinden Kandidaten mit Arbeitgebern",
+    chillEyebrow: "Balance aus Arbeit und Energie",
+    chillTitle: "Community & Networking",
+  },
+  map: {
+    title: "Germany",
+    titleAccent: "Map",
+    headline: "Wir sind schon da,",
+    headlineAccent: "wo du bist.",
+    desc: "TradeGround ist in allen großen Städten Deutschlands verfügbar. Finde Waren und Services in deiner Nähe.",
+    activeUsers: "aktive Anzeigen",
+    coverage: "Abdeckung",
+    activeCity: "Aktive Stadt",
+    otherCity: "Andere Stadt",
+    ads: "aktive Anzeigen",
+    newWeek: "neu diese Woche",
+    viewCity: "Ansehen",
+  },
+  footer: {
+    desc: "Ein Ökosystem aus Waren, Services und Möglichkeiten für das Leben in Deutschland.",
+    join: "Jetzt beitreten",
+    start: "Starten",
+    rights: "©2026 TradeGround | ALL RIGHTS RESERVED",
+    privacy: "Privacy Policy",
+    terms: "Terms of Use",
+  },
+  notFound: {
+    title: "Seite nicht gefunden",
+    description: "Diese Seite existiert nicht. Zurück zur TradeGround-Startseite.",
+    back: "Zurück",
+    home: "Zur Startseite",
+  },
+};
+
+export const dictionaries: Record<Locale, Dictionary> = { ua, ru, en, de };
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale] ?? dictionaries.ua;
+}

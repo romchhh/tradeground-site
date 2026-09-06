@@ -1,0 +1,6 @@
+# https://www.w3.org/TR/security-txt/
+Contact: mailto:hello@tradeground.app
+Contact: https://t.me/TradeGroundBot
+Preferred-Languages: uk, en, ru, de
+Canonical: https://tradeground.app/.well-known/security.txt
+Expires: 2027-12-31T23:59:59.000Z

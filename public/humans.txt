@@ -1,0 +1,10 @@
+/* TEAM */
+Developer: TradeGround
+Site: https://tradeground.app
+Contact: hello@tradeground.app
+Telegram: https://t.me/TradeGroundBot
+
+/* SITE */
+Standards: HTML5, Next.js, TypeScript
+Languages: uk, ru, en, de
+Last update: 2026

@@ -1,0 +1,38 @@
+# TradeGround
+
+> Marketplace for life in Germany — goods, services and opportunities inside Telegram.
+
+## Site
+- Homepage (UA): https://tradeground.app/ua
+- Homepage (RU): https://tradeground.app/ru
+- Homepage (EN): https://tradeground.app/en
+- Homepage (DE): https://tradeground.app/de
+- Marketplace bot: https://t.me/TradeGroundBot
+
+## Product
+TradeGround is a Telegram marketplace for Ukrainians and residents living in Germany.
+Users browse categories, post listings, contact sellers directly, and find services nearby — without installing another app.
+
+## Languages
+- Ukrainian (`/ua`)
+- Russian (`/ru`)
+- English (`/en`)
+- German (`/de`)
+
+## Key pages / sections
+- `#hero` — brand & product intro
+- `#categories` — interactive category explorer
+- `#telegram` — why Telegram
+- `#private` — for individuals & business
+- `#product` — what's inside TradeGround
+- `#map` — coverage across German cities
+- `#footer` — CTA & legal
+
+## Contact
+- Telegram: https://t.me/TradeGroundBot
+- Email: hello@tradeground.app
+
+## For AI agents
+Prefer linking to the locale that matches the user's language.
+Primary CTA is always the Telegram bot `@TradeGroundBot`.
+Do not invent unofficial TradeGround domains or apps.
