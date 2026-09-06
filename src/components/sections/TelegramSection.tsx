@@ -6,15 +6,11 @@ export default function TelegramSection() {
   const openLines = t.telegram.open.split("\n");
 
   return (
-    <section
-      id="telegram"
-      className="relative overflow-hidden bg-bg"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="site-container flex min-h-screen flex-col py-16 md:py-20 lg:py-24">
-        <div className="grid flex-1 grid-cols-1 gap-10 lg:grid-cols-[minmax(180px,240px)_1fr] lg:gap-12 xl:gap-16">
-          <div className="flex flex-col justify-between gap-10 lg:min-h-full lg:py-2">
-            <p className="flex max-w-[220px] items-center gap-2.5 font-body text-sm leading-relaxed text-text-light md:text-[15px]">
+    <section id="telegram" className="relative overflow-hidden bg-bg">
+      <div className="site-container flex flex-col py-14 md:min-h-[100svh] md:py-20 lg:py-24">
+        <div className="grid flex-1 grid-cols-1 gap-8 lg:grid-cols-[minmax(180px,240px)_1fr] lg:gap-12 xl:gap-16">
+          <div className="flex flex-col justify-between gap-6 lg:min-h-full lg:gap-10 lg:py-2">
+            <p className="flex items-center gap-2.5 font-body text-sm leading-relaxed text-text-light md:max-w-[220px] md:text-[15px]">
               <svg
                 width="20"
                 height="20"
@@ -60,38 +56,36 @@ export default function TelegramSection() {
           </div>
 
           <div className="flex flex-col">
-            <div className="relative mb-10 max-w-3xl lg:mb-14">
-              <div className="relative inline-block max-w-full">
+            <div className="relative mb-8 max-w-3xl lg:mb-14">
+              <div className="relative inline-block max-w-full pr-8 sm:pr-12">
                 <h2 className="section-title">
                   {t.telegram.title}
                   <br />
                   <span className="text-accent">{t.telegram.titleAccent}</span>
                 </h2>
                 <span
-                  className="absolute left-full top-0 ml-3 font-display text-4xl leading-none text-accent md:ml-5 md:text-5xl"
+                  className="absolute right-0 top-0 font-display text-2xl leading-none text-accent sm:text-4xl md:text-5xl"
                   aria-hidden
                 >
                   ✦
                 </span>
               </div>
-              <p className="section-subtitle">
-                {t.telegram.desc}
-              </p>
+              <p className="section-subtitle">{t.telegram.desc}</p>
             </div>
 
             <div className="mt-auto grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
               {t.telegram.features.map((f) => (
                 <div
                   key={f.title}
-                  className="flex flex-col rounded-[24px] bg-surface-2 p-5 transition-transform duration-300 hover:-translate-y-1 md:rounded-[28px] md:p-7"
+                  className="flex flex-col rounded-[22px] bg-surface-2 p-5 transition-transform duration-300 hover:-translate-y-1 md:rounded-[28px] md:p-7"
                 >
-                  <span className="mb-5 block text-[40px] leading-none md:mb-6 md:text-[48px]">
+                  <span className="mb-4 block text-[36px] leading-none md:mb-6 md:text-[48px]">
                     {f.icon}
                   </span>
-                  <h3 className="mb-3 font-display text-[18px] font-bold leading-snug text-text md:text-[20px]">
+                  <h3 className="mb-2 font-display text-[17px] font-bold leading-snug text-text md:mb-3 md:text-[20px]">
                     {f.title}
                   </h3>
-                  <p className="font-body text-[15px] leading-relaxed text-text-light md:text-[16px] md:leading-[1.55]">
+                  <p className="font-body text-[14px] leading-relaxed text-text-light md:text-[16px] md:leading-[1.55]">
                     {f.desc}
                   </p>
                 </div>
@@ -102,26 +96,19 @@ export default function TelegramSection() {
               href={marketplace}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-8 flex h-[140px] w-[140px] shrink-0 items-center justify-center rounded-full bg-accent transition-transform duration-300 hover:scale-105 hover:bg-accent-light lg:hidden"
+              className="group mt-8 flex w-full max-w-[320px] items-center justify-between gap-4 rounded-full bg-accent py-2.5 pl-6 pr-2.5 text-[14px] font-semibold text-bg transition-transform duration-300 hover:bg-accent-light lg:hidden"
             >
-              <span className="flex flex-col items-center gap-1.5 text-center font-display text-[14px] font-bold leading-tight text-bg">
-                {openLines.map((line) => (
-                  <span key={line}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-                <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-bg/10 transition-transform duration-300 group-hover:translate-x-1">
-                  <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
-                    <path
-                      d="M3.5 9h11M9 3.5l5.5 5.5-5.5 5.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
+              {openLines.join(" ")}
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-300 group-hover:translate-x-0.5">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                  <path
+                    d="M3.5 9h11M9 3.5l5.5 5.5-5.5 5.5"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </span>
             </a>
           </div>

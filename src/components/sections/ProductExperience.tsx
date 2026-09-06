@@ -6,17 +6,10 @@ export default function ProductExperience() {
   const p = t.product;
 
   return (
-    <section
-      id="product"
-      className="relative bg-white"
-      style={{ minHeight: "100vh" }}
-    >
-      <div
-        className="overflow-hidden rounded-b-[28px] bg-bg md:rounded-b-[40px] lg:rounded-b-[48px]"
-        style={{ minHeight: "100vh" }}
-      >
-        <div className="site-container flex min-h-screen flex-col py-20 md:py-24">
-          <div className="mb-8 flex flex-col gap-3 md:mb-12 md:flex-row md:items-end md:justify-between md:gap-8">
+    <section id="product" className="relative bg-white">
+      <div className="overflow-hidden rounded-b-[24px] bg-bg sm:rounded-b-[28px] md:rounded-b-[40px] lg:rounded-b-[48px]">
+        <div className="site-container flex flex-col py-14 md:min-h-[100svh] md:py-24">
+          <div className="mb-6 flex flex-col gap-3 md:mb-12 md:flex-row md:items-end md:justify-between md:gap-8">
             <h2 className="section-title">
               {p.title}{" "}
               <span className="text-accent">{p.titleAccent}</span>
@@ -30,8 +23,8 @@ export default function ProductExperience() {
             <p className="section-subtitle md:hidden">{p.subtitle}</p>
           </div>
 
-          <div className="grid flex-1 auto-rows-[180px] grid-cols-1 gap-3 sm:auto-rows-[200px] sm:grid-cols-2 md:auto-rows-[220px] md:grid-cols-4 md:gap-4 lg:auto-rows-[240px]">
-            <div className="group relative col-span-1 overflow-hidden rounded-[24px] sm:col-span-2 sm:row-span-2 md:rounded-[28px]">
+          <div className="grid flex-1 grid-cols-1 gap-3 sm:auto-rows-[200px] sm:grid-cols-2 md:auto-rows-[220px] md:grid-cols-4 md:gap-4 lg:auto-rows-[240px]">
+            <div className="group relative col-span-1 min-h-[260px] overflow-hidden rounded-[22px] sm:col-span-2 sm:row-span-2 sm:min-h-0 md:rounded-[28px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/media/pe-main.jpg"
@@ -39,7 +32,7 @@ export default function ProductExperience() {
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/20" />
-              <div className="relative z-10 flex h-full flex-col p-5 md:p-7">
+              <div className="relative z-10 flex h-full min-h-[260px] flex-col p-5 sm:min-h-0 md:p-7">
                 <div className="flex items-start justify-between">
                   <span className="rounded-full border border-white/25 bg-black/30 px-3 py-1 font-body text-[11px] text-text backdrop-blur-md">
                     {p.mainBadge}
@@ -61,7 +54,7 @@ export default function ProductExperience() {
               </div>
             </div>
 
-            <div className="relative col-span-1 overflow-hidden rounded-[24px] bg-surface-2 p-5 md:rounded-[28px] md:p-6">
+            <div className="relative col-span-1 min-h-[200px] overflow-hidden rounded-[22px] bg-surface-2 p-5 sm:min-h-0 md:rounded-[28px] md:p-6">
               <h3 className="font-display text-[18px] font-bold leading-tight text-text md:text-[22px]">
                 {p.choiceTitle}
               </h3>
@@ -76,16 +69,16 @@ export default function ProductExperience() {
               </div>
             </div>
 
-            <div className="group relative col-span-1 row-span-1 overflow-hidden rounded-[24px] sm:row-span-2 md:rounded-[28px]">
+            <div className="group relative col-span-1 min-h-[220px] overflow-hidden rounded-[22px] sm:row-span-2 sm:min-h-0 md:rounded-[28px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/media/pe-zones.jpg" alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/15" />
-              <div className="relative z-10 flex h-full flex-col p-5 md:p-6">
+              <div className="relative z-10 flex h-full min-h-[220px] flex-col p-5 sm:min-h-0 md:p-6">
                 <span className="w-fit rounded-full border border-white/25 bg-black/30 px-3 py-1 font-body text-[11px] text-text backdrop-blur-md">
                   {p.zonesBadge}
                 </span>
                 <div className="mt-auto">
-                  <h3 className="font-display text-[26px] font-bold leading-[1.05] text-text md:text-[32px]">
+                  <h3 className="font-display text-[24px] font-bold leading-[1.05] text-text md:text-[32px]">
                     {p.zonesLines.map((line) => (
                       <span key={line}>
                         {line}
@@ -97,13 +90,13 @@ export default function ProductExperience() {
               </div>
             </div>
 
-            <div className="group relative col-span-1 overflow-hidden rounded-[24px] md:rounded-[28px]">
+            <div className="group relative col-span-1 min-h-[180px] overflow-hidden rounded-[22px] sm:min-h-0 md:rounded-[28px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/media/pe-terrace.jpg" alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-              <div className="relative z-10 flex h-full items-end p-5 md:p-6">
+              <div className="relative z-10 flex h-full min-h-[180px] items-end p-5 sm:min-h-0 md:p-6">
                 <div className="flex items-end gap-2">
-                  <span className="font-display text-[64px] font-extrabold leading-none text-text md:text-[72px]">
+                  <span className="font-display text-[56px] font-extrabold leading-none text-text md:text-[72px]">
                     {p.audienceNum}
                   </span>
                   <p className="mb-2 max-w-[110px] font-body text-[13px] leading-snug text-text md:text-sm">
@@ -114,7 +107,7 @@ export default function ProductExperience() {
             </div>
 
             <div
-              className="relative col-span-1 flex flex-col overflow-hidden rounded-[24px] p-5 md:rounded-[28px] md:p-6"
+              className="relative col-span-1 flex min-h-[200px] flex-col overflow-hidden rounded-[22px] p-5 sm:min-h-0 md:rounded-[28px] md:p-6"
               style={{
                 background: "linear-gradient(160deg, #2C3024 0%, #656B4D 45%, #C0DB9A 100%)",
               }}
@@ -149,13 +142,13 @@ export default function ProductExperience() {
               </div>
             </div>
 
-            <div className="group relative col-span-1 overflow-hidden rounded-[24px] sm:col-span-2 md:rounded-[28px]">
+            <div className="group relative col-span-1 min-h-[200px] overflow-hidden rounded-[22px] sm:col-span-2 sm:min-h-0 md:rounded-[28px]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/media/pe-chill.jpg" alt="" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <div className="relative z-10 flex h-full flex-col items-center justify-end p-5 text-center md:p-7">
+              <div className="relative z-10 flex h-full min-h-[200px] flex-col items-center justify-end p-5 text-center sm:min-h-0 md:p-7">
                 <p className="font-body text-[12px] text-white/75 md:text-sm">{p.chillEyebrow}</p>
-                <h3 className="mt-1 font-display text-[24px] font-bold text-text md:text-[32px]">
+                <h3 className="mt-1 font-display text-[22px] font-bold text-text md:text-[32px]">
                   {p.chillTitle}
                 </h3>
               </div>

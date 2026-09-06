@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer id="footer" className="relative w-full overflow-hidden bg-white">
       <div className="w-full overflow-hidden rounded-t-[28px] bg-bg md:rounded-t-[40px] lg:rounded-t-[48px]">
-        <div className="relative w-full overflow-hidden px-5 py-16 text-center md:px-10 md:py-24 lg:px-14 lg:py-28">
+        <div className="relative w-full overflow-hidden px-4 py-12 text-center sm:px-5 md:px-10 md:py-24 lg:px-14 lg:py-28">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/media/footer-cta-bg.jpg"
@@ -65,7 +65,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="w-full border-t border-white/8 px-5 pb-7 pt-6 md:px-10 lg:px-14">
+        <div className="w-full border-t border-white/8 px-4 pb-[max(1.75rem,env(safe-area-inset-bottom))] pt-6 sm:px-5 md:px-10 lg:px-14">
           <div className="mx-auto w-full max-w-[1400px]">
             <div className="flex flex-col items-center gap-5 md:flex-row md:justify-between">
               <Link
@@ -75,7 +75,7 @@ export default function Footer() {
                 TradeGround
               </Link>
 
-              <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 md:gap-x-6 lg:gap-x-8">
+              <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5 md:gap-x-6 lg:gap-x-8">
                 {navLinks.map((l) => (
                   <a
                     key={l.to}

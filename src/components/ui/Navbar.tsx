@@ -51,13 +51,13 @@ export default function Navbar() {
               : "bg-transparent opacity-100"
         }`}
       >
-        <div className="site-container flex h-[72px] items-center justify-between gap-4">
+        <div className="site-container flex h-[72px] items-center justify-between gap-4 pt-[env(safe-area-inset-top)] md:h-[72px]">
           <Link href={href("#hero")} className="flex shrink-0 items-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/media/logo.svg"
               alt="TradeGround"
-              className="h-8 w-auto md:h-9"
+              className="h-7 w-auto sm:h-8 md:h-9"
             />
           </Link>
 
@@ -98,7 +98,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="flex items-center gap-2.5 p-1 md:hidden"
+            className="flex min-h-11 min-w-11 items-center gap-2.5 p-1 md:hidden"
             onClick={() => setMenuOpen(true)}
             aria-label={t.nav.menu}
           >
@@ -134,14 +134,14 @@ export default function Navbar() {
           }}
         />
 
-        <div className="site-container relative z-10 flex h-[72px] items-center justify-between">
+        <div className="site-container relative z-10 flex h-[calc(72px+env(safe-area-inset-top))] items-center justify-between pt-[env(safe-area-inset-top)]">
           <Link
             href={href("#hero")}
             onClick={() => setMenuOpen(false)}
             className="flex items-center"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/media/logo.svg" alt="TradeGround" className="h-8 w-auto" />
+            <img src="/media/logo.svg" alt="TradeGround" className="h-7 w-auto sm:h-8" />
           </Link>
           <button
             type="button"
@@ -160,14 +160,14 @@ export default function Navbar() {
           </button>
         </div>
 
-        <div className="site-container relative z-10 flex h-[calc(100%-72px)] flex-col pb-10 pt-4">
-          <nav className="flex flex-1 flex-col justify-center gap-1 overflow-y-auto">
+        <div className="site-container relative z-10 flex h-[calc(100%-72px-env(safe-area-inset-top))] flex-col pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-4">
+          <nav className="flex flex-1 flex-col justify-center gap-1 overflow-y-auto overscroll-contain">
             {menuLinks.map((l, i) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setMenuOpen(false)}
-                className={`font-display text-[clamp(26px,8vw,40px)] font-extrabold uppercase leading-[1.1] tracking-[-0.02em] text-text transition-all duration-500 hover:text-accent ${
+                className={`font-display text-[clamp(24px,7.5vw,40px)] font-extrabold uppercase leading-[1.15] tracking-[-0.02em] text-text transition-all duration-500 hover:text-accent ${
                   menuOpen
                     ? "translate-y-0 opacity-100"
                     : "translate-y-4 opacity-0"

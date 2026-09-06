@@ -16,11 +16,6 @@ const CITY_STATS: Record<string, { ads: number; newWeek: number }> = {
   Dortmund: { ads: 11000, newWeek: 142 },
 };
 
-function formatUsers(n: number) {
-  if (n >= 1000) return `${Math.round(n / 1000)}K+`;
-  return String(n);
-}
-
 export default function GermanyMap() {
   const { t, marketplace, locale } = useI18n();
   const cities: City[] = MAP_CITIES.map((c) => ({
@@ -44,26 +39,22 @@ export default function GermanyMap() {
     `${marketplace}&city=${encodeURIComponent(name)}`;
 
   return (
-    <section
-      id="map"
-      className="relative overflow-hidden bg-white"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="site-container relative z-10 flex min-h-screen flex-col items-center gap-12 py-20 lg:flex-row lg:gap-16 lg:py-24">
+    <section id="map" className="relative overflow-hidden bg-white">
+      <div className="site-container relative z-10 flex flex-col items-center gap-10 py-14 md:min-h-[100svh] lg:flex-row lg:gap-16 lg:py-24">
         <div className="w-full flex-1">
-          <h2 className="section-title section-title-dark mb-3">
+          <h2 className="section-title section-title-dark mb-2 md:mb-3">
             {t.map.title} <span className="text-olive">{t.map.titleAccent}</span>
           </h2>
-          <h3 className="section-title section-title-dark mb-0">
+          <h3 className="section-title section-title-dark mb-0 text-[clamp(24px,7vw,64px)]">
             {t.map.headline}
             <br />
             <span className="text-olive">{t.map.headlineAccent}</span>
           </h3>
-          <p className="section-subtitle section-subtitle-dark mb-8">
+          <p className="section-subtitle section-subtitle-dark mb-6 md:mb-8">
             {t.map.desc}
           </p>
 
-          <div className="grid grid-cols-2 gap-2.5">
+          <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
             {cities.map((city) => {
               const isActive = activeCity.name === city.name;
               return (
@@ -71,7 +62,7 @@ export default function GermanyMap() {
                   key={city.name}
                   type="button"
                   onClick={() => setActiveCity(city)}
-                  className="flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300"
+                  className="flex min-h-11 items-center justify-between rounded-2xl px-3 py-2.5 transition-all duration-300 sm:px-4 sm:py-3"
                   style={{
                     background: isActive ? "rgba(192,219,154,0.45)" : "#FFFFFF",
                     border: isActive
@@ -82,7 +73,7 @@ export default function GermanyMap() {
                       : "none",
                   }}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                     <span
                       className="h-2 w-2 shrink-0 rounded-full"
                       style={{
@@ -90,7 +81,7 @@ export default function GermanyMap() {
                       }}
                     />
                     <span
-                      className={`font-body text-sm ${
+                      className={`truncate font-body text-[13px] sm:text-sm ${
                         isActive ? "font-medium text-[#000100]" : "text-[#656B4D]"
                       }`}
                     >
@@ -98,7 +89,7 @@ export default function GermanyMap() {
                     </span>
                   </div>
                   <span
-                    className="font-display text-xs font-bold"
+                    className="shrink-0 font-display text-[11px] font-bold sm:text-xs"
                     style={{ color: isActive ? "#2C3024" : "#979387" }}
                   >
                     {city.users}
@@ -113,7 +104,7 @@ export default function GermanyMap() {
               href={cityMarketplace(activeCity.name)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 flex items-start gap-3 rounded-2xl p-4 transition-transform hover:scale-[1.01]"
+              className="mt-5 flex items-start gap-3 rounded-2xl p-4 transition-transform hover:scale-[1.01] md:mt-6"
               style={{
                 background: "#FFFFFF",
                 border: "1px solid rgba(0,1,0,0.08)",
@@ -123,12 +114,14 @@ export default function GermanyMap() {
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/50">
                 <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-olive" />
               </div>
-              <div className="flex-1">
+              <div className="min-w-0 flex-1">
                 <div className="font-display text-sm font-bold text-[#000100]">
                   {activeCity.name}
                 </div>
                 <div className="mt-0.5 font-body text-xs text-[#656B4D]">
-                  {activeCity.ads?.toLocaleString(locale === "de" ? "de-DE" : locale === "en" ? "en-US" : "uk-UA")}{" "}
+                  {activeCity.ads?.toLocaleString(
+                    locale === "de" ? "de-DE" : locale === "en" ? "en-US" : "uk-UA"
+                  )}{" "}
                   {t.map.ads}
                 </div>
                 <div className="mt-0.5 font-body text-xs text-olive">
@@ -143,7 +136,7 @@ export default function GermanyMap() {
         </div>
 
         <div className="relative w-full flex-1">
-          <div className="relative mx-auto w-full max-w-[460px]">
+          <div className="relative mx-auto w-full max-w-[380px] sm:max-w-[460px]">
             <svg
               viewBox={GERMANY_VIEWBOX}
               className="h-auto w-full"
@@ -216,7 +209,7 @@ export default function GermanyMap() {
             </svg>
 
             <div
-              className="absolute bottom-2 left-2 rounded-2xl p-3.5"
+              className="absolute bottom-2 left-2 rounded-2xl p-3 sm:p-3.5"
               style={{
                 background: "rgba(255,255,255,0.92)",
                 border: "1px solid rgba(0,1,0,0.08)",

@@ -7,36 +7,36 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="snap-section relative min-h-screen overflow-hidden"
+      className="snap-section relative overflow-hidden"
     >
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/media/hero-bg.jpg"
           alt=""
-          className="h-full w-full object-cover object-center"
+          className="h-full w-full object-cover object-[center_30%] sm:object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg/75 via-bg/55 to-bg/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg/60 via-transparent to-bg/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/80 via-bg/55 to-bg/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-transparent to-bg/40" />
       </div>
 
-      <div className="site-container relative z-10 flex min-h-screen flex-col pb-10 pt-24 lg:pb-14 lg:pt-28">
-        <div className="flex flex-1 flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+      <div className="site-container relative z-10 flex min-h-[100svh] flex-col pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[calc(4.5rem+env(safe-area-inset-top))] sm:pb-10 lg:pb-14 lg:pt-28">
+        <div className="flex flex-1 flex-col gap-6 sm:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
           <div className="animate-fadeUp flex w-full flex-col justify-center lg:max-w-[48%]">
-            <h1 className="font-display text-[clamp(42px,7.5vw,92px)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em] text-text">
+            <h1 className="font-display text-[clamp(36px,11vw,92px)] font-extrabold uppercase leading-[0.92] tracking-[-0.02em] text-text">
               {t.hero.line1}
               <br />
               <span className="text-accent">{t.hero.line2}</span>
             </h1>
-            <p className="section-subtitle mt-6 max-w-lg">
+            <p className="section-subtitle mt-4 max-w-lg sm:mt-6">
               {t.hero.subtitle}
             </p>
-            <div className="mt-8">
+            <div className="mt-6 sm:mt-8">
               <a
                 href={marketplace}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-full items-center justify-between gap-4 rounded-full bg-accent py-2.5 pl-7 pr-2.5 text-[14px] font-semibold text-bg transition-transform duration-300 hover:bg-accent-light sm:w-[274px] sm:hover:scale-[1.02]"
+                className="group flex w-full max-w-[320px] items-center justify-between gap-4 rounded-full bg-accent py-2.5 pl-6 pr-2.5 text-[14px] font-semibold text-bg transition-transform duration-300 hover:bg-accent-light sm:w-[274px] sm:pl-7 sm:hover:scale-[1.02]"
               >
                 {t.hero.cta}
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-300 group-hover:translate-x-0.5">
@@ -54,19 +54,19 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="animate-fadeUp delay-100 relative flex w-full flex-1 items-center justify-center lg:max-w-[54%] lg:justify-end lg:self-center">
+          <div className="animate-fadeUp delay-100 relative mx-auto flex w-full max-w-[340px] flex-1 items-center justify-center sm:max-w-[420px] lg:mx-0 lg:max-w-[54%] lg:justify-end lg:self-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/media/hero-phones.png"
               alt="TradeGround"
-              className="relative z-10 h-auto w-full max-w-[480px] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)] lg:max-w-[600px] lg:translate-x-6 xl:translate-x-10"
+              className="relative z-10 h-auto w-full max-h-[38vh] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)] sm:max-h-none lg:max-w-[600px] lg:translate-x-6 xl:translate-x-10"
             />
           </div>
         </div>
 
-        <div className="mt-auto flex flex-col gap-6 pt-10 lg:flex-row lg:items-end lg:justify-between">
+        <div className="mt-6 flex flex-col gap-4 pt-2 sm:mt-auto sm:gap-6 sm:pt-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="animate-fadeUp delay-200 flex w-full flex-row items-stretch gap-2.5 sm:gap-3 lg:w-auto lg:max-w-[560px]">
-            <div className="flex min-h-[170px] flex-1 flex-col justify-between rounded-[22px] bg-accent p-3.5 text-bg sm:min-h-[200px] sm:rounded-[28px] sm:p-5">
+            <div className="flex min-h-[148px] flex-1 flex-col justify-between rounded-[20px] bg-accent p-3.5 text-bg sm:min-h-[200px] sm:rounded-[28px] sm:p-5">
               <div className="flex items-center gap-2">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-bg/25 sm:h-8 sm:w-8">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -84,16 +84,16 @@ export default function Hero() {
                 </span>
               </div>
               <div>
-                <div className="font-display text-[40px] font-extrabold leading-none tracking-tight sm:text-[64px]">
+                <div className="font-display text-[36px] font-extrabold leading-none tracking-tight sm:text-[64px]">
                   {t.hero.cardStats}
                 </div>
-                <p className="mt-1.5 font-body text-[10px] leading-snug text-bg/80 sm:mt-2 sm:text-[12px]">
+                <p className="mt-1.5 font-body text-[11px] leading-snug text-bg/80 sm:mt-2 sm:text-[12px]">
                   {t.hero.cardStatsDesc}
                 </p>
               </div>
             </div>
 
-            <div className="liquid-glass flex min-h-[170px] flex-1 flex-col justify-between rounded-[22px] p-3.5 text-text sm:min-h-[200px] sm:rounded-[28px] sm:p-5">
+            <div className="liquid-glass flex min-h-[148px] flex-1 flex-col justify-between rounded-[20px] p-3.5 text-text sm:min-h-[200px] sm:rounded-[28px] sm:p-5">
               <div className="relative z-10 flex items-start gap-2.5">
                 <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 sm:h-9 sm:w-9">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
@@ -103,17 +103,17 @@ export default function Hero() {
                     />
                   </svg>
                 </span>
-                <span className="font-display text-[14px] font-semibold leading-tight sm:text-[17px]">
+                <span className="font-display text-[13px] font-semibold leading-tight sm:text-[17px]">
                   {t.hero.cardTg}
                 </span>
               </div>
-              <p className="relative z-10 font-body text-[13px] leading-snug text-text sm:text-[15px] sm:leading-relaxed">
+              <p className="relative z-10 font-body text-[12px] leading-snug text-text sm:text-[15px] sm:leading-relaxed">
                 {t.hero.cardTgDesc}
               </p>
             </div>
           </div>
 
-          <div className="animate-fadeUp delay-300 flex w-full flex-nowrap items-center justify-between gap-1.5 sm:justify-start sm:gap-2.5 lg:w-auto lg:max-w-[340px] lg:flex-wrap lg:justify-end">
+          <div className="animate-fadeUp delay-300 flex w-full flex-wrap items-center gap-2 sm:gap-2.5 lg:w-auto lg:max-w-[340px] lg:justify-end">
             <span className="hero-tag hidden h-10 w-10 shrink-0 !px-0 sm:inline-flex">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <circle cx="8" cy="8" r="2" fill="currentColor" />
@@ -125,18 +125,10 @@ export default function Hero() {
                 />
               </svg>
             </span>
-            <span className="hero-tag shrink-0 !px-3 !py-2 text-[12px] sm:!px-[18px] sm:!py-[9px] sm:text-[13px]">
-              {t.hero.tagGoods}
-            </span>
-            <span className="hero-tag shrink-0 !px-3 !py-2 text-[12px] sm:!px-[18px] sm:!py-[9px] sm:text-[13px]">
-              {t.hero.tagServices}
-            </span>
-            <span className="hero-tag shrink-0 !px-3 !py-2 text-[12px] sm:!px-[18px] sm:!py-[9px] sm:text-[13px]">
-              {t.hero.tagAds}
-            </span>
-            <span className="hero-tag shrink-0 !px-3 !py-2 text-[12px] sm:!px-[18px] sm:!py-[9px] sm:text-[13px]">
-              {t.hero.tagCommunity}
-            </span>
+            <span className="hero-tag">{t.hero.tagGoods}</span>
+            <span className="hero-tag">{t.hero.tagServices}</span>
+            <span className="hero-tag">{t.hero.tagAds}</span>
+            <span className="hero-tag">{t.hero.tagCommunity}</span>
           </div>
         </div>
       </div>

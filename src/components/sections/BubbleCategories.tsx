@@ -228,7 +228,7 @@ export default function BubbleCategories() {
 
   const initBubbles = useCallback((w: number, h: number) => {
     const mobile = w < 768;
-    const scale = mobile ? 0.55 : 1;
+    const scale = mobile ? (w < 400 ? 0.42 : 0.5) : 1;
     bubblesRef.current = CATEGORIES.map((cat, i) => {
       const baseRadius =
         (cat.size === "large" ? 100 : cat.size === "medium" ? 82 : 68) * scale;
@@ -236,14 +236,14 @@ export default function BubbleCategories() {
         (i / CATEGORIES.length) * Math.PI * 2 -
         Math.PI / 2 +
         (Math.random() - 0.5) * 0.45;
-      const r = Math.min(w, h) * (mobile ? 0.38 : 0.32);
-      const jitter = mobile ? 0.9 : 0.5;
+      const r = Math.min(w, h) * (mobile ? 0.34 : 0.32);
+      const jitter = mobile ? 0.75 : 0.5;
       return {
         id: cat.id,
         x: w / 2 + Math.cos(angle) * r * (0.5 + Math.random() * jitter),
         y: h / 2 + Math.sin(angle) * r * (0.5 + Math.random() * jitter),
-        vx: (Math.random() - 0.5) * (mobile ? 1.2 : 0.8),
-        vy: (Math.random() - 0.5) * (mobile ? 1.2 : 0.8),
+        vx: (Math.random() - 0.5) * (mobile ? 1.0 : 0.8),
+        vy: (Math.random() - 0.5) * (mobile ? 1.0 : 0.8),
         radius: baseRadius,
         category: cat,
       };
@@ -474,7 +474,7 @@ export default function BubbleCategories() {
   return (
     <section
       id="categories"
-      className="snap-section relative min-h-[100vh] overflow-x-hidden bg-bg"
+      className="snap-section relative overflow-x-hidden bg-bg pb-10 md:pb-0"
     >
       <div className="pointer-events-none absolute inset-0">
         <div
@@ -486,7 +486,7 @@ export default function BubbleCategories() {
         />
       </div>
 
-      <div className="site-container relative z-20 pt-16 pb-2 md:pt-24 md:pb-4">
+      <div className="site-container relative z-20 pt-14 pb-2 md:pt-24 md:pb-4">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="section-title">
             {t.categories.title.split(". ").map((part, i, arr) => (
@@ -510,8 +510,8 @@ export default function BubbleCategories() {
 
       <div
         ref={containerRef}
-        className="relative mx-auto w-full max-w-[1400px] overflow-visible px-2 pb-8 pt-4 md:px-4 md:pb-12 md:pt-6"
-        style={{ height: "min(72vh, 640px)", minHeight: 420 }}
+        className="relative mx-auto w-full max-w-[1400px] overflow-hidden px-1 pb-6 pt-2 sm:overflow-visible sm:px-2 md:px-4 md:pb-12 md:pt-6"
+        style={{ height: "min(58svh, 560px)", minHeight: 320 }}
       >
         <canvas
           ref={canvasRef}
@@ -525,7 +525,7 @@ export default function BubbleCategories() {
             const t = e.touches[0];
             if (t) handlePointerMove(t.clientX, t.clientY);
           }}
-          className="absolute inset-0 cursor-pointer touch-none"
+          className="absolute inset-0 cursor-pointer touch-manipulation"
           style={{ width: "100%", height: "100%" }}
         />
 
