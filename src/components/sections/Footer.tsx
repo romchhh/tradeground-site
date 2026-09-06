@@ -11,6 +11,7 @@ export default function Footer() {
     { label: t.nav.telegram, to: href("#telegram") },
     { label: t.nav.forWhom, to: href("#private") },
     { label: t.nav.product, to: href("#product") },
+    { label: t.nav.matches, to: href("#matches") },
     { label: t.nav.location, to: href("#map") },
   ];
 

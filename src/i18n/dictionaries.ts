@@ -12,6 +12,7 @@ export type Dictionary = {
     telegram: string;
     forWhom: string;
     product: string;
+    matches: string;
     location: string;
     start: string;
     menu: string;
@@ -78,6 +79,27 @@ export type Dictionary = {
     chillEyebrow: string;
     chillTitle: string;
   };
+  matches: {
+    badge: string;
+    line1: string;
+    line2: string;
+    brand: string;
+    unites: string;
+    bottom: string;
+    cta: string;
+    matchLabel: string;
+    live: string;
+    seeking: string;
+    offering: string;
+    items: {
+      seekTitle: string;
+      seekSub?: string;
+      seekCity: string;
+      offerTitle: string;
+      offerSub?: string;
+      offerCity: string;
+    }[];
+  };
   map: {
     title: string;
     titleAccent: string;
@@ -129,6 +151,7 @@ const ua: Dictionary = {
     telegram: "Telegram",
     forWhom: "Для кого",
     product: "Що всередині",
+    matches: "Матчі",
     location: "Локація",
     start: "Почати",
     menu: "Menu",
@@ -236,6 +259,43 @@ const ua: Dictionary = {
     chillEyebrow: "Баланс роботи та енергії",
     chillTitle: "Спільнота & нетворкінг",
   },
+  matches: {
+    badge: "Дивитись",
+    line1: "Хтось шукає.",
+    line2: "Хтось пропонує.",
+    brand: "TradeGround",
+    unites: "об'єднує.",
+    bottom:
+      "Людей, товари, послуги й можливості по всій Німеччині.",
+    cta: "Знайти свій матч",
+    matchLabel: "Угода",
+    live: "Матч",
+    seeking: "Шукає",
+    offering: "Пропонує",
+    items: [
+      {
+        seekTitle: "Шукаю велосипед",
+        seekCity: "Hamburg",
+        offerTitle: "Продаю велосипед",
+        offerCity: "Hamburg",
+      },
+      {
+        seekTitle: "Потрібен майстер",
+        seekSub: "для збірки кухні",
+        seekCity: "Berlin",
+        offerTitle: "Збираю меблі",
+        offerSub: "Berlin і поруч",
+        offerCity: "Berlin",
+      },
+      {
+        seekTitle: "Шукаю роботу",
+        seekCity: "Köln",
+        offerTitle: "Шукаємо кур'єра",
+        offerSub: "Гнучкий графік",
+        offerCity: "Köln",
+      },
+    ],
+  },
   map: {
     title: "Germany",
     titleAccent: "Map",
@@ -287,6 +347,7 @@ const ru: Dictionary = {
     telegram: "Telegram",
     forWhom: "Для кого",
     product: "Что внутри",
+    matches: "Сделки",
     location: "Локация",
     start: "Начать",
     menu: "Menu",
@@ -394,6 +455,43 @@ const ru: Dictionary = {
     chillEyebrow: "Баланс работы и энергии",
     chillTitle: "Сообщество & нетворкинг",
   },
+  matches: {
+    badge: "Смотреть",
+    line1: "Кто-то ищет.",
+    line2: "Кто-то предлагает.",
+    brand: "TradeGround",
+    unites: "объединяет.",
+    bottom:
+      "Людей, товары, услуги и возможности по всей Германии.",
+    cta: "Найти свой матч",
+    matchLabel: "Сделка",
+    live: "Матч",
+    seeking: "Ищет",
+    offering: "Предлагает",
+    items: [
+      {
+        seekTitle: "Ищу велосипед",
+        seekCity: "Hamburg",
+        offerTitle: "Продаю велосипед",
+        offerCity: "Hamburg",
+      },
+      {
+        seekTitle: "Нужен мастер",
+        seekSub: "для сборки кухни",
+        seekCity: "Berlin",
+        offerTitle: "Собираю мебель",
+        offerSub: "Berlin и рядом",
+        offerCity: "Berlin",
+      },
+      {
+        seekTitle: "Ищу работу",
+        seekCity: "Köln",
+        offerTitle: "Ищем курьера",
+        offerSub: "Гибкий график",
+        offerCity: "Köln",
+      },
+    ],
+  },
   map: {
     title: "Germany",
     titleAccent: "Map",
@@ -445,6 +543,7 @@ const en: Dictionary = {
     telegram: "Telegram",
     forWhom: "For whom",
     product: "What's inside",
+    matches: "Matches",
     location: "Location",
     start: "Start",
     menu: "Menu",
@@ -552,6 +651,43 @@ const en: Dictionary = {
     chillEyebrow: "Balance of work and energy",
     chillTitle: "Community & networking",
   },
+  matches: {
+    badge: "Explore",
+    line1: "Someone seeks.",
+    line2: "Someone offers.",
+    brand: "TradeGround",
+    unites: "connects.",
+    bottom:
+      "People, goods, services and opportunities across Germany.",
+    cta: "Find your match",
+    matchLabel: "Deal",
+    live: "Match",
+    seeking: "Seeks",
+    offering: "Offers",
+    items: [
+      {
+        seekTitle: "Looking for a bike",
+        seekCity: "Hamburg",
+        offerTitle: "Selling a bike",
+        offerCity: "Hamburg",
+      },
+      {
+        seekTitle: "Need a handyman",
+        seekSub: "for kitchen assembly",
+        seekCity: "Berlin",
+        offerTitle: "I assemble furniture",
+        offerSub: "Berlin and nearby",
+        offerCity: "Berlin",
+      },
+      {
+        seekTitle: "Looking for a job",
+        seekCity: "Köln",
+        offerTitle: "Hiring a courier",
+        offerSub: "Flexible schedule",
+        offerCity: "Köln",
+      },
+    ],
+  },
   map: {
     title: "Germany",
     titleAccent: "Map",
@@ -603,6 +739,7 @@ const de: Dictionary = {
     telegram: "Telegram",
     forWhom: "Für wen",
     product: "Was steckt drin",
+    matches: "Matches",
     location: "Standort",
     start: "Starten",
     menu: "Menu",
@@ -709,6 +846,43 @@ const de: Dictionary = {
     hrDesc: "Wir verbinden Kandidaten mit Arbeitgebern",
     chillEyebrow: "Balance aus Arbeit und Energie",
     chillTitle: "Community & Networking",
+  },
+  matches: {
+    badge: "Ansehen",
+    line1: "Jemand sucht.",
+    line2: "Jemand bietet.",
+    brand: "TradeGround",
+    unites: "verbindet.",
+    bottom:
+      "Menschen, Waren, Services und Möglichkeiten in ganz Deutschland.",
+    cta: "Match finden",
+    matchLabel: "Deal",
+    live: "Match",
+    seeking: "Sucht",
+    offering: "Bietet",
+    items: [
+      {
+        seekTitle: "Suche Fahrrad",
+        seekCity: "Hamburg",
+        offerTitle: "Verkaufe Fahrrad",
+        offerCity: "Hamburg",
+      },
+      {
+        seekTitle: "Brauche Handwerker",
+        seekSub: "für Küchenmontage",
+        seekCity: "Berlin",
+        offerTitle: "Montiere Möbel",
+        offerSub: "Berlin und Umgebung",
+        offerCity: "Berlin",
+      },
+      {
+        seekTitle: "Suche Job",
+        seekCity: "Köln",
+        offerTitle: "Suchen Kurier",
+        offerSub: "Flexible Arbeitszeiten",
+        offerCity: "Köln",
+      },
+    ],
   },
   map: {
     title: "Germany",

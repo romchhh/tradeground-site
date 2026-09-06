@@ -14,6 +14,7 @@ export default function Navbar() {
     { label: t.nav.telegram, href: href("#telegram") },
     { label: t.nav.forWhom, href: href("#private") },
     { label: t.nav.product, href: href("#product") },
+    { label: t.nav.matches, href: href("#matches") },
     { label: t.nav.location, href: href("#map") },
   ];
 

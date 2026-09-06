@@ -19,6 +19,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-display)"],
+        "display-heading": ["var(--font-display-heading)"],
         body: ["var(--font-body)"],
       },
     },
