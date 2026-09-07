@@ -70,7 +70,7 @@ export default async function ContactsPage({ params }: Props) {
       <main id="main">
         <ContactsView dict={dict.contacts} />
       </main>
-      <Footer />
+      <Footer cornerBg="dark" />
     </>
   );
 }

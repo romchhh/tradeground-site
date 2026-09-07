@@ -79,7 +79,11 @@ export default function Navbar() {
         aria-label="TradeGround"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/icon.png" alt="" className="h-full w-full object-cover" />
+        <img
+          src="/media/tg-mark.png"
+          alt=""
+          className="h-full w-full object-cover"
+        />
       </Link>
 
       {/* Full top bar — visible until scrolled */}
@@ -186,7 +190,7 @@ export default function Navbar() {
             className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl ring-1 ring-white/10"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon.png" alt="TradeGround" className="h-full w-full object-cover" />
+            <img src="/media/tg-mark.png" alt="TradeGround" className="h-full w-full object-cover" />
           </Link>
           <button
             type="button"

@@ -50,24 +50,24 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
   return (
     <section className="relative min-h-[100svh] bg-bg text-text">
       <div
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 50% 35% at 15% 10%, rgba(192,219,154,0.16), transparent 55%)",
+            "radial-gradient(ellipse 55% 40% at 12% 8%, rgba(192,219,154,0.12), transparent 55%)",
         }}
       />
 
       <div className="site-container relative z-10 pb-20 pt-[calc(6.5rem+env(safe-area-inset-top))] md:pb-28 md:pt-36">
         <header className="mb-12 max-w-3xl md:mb-16">
           <h1 className="section-title">{dict.title}</h1>
-          <p className="section-subtitle mt-5 !text-text-light">{dict.subtitle}</p>
+          <p className="section-subtitle mt-5">{dict.subtitle}</p>
           <p className="mt-2 font-body text-[16px] leading-relaxed text-muted md:text-[18px]">
             {dict.lead}
           </p>
         </header>
 
         <div className="mx-auto max-w-4xl">
-          <div className="overflow-hidden rounded-[28px] border border-white/8 bg-surface/80 md:rounded-[32px]">
+          <div className="overflow-hidden rounded-[28px] border border-white/8 bg-surface md:rounded-[32px]">
             {dict.topics.map((topic, index) => {
               const isOpen = openId === topic.id;
               const isSent = sentTopic === topic.id;
@@ -81,18 +81,18 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
                     type="button"
                     onClick={() => toggle(topic.id)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-start justify-between gap-4 px-5 py-6 text-left transition-colors hover:bg-white/[0.02] md:px-8 md:py-7"
+                    className="flex w-full items-start justify-between gap-4 px-5 py-6 text-left transition-colors hover:bg-white/[0.03] md:px-8 md:py-7"
                   >
                     <div className="min-w-0 flex-1">
                       <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.06em] text-text md:text-[16px]">
                         {topic.title}
                       </h2>
-                      <p className="mt-2 max-w-2xl font-body text-[14px] leading-relaxed text-text-light md:text-[15px]">
+                      <p className="mt-2 max-w-2xl font-body text-[14px] leading-relaxed text-muted md:text-[15px]">
                         {topic.desc}
                       </p>
                       <span className="mt-4 inline-flex items-center gap-2 font-body text-[13px] font-semibold text-accent">
                         {topic.cta}
-                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent/15 text-accent">
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-bg">
                           <BrandArrow
                             className={`transition-transform duration-300 ${
                               isOpen ? "rotate-90" : ""
@@ -109,13 +109,13 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="border-t border-white/6 px-5 pb-7 pt-2 md:px-8 md:pb-8">
+                      <div className="border-t border-white/6 bg-bg/40 px-5 pb-7 pt-2 md:px-8 md:pb-8">
                         {isSent ? (
-                          <div className="rounded-[22px] bg-accent/10 px-5 py-8 text-center md:px-8">
-                            <p className="font-display text-[28px] font-extrabold uppercase tracking-[-0.02em] text-accent md:text-[36px]">
+                          <div className="rounded-[22px] bg-accent/15 px-5 py-8 text-center md:px-8">
+                            <p className="font-display text-[28px] font-extrabold uppercase tracking-[-0.02em] text-text md:text-[36px]">
                               {dict.successTitle}
                             </p>
-                            <p className="mt-3 font-body text-[15px] text-text-light">
+                            <p className="mt-3 font-body text-[15px] text-muted">
                               {dict.successDesc}
                             </p>
                           </div>
@@ -166,7 +166,7 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
 
                             <button
                               type="submit"
-                              className="group inline-flex items-center gap-2 rounded-full bg-accent py-2.5 pl-6 pr-2 font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-bg transition-transform hover:scale-[1.02] hover:bg-accent-light"
+                              className="group inline-flex items-center gap-2 rounded-full bg-white py-2.5 pl-6 pr-2 font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black transition-transform hover:scale-[1.02]"
                             >
                               {dict.submit}
                               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-bg text-accent transition-transform group-hover:rotate-[-15deg]">
@@ -190,12 +190,12 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-6">
               <a
                 href={`mailto:${dict.emailValue}`}
-                className="rounded-[22px] border border-white/8 bg-surface/60 px-5 py-5 transition-colors hover:border-accent/40 hover:bg-surface"
+                className="rounded-[22px] border border-white/8 bg-surface px-5 py-5 transition-colors hover:border-accent/30 hover:bg-white/[0.03]"
               >
                 <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   {dict.emailLabel}
                 </p>
-                <p className="mt-2 font-display text-[15px] font-bold text-text break-all">
+                <p className="mt-2 break-all font-display text-[15px] font-bold text-text">
                   {dict.emailValue}
                 </p>
               </a>
@@ -203,7 +203,7 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
                 href={dict.telegramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[22px] border border-white/8 bg-surface/60 px-5 py-5 transition-colors hover:border-accent/40 hover:bg-surface"
+                className="rounded-[22px] border border-white/8 bg-surface px-5 py-5 transition-colors hover:border-accent/30 hover:bg-white/[0.03]"
               >
                 <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   {dict.telegramLabel}
@@ -216,7 +216,7 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
                 href={dict.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-[22px] border border-white/8 bg-surface/60 px-5 py-5 transition-colors hover:border-accent/40 hover:bg-surface"
+                className="rounded-[22px] border border-white/8 bg-surface px-5 py-5 transition-colors hover:border-accent/30 hover:bg-white/[0.03]"
               >
                 <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                   {dict.instagramLabel}

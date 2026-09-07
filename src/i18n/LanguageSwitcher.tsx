@@ -39,7 +39,7 @@ function localeHref(code: Locale, pathname: string | null) {
 export default function LanguageSwitcher({
   variant = "header",
 }: {
-  variant?: "header" | "menu";
+  variant?: "header" | "header-light" | "menu";
 }) {
   const { locale } = useI18n();
   const pathname = usePathname();
@@ -65,6 +65,7 @@ export default function LanguageSwitcher({
   }, [open]);
 
   const isMenu = variant === "menu";
+  const isLight = variant === "header-light";
 
   return (
     <div ref={rootRef} className={`relative ${isMenu ? "flex justify-center" : ""}`}>
@@ -77,8 +78,18 @@ export default function LanguageSwitcher({
         className={`inline-flex items-center gap-2 rounded-full border transition-all duration-200 ${
           isMenu
             ? "border-white/20 px-4 py-2.5 text-text hover:border-accent hover:text-accent"
-            : "border-white/15 px-3 py-2 text-white/85 hover:border-white/30 hover:text-white"
-        } ${open ? (isMenu ? "border-accent text-accent" : "border-white/40 text-white") : ""}`}
+            : isLight
+              ? "border-black/10 px-3 py-2 text-[#000100]/80 hover:border-black/25 hover:text-[#000100]"
+              : "border-white/15 px-3 py-2 text-white/85 hover:border-white/30 hover:text-white"
+        } ${
+          open
+            ? isMenu
+              ? "border-accent text-accent"
+              : isLight
+                ? "border-black/30 text-[#000100]"
+                : "border-white/40 text-white"
+            : ""
+        }`}
       >
         <GlobeIcon />
         <span className="font-display text-[12px] font-bold tracking-wide">

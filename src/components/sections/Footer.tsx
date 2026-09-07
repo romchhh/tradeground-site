@@ -2,7 +2,12 @@
 import Link from "next/link";
 import { useI18n } from "@/i18n/LanguageContext";
 
-export default function Footer() {
+export default function Footer({
+  cornerBg = "white",
+}: {
+  /** Background behind the top rounded corners */
+  cornerBg?: "white" | "dark";
+}) {
   const { t, marketplace, href, locale } = useI18n();
 
   const navLinks = [
@@ -13,7 +18,12 @@ export default function Footer() {
   ];
 
   return (
-    <footer id="footer" className="relative w-full overflow-hidden bg-white">
+    <footer
+      id="footer"
+      className={`relative w-full overflow-hidden ${
+        cornerBg === "dark" ? "bg-bg" : "bg-white"
+      }`}
+    >
       <div className="w-full overflow-hidden rounded-t-[28px] bg-bg md:rounded-t-[40px] lg:rounded-t-[48px]">
         <div className="relative w-full overflow-hidden px-4 py-12 text-center sm:px-5 md:px-10 md:py-24 lg:px-14 lg:py-28">
           {/* eslint-disable-next-line @next/next/no-img-element */}
