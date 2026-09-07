@@ -3,16 +3,13 @@ import Link from "next/link";
 import { useI18n } from "@/i18n/LanguageContext";
 
 export default function Footer() {
-  const { t, marketplace, href } = useI18n();
+  const { t, marketplace, href, locale } = useI18n();
 
   const navLinks = [
-    { label: t.nav.home, to: href("#hero") },
-    { label: t.nav.categories, to: href("#categories") },
-    { label: t.nav.telegram, to: href("#telegram") },
-    { label: t.nav.forWhom, to: href("#private") },
-    { label: t.nav.product, to: href("#product") },
-    { label: t.nav.matches, to: href("#matches") },
-    { label: t.nav.location, to: href("#map") },
+    { label: t.nav.about, to: href("#hero") },
+    { label: t.nav.marketplace, to: marketplace, external: true },
+    { label: t.nav.business, to: href("#private") },
+    { label: t.nav.contacts, to: `/${locale}/contacts` },
   ];
 
   return (
@@ -77,15 +74,27 @@ export default function Footer() {
               </Link>
 
               <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5 md:gap-x-6 lg:gap-x-8">
-                {navLinks.map((l) => (
-                  <a
-                    key={l.to}
-                    href={l.to}
-                    className="font-body text-[13px] text-text-light transition-colors hover:text-accent"
-                  >
-                    {l.label}
-                  </a>
-                ))}
+                {navLinks.map((l) =>
+                  l.external ? (
+                    <a
+                      key={l.label}
+                      href={l.to}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-[13px] text-text-light transition-colors hover:text-accent"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <a
+                      key={l.label}
+                      href={l.to}
+                      className="font-body text-[13px] text-text-light transition-colors hover:text-accent"
+                    >
+                      {l.label}
+                    </a>
+                  )
+                )}
               </nav>
 
               <a
@@ -94,7 +103,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-accent py-2 pl-5 pr-2 font-body text-[13px] font-medium text-bg transition-all duration-200 hover:scale-[1.03] hover:bg-accent-light"
               >
-                {t.footer.start}
+                {t.nav.open}
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-200 group-hover:translate-x-0.5">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                     <path

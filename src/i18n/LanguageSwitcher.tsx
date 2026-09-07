@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { locales, localeLabels, type Locale } from "@/i18n/config";
+import { usePathname } from "next/navigation";
+import { locales, localeLabels, type Locale, isLocale } from "@/i18n/config";
 import { useI18n } from "@/i18n/LanguageContext";
 
 function GlobeIcon({ className }: { className?: string }) {
@@ -26,12 +27,22 @@ function GlobeIcon({ className }: { className?: string }) {
   );
 }
 
+function localeHref(code: Locale, pathname: string | null) {
+  const parts = (pathname || "/").split("/").filter(Boolean);
+  if (parts.length && isLocale(parts[0])) {
+    parts[0] = code;
+    return `/${parts.join("/")}`;
+  }
+  return `/${code}`;
+}
+
 export default function LanguageSwitcher({
   variant = "header",
 }: {
   variant?: "header" | "menu";
 }) {
   const { locale } = useI18n();
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -107,7 +118,7 @@ export default function LanguageSwitcher({
               return (
                 <li key={code} role="option" aria-selected={active}>
                   <Link
-                    href={`/${code}`}
+                    href={localeHref(code as Locale, pathname)}
                     onClick={() => setOpen(false)}
                     className={`flex items-center justify-between gap-6 px-4 py-2.5 font-display text-[13px] font-bold tracking-wide transition-colors ${
                       active

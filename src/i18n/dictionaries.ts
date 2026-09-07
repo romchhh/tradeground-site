@@ -7,17 +7,13 @@ export type Dictionary = {
     keywords: string[];
   };
   nav: {
-    home: string;
-    categories: string;
-    telegram: string;
-    forWhom: string;
-    product: string;
-    matches: string;
-    location: string;
-    start: string;
+    about: string;
+    marketplace: string;
+    business: string;
+    contacts: string;
+    open: string;
     menu: string;
     close: string;
-    join: string;
   };
   hero: {
     line1: string;
@@ -81,6 +77,7 @@ export type Dictionary = {
   };
   matches: {
     badge: string;
+    sectionLabel: string;
     line1: string;
     line2: string;
     brand: string;
@@ -122,6 +119,37 @@ export type Dictionary = {
     privacy: string;
     terms: string;
   };
+  contacts: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    subtitle: string;
+    lead: string;
+    topics: {
+      id: string;
+      title: string;
+      desc: string;
+      cta: string;
+    }[];
+    formNameLabel: string;
+    formNamePlaceholder: string;
+    formContactLabel: string;
+    formContactPlaceholder: string;
+    formMessageLabel: string;
+    formMessagePlaceholder: string;
+    submit: string;
+    successTitle: string;
+    successDesc: string;
+    otherTitle: string;
+    emailLabel: string;
+    emailValue: string;
+    telegramLabel: string;
+    telegramValue: string;
+    telegramUrl: string;
+    instagramLabel: string;
+    instagramValue: string;
+    instagramUrl: string;
+  };
   notFound: {
     title: string;
     description: string;
@@ -146,17 +174,13 @@ const ua: Dictionary = {
     ],
   },
   nav: {
-    home: "Головна",
-    categories: "Категорії",
-    telegram: "Telegram",
-    forWhom: "Для кого",
-    product: "Що всередині",
-    matches: "Матчі",
-    location: "Локація",
-    start: "Почати",
-    menu: "Menu",
-    close: "Close",
-    join: "Приєднатись зараз",
+    about: "Про TradeGround",
+    marketplace: "Marketplace",
+    business: "Для бізнесу",
+    contacts: "Контакти",
+    open: "Відкрити",
+    menu: "Меню",
+    close: "Закрити",
   },
   hero: {
     line1: "Trade",
@@ -261,6 +285,7 @@ const ua: Dictionary = {
   },
   matches: {
     badge: "Дивитись",
+    sectionLabel: "Матчі",
     line1: "Хтось шукає.",
     line2: "Хтось пропонує.",
     brand: "TradeGround",
@@ -318,6 +343,58 @@ const ua: Dictionary = {
     privacy: "Privacy Policy",
     terms: "Terms of Use",
   },
+  contacts: {
+    metaTitle: "Контакти — TradeGround",
+    metaDescription:
+      "Зв’яжіться з TradeGround: загальні питання, бізнес, реклама та підтримка.",
+    title: "LET'S TALK.",
+    subtitle: "Є питання, ідея чи пропозиція?",
+    lead: "Зв’яжіться з TradeGround.",
+    topics: [
+      {
+        id: "general",
+        title: "Загальне питання",
+        desc: "Питання про TradeGround, акаунт або роботу платформи.",
+        cta: "Написати",
+      },
+      {
+        id: "business",
+        title: "Для бізнесу",
+        desc: "Бізнес-профіль, просування товарів і послуг, професійні можливості.",
+        cta: "Зв’язатись",
+      },
+      {
+        id: "ads",
+        title: "Реклама і партнерства",
+        desc: "Реклама в TradeGround, інтеграції, блогери, спільноти та пропозиції про співпрацю.",
+        cta: "Обговорити",
+      },
+      {
+        id: "support",
+        title: "Проблема / Підтримка",
+        desc: "Щось працює не так або потрібна допомога з платформою.",
+        cta: "Отримати допомогу",
+      },
+    ],
+    formNameLabel: "Як вас звати?",
+    formNamePlaceholder: "Ваше ім’я",
+    formContactLabel: "Як з вами зв’язатись?",
+    formContactPlaceholder: "Email / Telegram",
+    formMessageLabel: "Про що хочете поговорити?",
+    formMessagePlaceholder: "Розкажіть трохи докладніше...",
+    submit: "Надіслати",
+    successTitle: "MESSAGE SENT.",
+    successDesc: "Дякуємо. Ми отримали ваше повідомлення.",
+    otherTitle: "OTHER WAYS TO CONNECT",
+    emailLabel: "EMAIL",
+    emailValue: "tradegrnd@gmail.com",
+    telegramLabel: "TELEGRAM",
+    telegramValue: "@tradeground_support",
+    telegramUrl: "https://t.me/tradeground_support",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@tradeground",
+    instagramUrl: "https://instagram.com/tradeground",
+  },
   notFound: {
     title: "Сторінку не знайдено",
     description: "Схоже, цієї сторінки не існує. Поверніться на головну TradeGround.",
@@ -342,17 +419,13 @@ const ru: Dictionary = {
     ],
   },
   nav: {
-    home: "Главная",
-    categories: "Категории",
-    telegram: "Telegram",
-    forWhom: "Для кого",
-    product: "Что внутри",
-    matches: "Сделки",
-    location: "Локация",
-    start: "Начать",
-    menu: "Menu",
-    close: "Close",
-    join: "Присоединиться сейчас",
+    about: "О TradeGround",
+    marketplace: "Marketplace",
+    business: "Для бизнеса",
+    contacts: "Контакты",
+    open: "Открыть",
+    menu: "Меню",
+    close: "Закрыть",
   },
   hero: {
     line1: "Trade",
@@ -457,6 +530,7 @@ const ru: Dictionary = {
   },
   matches: {
     badge: "Смотреть",
+    sectionLabel: "Сделки",
     line1: "Кто-то ищет.",
     line2: "Кто-то предлагает.",
     brand: "TradeGround",
@@ -514,6 +588,58 @@ const ru: Dictionary = {
     privacy: "Privacy Policy",
     terms: "Terms of Use",
   },
+  contacts: {
+    metaTitle: "Контакты — TradeGround",
+    metaDescription:
+      "Свяжитесь с TradeGround: общий вопрос, бизнес, реклама и поддержка.",
+    title: "LET'S TALK.",
+    subtitle: "Есть вопрос, идея или предложение?",
+    lead: "Свяжитесь с TradeGround.",
+    topics: [
+      {
+        id: "general",
+        title: "Общий вопрос",
+        desc: "Вопрос о TradeGround, аккаунте или работе платформы.",
+        cta: "Написать",
+      },
+      {
+        id: "business",
+        title: "Для бизнеса",
+        desc: "Бизнес-профиль, продвижение товаров и услуг, профессиональные возможности.",
+        cta: "Связаться",
+      },
+      {
+        id: "ads",
+        title: "Реклама и партнёрства",
+        desc: "Реклама в TradeGround, интеграции, блогеры, сообщества и предложения о сотрудничестве.",
+        cta: "Обсудить",
+      },
+      {
+        id: "support",
+        title: "Проблема / Поддержка",
+        desc: "Что-то работает не так или нужна помощь с платформой.",
+        cta: "Получить помощь",
+      },
+    ],
+    formNameLabel: "Как вас зовут?",
+    formNamePlaceholder: "Ваше имя",
+    formContactLabel: "Как с вами связаться?",
+    formContactPlaceholder: "Email / Telegram",
+    formMessageLabel: "О чём хотите поговорить?",
+    formMessagePlaceholder: "Расскажите немного подробнее...",
+    submit: "Отправить",
+    successTitle: "MESSAGE SENT.",
+    successDesc: "Спасибо. Мы получили ваше сообщение.",
+    otherTitle: "OTHER WAYS TO CONNECT",
+    emailLabel: "EMAIL",
+    emailValue: "tradegrnd@gmail.com",
+    telegramLabel: "TELEGRAM",
+    telegramValue: "@tradeground_support",
+    telegramUrl: "https://t.me/tradeground_support",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@tradeground",
+    instagramUrl: "https://instagram.com/tradeground",
+  },
   notFound: {
     title: "Страница не найдена",
     description: "Похоже, этой страницы не существует. Вернитесь на главную TradeGround.",
@@ -538,17 +664,13 @@ const en: Dictionary = {
     ],
   },
   nav: {
-    home: "Home",
-    categories: "Categories",
-    telegram: "Telegram",
-    forWhom: "For whom",
-    product: "What's inside",
-    matches: "Matches",
-    location: "Location",
-    start: "Start",
+    about: "About TradeGround",
+    marketplace: "Marketplace",
+    business: "For business",
+    contacts: "Contacts",
+    open: "Open",
     menu: "Menu",
     close: "Close",
-    join: "Join now",
   },
   hero: {
     line1: "Trade",
@@ -653,6 +775,7 @@ const en: Dictionary = {
   },
   matches: {
     badge: "Explore",
+    sectionLabel: "Matches",
     line1: "Someone seeks.",
     line2: "Someone offers.",
     brand: "TradeGround",
@@ -710,6 +833,58 @@ const en: Dictionary = {
     privacy: "Privacy Policy",
     terms: "Terms of Use",
   },
+  contacts: {
+    metaTitle: "Contacts — TradeGround",
+    metaDescription:
+      "Contact TradeGround: general questions, business, advertising and support.",
+    title: "LET'S TALK.",
+    subtitle: "Have a question, idea or suggestion?",
+    lead: "Get in touch with TradeGround.",
+    topics: [
+      {
+        id: "general",
+        title: "General question",
+        desc: "A question about TradeGround, your account or how the platform works.",
+        cta: "Write",
+      },
+      {
+        id: "business",
+        title: "For business",
+        desc: "Business profile, promoting goods and services, professional opportunities.",
+        cta: "Contact",
+      },
+      {
+        id: "ads",
+        title: "Ads & partnerships",
+        desc: "Advertising in TradeGround, integrations, creators, communities and collaboration.",
+        cta: "Discuss",
+      },
+      {
+        id: "support",
+        title: "Issue / Support",
+        desc: "Something isn’t working or you need help with the platform.",
+        cta: "Get help",
+      },
+    ],
+    formNameLabel: "What’s your name?",
+    formNamePlaceholder: "Your name",
+    formContactLabel: "How can we reach you?",
+    formContactPlaceholder: "Email / Telegram",
+    formMessageLabel: "What would you like to talk about?",
+    formMessagePlaceholder: "Tell us a bit more...",
+    submit: "Send",
+    successTitle: "MESSAGE SENT.",
+    successDesc: "Thank you. We’ve received your message.",
+    otherTitle: "OTHER WAYS TO CONNECT",
+    emailLabel: "EMAIL",
+    emailValue: "tradegrnd@gmail.com",
+    telegramLabel: "TELEGRAM",
+    telegramValue: "@tradeground_support",
+    telegramUrl: "https://t.me/tradeground_support",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@tradeground",
+    instagramUrl: "https://instagram.com/tradeground",
+  },
   notFound: {
     title: "Page not found",
     description: "This page doesn’t exist. Head back to the TradeGround home page.",
@@ -734,17 +909,13 @@ const de: Dictionary = {
     ],
   },
   nav: {
-    home: "Start",
-    categories: "Kategorien",
-    telegram: "Telegram",
-    forWhom: "Für wen",
-    product: "Was steckt drin",
-    matches: "Matches",
-    location: "Standort",
-    start: "Starten",
-    menu: "Menu",
-    close: "Close",
-    join: "Jetzt beitreten",
+    about: "Über TradeGround",
+    marketplace: "Marketplace",
+    business: "Für Business",
+    contacts: "Kontakt",
+    open: "Öffnen",
+    menu: "Menü",
+    close: "Schließen",
   },
   hero: {
     line1: "Trade",
@@ -849,6 +1020,7 @@ const de: Dictionary = {
   },
   matches: {
     badge: "Ansehen",
+    sectionLabel: "Matches",
     line1: "Jemand sucht.",
     line2: "Jemand bietet.",
     brand: "TradeGround",
@@ -905,6 +1077,58 @@ const de: Dictionary = {
     rights: "©2026 TradeGround | ALL RIGHTS RESERVED",
     privacy: "Privacy Policy",
     terms: "Terms of Use",
+  },
+  contacts: {
+    metaTitle: "Kontakt — TradeGround",
+    metaDescription:
+      "Kontaktieren Sie TradeGround: allgemeine Fragen, Business, Werbung und Support.",
+    title: "LET'S TALK.",
+    subtitle: "Frage, Idee oder Vorschlag?",
+    lead: "Schreiben Sie TradeGround.",
+    topics: [
+      {
+        id: "general",
+        title: "Allgemeine Frage",
+        desc: "Frage zu TradeGround, Konto oder Plattform.",
+        cta: "Schreiben",
+      },
+      {
+        id: "business",
+        title: "Für Business",
+        desc: "Business-Profil, Promotion von Waren und Services, professionelle Möglichkeiten.",
+        cta: "Kontaktieren",
+      },
+      {
+        id: "ads",
+        title: "Werbung & Partnerschaften",
+        desc: "Werbung bei TradeGround, Integrationen, Creator, Communities und Kooperationen.",
+        cta: "Besprechen",
+      },
+      {
+        id: "support",
+        title: "Problem / Support",
+        desc: "Etwas funktioniert nicht oder Sie brauchen Hilfe mit der Plattform.",
+        cta: "Hilfe erhalten",
+      },
+    ],
+    formNameLabel: "Wie heißen Sie?",
+    formNamePlaceholder: "Ihr Name",
+    formContactLabel: "Wie erreichen wir Sie?",
+    formContactPlaceholder: "Email / Telegram",
+    formMessageLabel: "Worüber möchten Sie sprechen?",
+    formMessagePlaceholder: "Erzählen Sie kurz mehr...",
+    submit: "Senden",
+    successTitle: "MESSAGE SENT.",
+    successDesc: "Danke. Wir haben Ihre Nachricht erhalten.",
+    otherTitle: "OTHER WAYS TO CONNECT",
+    emailLabel: "EMAIL",
+    emailValue: "tradegrnd@gmail.com",
+    telegramLabel: "TELEGRAM",
+    telegramValue: "@tradeground_support",
+    telegramUrl: "https://t.me/tradeground_support",
+    instagramLabel: "INSTAGRAM",
+    instagramValue: "@tradeground",
+    instagramUrl: "https://instagram.com/tradeground",
   },
   notFound: {
     title: "Seite nicht gefunden",

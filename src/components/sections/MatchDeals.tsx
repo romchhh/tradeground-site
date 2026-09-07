@@ -42,7 +42,7 @@ export default function MatchDeals() {
           <aside className="lg:sticky lg:top-28 lg:z-10 lg:self-start lg:pb-8">
             <div className="mb-6 flex items-center gap-3">
               <span className="font-body text-[13px] text-[#656B4D]">
-                {t.nav.matches}
+                {t.matches.sectionLabel}
               </span>
               <a
                 href="#matches-list"
