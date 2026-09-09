@@ -150,6 +150,31 @@ export type Dictionary = {
     instagramValue: string;
     instagramUrl: string;
   };
+  marketplace: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    titleAccent: string;
+    lead: string;
+    categories: {
+      id: string;
+      title: string;
+      desc: string;
+      icon: string;
+    }[];
+    moreLabel: string;
+    moreCta: string;
+    personalTitle: string;
+    personalDesc: string;
+    businessTitle: string;
+    businessTitleAccent: string;
+    businessDesc: string;
+    businessFeatures: string[];
+    businessCta: string;
+    openTitle: string;
+    openDesc: string;
+    openCta: string;
+  };
   notFound: {
     title: string;
     description: string;
@@ -394,6 +419,65 @@ const ua: Dictionary = {
     instagramLabel: "INSTAGRAM",
     instagramValue: "@tradeground",
     instagramUrl: "https://instagram.com/tradeground",
+  },
+  marketplace: {
+    metaTitle: "Marketplace — TradeGround",
+    metaDescription:
+      "Marketplace, який підлаштовується під вас. Товари, послуги, робота, нерухомість і безкоштовне — в одному просторі TradeGround.",
+    title: "MARKETPLACE,",
+    titleAccent: "ЯКИЙ ПІДЛАШТОВУЄТЬСЯ ПІД ВАС.",
+    lead: "Обирайте те, що цікавить саме вас — TradeGround збере потрібні товари, послуги й пропозиції в одному просторі.",
+    categories: [
+      {
+        id: "goods",
+        title: "ТОВАРИ",
+        desc: "Від меблів і електроніки до автомобілів і одягу.",
+        icon: "/categories_icons/furniture.svg",
+      },
+      {
+        id: "services",
+        title: "ПОСЛУГИ",
+        desc: "Знаходьте спеціалістів або пропонуйте свої послуги.",
+        icon: "/categories_icons/services_work.svg",
+      },
+      {
+        id: "jobs",
+        title: "РОБОТА",
+        desc: "Вакансії та пропозиції роботи.",
+        icon: "/categories_icons/appliances.svg",
+      },
+      {
+        id: "realestate",
+        title: "НЕРУХОМІСТЬ",
+        desc: "Оренда та інші пропозиції.",
+        icon: "/categories_icons/realestate.svg",
+      },
+      {
+        id: "free",
+        title: "БЕЗКОШТОВНО",
+        desc: "Речі, які готові віддати.",
+        icon: "/categories_icons/free.svg",
+      },
+    ],
+    moreLabel: "І ЩЕ",
+    moreCta: "Усі категорії",
+    personalTitle: "MAKE IT PERSONAL.",
+    personalDesc:
+      "TradeGround не виглядає однаково для всіх. Кожен користувач поступово формує свій простір — своє місто, свої інтереси, збережені оголошення, підписки.",
+    businessTitle: "ПРОДАЄТЕ",
+    businessTitleAccent: "ПРОФЕСІЙНО?",
+    businessDesc:
+      "TradeGround пропонує окремі можливості для бізнесу та професійних продавців.",
+    businessFeatures: [
+      "Бізнес-профіль",
+      "Просування",
+      "Більше оголошень",
+      "Інструменти продавця",
+    ],
+    businessCta: "TradeGround для бізнесу",
+    openTitle: "ВІДКРИЙТЕ TRADEGROUND.",
+    openDesc: "Товари, послуги й можливості вже всередині.",
+    openCta: "Відкрити Marketplace",
   },
   notFound: {
     title: "Сторінку не знайдено",
@@ -640,6 +724,65 @@ const ru: Dictionary = {
     instagramValue: "@tradeground",
     instagramUrl: "https://instagram.com/tradeground",
   },
+  marketplace: {
+    metaTitle: "Marketplace — TradeGround",
+    metaDescription:
+      "Marketplace, который подстраивается под вас. Товары, услуги, работа, недвижимость и бесплатное — в одном пространстве TradeGround.",
+    title: "MARKETPLACE,",
+    titleAccent: "КОТОРЫЙ ПОДСТРАИВАЕТСЯ ПОД ВАС.",
+    lead: "Выбирайте то, что интересно именно вам — TradeGround соберёт нужные товары, услуги и предложения в одном пространстве.",
+    categories: [
+      {
+        id: "goods",
+        title: "ТОВАРЫ",
+        desc: "От мебели и электроники до автомобилей и одежды.",
+        icon: "/categories_icons/furniture.svg",
+      },
+      {
+        id: "services",
+        title: "УСЛУГИ",
+        desc: "Находите специалистов или предлагайте свои услуги.",
+        icon: "/categories_icons/services_work.svg",
+      },
+      {
+        id: "jobs",
+        title: "РАБОТА",
+        desc: "Вакансии и предложения работы.",
+        icon: "/categories_icons/appliances.svg",
+      },
+      {
+        id: "realestate",
+        title: "НЕДВИЖИМОСТЬ",
+        desc: "Аренда и другие предложения.",
+        icon: "/categories_icons/realestate.svg",
+      },
+      {
+        id: "free",
+        title: "БЕСПЛАТНО",
+        desc: "Вещи, которые готовы отдать.",
+        icon: "/categories_icons/free.svg",
+      },
+    ],
+    moreLabel: "И ЕЩЁ",
+    moreCta: "Все категории",
+    personalTitle: "MAKE IT PERSONAL.",
+    personalDesc:
+      "TradeGround не выглядит одинаково для всех. Каждый пользователь постепенно формирует своё пространство — свой город, свои интересы, сохранённые объявления, подписки.",
+    businessTitle: "ПРОДАЁТЕ",
+    businessTitleAccent: "ПРОФЕССИОНАЛЬНО?",
+    businessDesc:
+      "TradeGround предлагает отдельные возможности для бизнеса и профессиональных продавцов.",
+    businessFeatures: [
+      "Бизнес-профиль",
+      "Продвижение",
+      "Больше объявлений",
+      "Инструменты продавца",
+    ],
+    businessCta: "TradeGround для бизнеса",
+    openTitle: "ОТКРОЙТЕ TRADEGROUND.",
+    openDesc: "Товары, услуги и возможности уже внутри.",
+    openCta: "Открыть Marketplace",
+  },
   notFound: {
     title: "Страница не найдена",
     description: "Похоже, этой страницы не существует. Вернитесь на главную TradeGround.",
@@ -885,6 +1028,65 @@ const en: Dictionary = {
     instagramValue: "@tradeground",
     instagramUrl: "https://instagram.com/tradeground",
   },
+  marketplace: {
+    metaTitle: "Marketplace — TradeGround",
+    metaDescription:
+      "A marketplace that adapts to you. Goods, services, jobs, real estate and freebies — in one TradeGround space.",
+    title: "MARKETPLACE,",
+    titleAccent: "THAT ADAPTS TO YOU.",
+    lead: "Choose what matters to you — TradeGround gathers the right goods, services and offers in one place.",
+    categories: [
+      {
+        id: "goods",
+        title: "GOODS",
+        desc: "From furniture and electronics to cars and fashion.",
+        icon: "/categories_icons/furniture.svg",
+      },
+      {
+        id: "services",
+        title: "SERVICES",
+        desc: "Find specialists or offer your own services.",
+        icon: "/categories_icons/services_work.svg",
+      },
+      {
+        id: "jobs",
+        title: "JOBS",
+        desc: "Vacancies and work opportunities.",
+        icon: "/categories_icons/appliances.svg",
+      },
+      {
+        id: "realestate",
+        title: "REAL ESTATE",
+        desc: "Rentals and other property offers.",
+        icon: "/categories_icons/realestate.svg",
+      },
+      {
+        id: "free",
+        title: "FREE",
+        desc: "Things people are ready to give away.",
+        icon: "/categories_icons/free.svg",
+      },
+    ],
+    moreLabel: "AND MORE",
+    moreCta: "All categories",
+    personalTitle: "MAKE IT PERSONAL.",
+    personalDesc:
+      "TradeGround doesn’t look the same for everyone. Each user gradually shapes their space — their city, interests, saved listings and subscriptions.",
+    businessTitle: "SELLING",
+    businessTitleAccent: "PROFESSIONALLY?",
+    businessDesc:
+      "TradeGround offers dedicated tools for businesses and professional sellers.",
+    businessFeatures: [
+      "Business profile",
+      "Promotion",
+      "More listings",
+      "Seller tools",
+    ],
+    businessCta: "TradeGround for business",
+    openTitle: "OPEN TRADEGROUND.",
+    openDesc: "Goods, services and opportunities are already inside.",
+    openCta: "Open Marketplace",
+  },
   notFound: {
     title: "Page not found",
     description: "This page doesn’t exist. Head back to the TradeGround home page.",
@@ -1129,6 +1331,65 @@ const de: Dictionary = {
     instagramLabel: "INSTAGRAM",
     instagramValue: "@tradeground",
     instagramUrl: "https://instagram.com/tradeground",
+  },
+  marketplace: {
+    metaTitle: "Marketplace — TradeGround",
+    metaDescription:
+      "Ein Marketplace, der sich an Sie anpasst. Waren, Services, Jobs, Immobilien und Gratisangebote — in einem TradeGround-Raum.",
+    title: "MARKETPLACE,",
+    titleAccent: "DER SICH AN SIE ANPASST.",
+    lead: "Wählen Sie, was Sie wirklich interessiert — TradeGround bündelt passende Waren, Services und Angebote an einem Ort.",
+    categories: [
+      {
+        id: "goods",
+        title: "WAREN",
+        desc: "Von Möbeln und Elektronik bis Autos und Mode.",
+        icon: "/categories_icons/furniture.svg",
+      },
+      {
+        id: "services",
+        title: "SERVICES",
+        desc: "Finden Sie Fachleute oder bieten Sie eigene Services an.",
+        icon: "/categories_icons/services_work.svg",
+      },
+      {
+        id: "jobs",
+        title: "JOBS",
+        desc: "Stellenangebote und Arbeitsmöglichkeiten.",
+        icon: "/categories_icons/appliances.svg",
+      },
+      {
+        id: "realestate",
+        title: "IMMOBILIEN",
+        desc: "Miete und weitere Angebote.",
+        icon: "/categories_icons/realestate.svg",
+      },
+      {
+        id: "free",
+        title: "GRATIS",
+        desc: "Dinge, die weitergegeben werden.",
+        icon: "/categories_icons/free.svg",
+      },
+    ],
+    moreLabel: "UND MEHR",
+    moreCta: "Alle Kategorien",
+    personalTitle: "MAKE IT PERSONAL.",
+    personalDesc:
+      "TradeGround sieht nicht für alle gleich aus. Jeder Nutzer formt nach und nach seinen Raum — Stadt, Interessen, gespeicherte Anzeigen, Abos.",
+    businessTitle: "VERKAUFEN SIE",
+    businessTitleAccent: "PROFESSIONELL?",
+    businessDesc:
+      "TradeGround bietet eigene Möglichkeiten für Business und professionelle Verkäufer.",
+    businessFeatures: [
+      "Business-Profil",
+      "Promotion",
+      "Mehr Anzeigen",
+      "Verkäufer-Tools",
+    ],
+    businessCta: "TradeGround für Business",
+    openTitle: "ÖFFNEN SIE TRADEGROUND.",
+    openDesc: "Waren, Services und Möglichkeiten warten schon.",
+    openCta: "Marketplace öffnen",
   },
   notFound: {
     title: "Seite nicht gefunden",

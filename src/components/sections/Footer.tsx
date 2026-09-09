@@ -12,7 +12,7 @@ export default function Footer({
 
   const navLinks = [
     { label: t.nav.about, to: href("#hero") },
-    { label: t.nav.marketplace, to: marketplace, external: true },
+    { label: t.nav.marketplace, to: `/${locale}/marketplace` },
     { label: t.nav.business, to: href("#private") },
     { label: t.nav.contacts, to: `/${locale}/contacts` },
   ];
@@ -48,7 +48,7 @@ export default function Footer({
               alt="TradeGround"
               className="h-12 w-auto sm:h-16 md:h-20 lg:h-24"
             />
-            <p className="section-subtitle section-subtitle-center mx-auto mt-6">
+            <p className="section-subtitle section-subtitle-center mx-auto mt-6 !text-white">
               {t.footer.desc}
             </p>
             <a
@@ -84,27 +84,15 @@ export default function Footer({
               </Link>
 
               <nav className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:gap-x-5 md:gap-x-6 lg:gap-x-8">
-                {navLinks.map((l) =>
-                  l.external ? (
-                    <a
-                      key={l.label}
-                      href={l.to}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-body text-[13px] text-text-light transition-colors hover:text-accent"
-                    >
-                      {l.label}
-                    </a>
-                  ) : (
-                    <a
-                      key={l.label}
-                      href={l.to}
-                      className="font-body text-[13px] text-text-light transition-colors hover:text-accent"
-                    >
-                      {l.label}
-                    </a>
-                  )
-                )}
+                {navLinks.map((l) => (
+                  <a
+                    key={l.label}
+                    href={l.to}
+                    className="font-body text-[13px] text-white transition-colors hover:text-accent"
+                  >
+                    {l.label}
+                  </a>
+                ))}
               </nav>
 
               <a

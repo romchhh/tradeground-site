@@ -45,7 +45,7 @@ export default function Navbar() {
 
   const links = [
     { label: t.nav.about, href: href("#hero"), external: false },
-    { label: t.nav.marketplace, href: marketplace, external: true },
+    { label: t.nav.marketplace, href: `/${locale}/marketplace`, external: false },
     { label: t.nav.business, href: href("#private"), external: false },
     { label: t.nav.contacts, href: `/${locale}/contacts`, external: false },
   ];
