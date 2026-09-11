@@ -11,7 +11,7 @@ export default function Footer({
   const { t, marketplace, href, locale } = useI18n();
 
   const navLinks = [
-    { label: t.nav.about, to: href("#hero") },
+    { label: t.nav.about, to: `/${locale}/about` },
     { label: t.nav.marketplace, to: `/${locale}/marketplace` },
     { label: t.nav.business, to: href("#private") },
     { label: t.nav.contacts, to: `/${locale}/contacts` },

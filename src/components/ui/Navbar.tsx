@@ -44,7 +44,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { label: t.nav.about, href: href("#hero"), external: false },
+    { label: t.nav.about, href: `/${locale}/about`, external: false },
     { label: t.nav.marketplace, href: `/${locale}/marketplace`, external: false },
     { label: t.nav.business, href: href("#private"), external: false },
     { label: t.nav.contacts, href: `/${locale}/contacts`, external: false },

@@ -175,6 +175,30 @@ export type Dictionary = {
     openDesc: string;
     openCta: string;
   };
+  about: {
+    metaTitle: string;
+    metaDescription: string;
+    title: string;
+    titleAccent: string;
+    lead: string;
+    storyTitle: string;
+    storyTitleAccent: string;
+    storyParagraphs: string[];
+    storyReveal: string;
+    founderName: string;
+    founderRole: string;
+    buyTitle: string;
+    buyDesc: string;
+    simpleTitle: string;
+    simpleTitleAccent: string;
+    simpleDesc: string;
+    futureTitle: string;
+    futureTitleAccent: string;
+    futureDesc: string;
+    ctaLine1: string;
+    ctaLine2: string;
+    cta: string;
+  };
   notFound: {
     title: string;
     description: string;
@@ -199,7 +223,7 @@ const ua: Dictionary = {
     ],
   },
   nav: {
-    about: "Про TradeGround",
+    about: "Про нас",
     marketplace: "Marketplace",
     business: "Для бізнесу",
     contacts: "Контакти",
@@ -479,6 +503,38 @@ const ua: Dictionary = {
     openDesc: "Товари, послуги й можливості вже всередині.",
     openCta: "Відкрити Marketplace",
   },
+  about: {
+    metaTitle: "Про нас — TradeGround",
+    metaDescription:
+      "Більше, ніж marketplace. TradeGround створений для російсько- та україномовних жителів Німеччини — щоб знаходити потрібне, пропонувати своє і напряму зв’язуватися одне з одним.",
+    title: "БІЛЬШЕ,",
+    titleAccent: "НІЖ MARKETPLACE.",
+    lead: "TradeGround створений для російсько- та україномовних жителів Німеччини — щоб знаходити потрібне, пропонувати своє і напряму зв’язуватися одне з одним.",
+    storyTitle: "ВСЕ ПОЧАЛОСЬ",
+    storyTitleAccent: "З ПРОСТОЇ ПОТРЕБИ.",
+    storyParagraphs: [
+      "Після переїзду до Німеччини я знову й знову стикався з однією проблемою: товари, послуги, вакансії та інші пропозиції були розкидані по десятках груп, каналів і платформ.",
+      "Знайти потрібного спеціаліста, відповідну річ або просто швидко щось продати виявлялося складніше, ніж має бути.",
+      "Тоді з’явилася проста ідея — зібрати все це в одному місці і зробити пошук звичним і зрозумілим.",
+    ],
+    storyReveal: "ТАК З’ЯВИВСЯ TRADEGROUND.",
+    founderName: "Vasyl Zhuravlov",
+    founderRole: "Founder, TradeGround",
+    buyTitle: "BUY. SELL. FIND.",
+    buyDesc:
+      "Купуйте і продавайте. Знаходьте спеціалістів, роботу, житло та локальні пропозиції — без потреби шукати в десятках різних джерел.",
+    simpleTitle: "БЕЗ СКЛАДНОСТЕЙ.",
+    simpleTitleAccent: "БЕЗ МОВНОГО БАР’ЄРА.",
+    simpleDesc:
+      "Звичний Telegram. Зрозуміла мова. Прямий зв’язок між людьми. Нічого додатково завантажувати не потрібно. Знайшли потрібне — одразу зв’язались із продавцем або спеціалістом.",
+    futureTitle: "MARKETPLACE —",
+    futureTitleAccent: "ЦЕ ЛИШЕ ПОЧАТОК.",
+    futureDesc:
+      "Сьогодні — Marketplace. Далі — більше можливостей для повсякденного життя, спілкування та бізнесу.",
+    ctaLine1: "GERMANY TODAY.",
+    ctaLine2: "MORE TOMORROW.",
+    cta: "Приєднатись",
+  },
   notFound: {
     title: "Сторінку не знайдено",
     description: "Схоже, цієї сторінки не існує. Поверніться на головну TradeGround.",
@@ -503,7 +559,7 @@ const ru: Dictionary = {
     ],
   },
   nav: {
-    about: "О TradeGround",
+    about: "О нас",
     marketplace: "Marketplace",
     business: "Для бизнеса",
     contacts: "Контакты",
@@ -783,6 +839,38 @@ const ru: Dictionary = {
     openDesc: "Товары, услуги и возможности уже внутри.",
     openCta: "Открыть Marketplace",
   },
+  about: {
+    metaTitle: "О нас — TradeGround",
+    metaDescription:
+      "Больше, чем marketplace. TradeGround создан для русско- и украиноязычных жителей Германии — чтобы находить нужное, предлагать своё и напрямую связываться друг с другом.",
+    title: "БОЛЬШЕ,",
+    titleAccent: "ЧЕМ MARKETPLACE.",
+    lead: "TradeGround создан для русско- и украиноязычных жителей Германии — чтобы находить нужное, предлагать своё и напрямую связываться друг с другом.",
+    storyTitle: "ВСЁ НАЧАЛОСЬ",
+    storyTitleAccent: "С ПРОСТОЙ ПОТРЕБНОСТИ.",
+    storyParagraphs: [
+      "После переезда в Германию я снова и снова сталкивался с одной проблемой: товары, услуги, вакансии и другие предложения были разбросаны по десяткам групп, каналов и платформ.",
+      "Найти нужного специалиста, подходящую вещь или просто быстро что-то продать оказывалось сложнее, чем должно быть.",
+      "Тогда появилась простая идея — собрать всё это в одном месте и сделать поиск привычным и понятным.",
+    ],
+    storyReveal: "ТАК ПОЯВИЛСЯ TRADEGROUND.",
+    founderName: "Vasyl Zhuravlov",
+    founderRole: "Founder, TradeGround",
+    buyTitle: "BUY. SELL. FIND.",
+    buyDesc:
+      "Покупайте и продавайте. Находите специалистов, работу, жильё и локальные предложения — без необходимости искать по десяткам разных источников.",
+    simpleTitle: "БЕЗ СЛОЖНОСТЕЙ.",
+    simpleTitleAccent: "БЕЗ ЯЗЫКОВОГО БАРЬЕРА.",
+    simpleDesc:
+      "Привычный Telegram. Понятный язык. Прямая связь между людьми. Ничего дополнительно скачивать не нужно. Нашли нужное — сразу связались с продавцом или специалистом.",
+    futureTitle: "MARKETPLACE —",
+    futureTitleAccent: "ЭТО ТОЛЬКО НАЧАЛО.",
+    futureDesc:
+      "Сегодня — Marketplace. Дальше — больше возможностей для повседневной жизни, общения и бизнеса.",
+    ctaLine1: "GERMANY TODAY.",
+    ctaLine2: "MORE TOMORROW.",
+    cta: "Присоединиться",
+  },
   notFound: {
     title: "Страница не найдена",
     description: "Похоже, этой страницы не существует. Вернитесь на главную TradeGround.",
@@ -807,7 +895,7 @@ const en: Dictionary = {
     ],
   },
   nav: {
-    about: "About TradeGround",
+    about: "About us",
     marketplace: "Marketplace",
     business: "For business",
     contacts: "Contacts",
@@ -1087,6 +1175,38 @@ const en: Dictionary = {
     openDesc: "Goods, services and opportunities are already inside.",
     openCta: "Open Marketplace",
   },
+  about: {
+    metaTitle: "About us — TradeGround",
+    metaDescription:
+      "More than a marketplace. TradeGround was built for Russian- and Ukrainian-speaking residents of Germany — to find what you need, offer what you have, and connect directly.",
+    title: "MORE THAN",
+    titleAccent: "A MARKETPLACE.",
+    lead: "TradeGround was built for Russian- and Ukrainian-speaking residents of Germany — to find what you need, offer what you have, and connect directly with each other.",
+    storyTitle: "IT STARTED",
+    storyTitleAccent: "WITH A SIMPLE NEED.",
+    storyParagraphs: [
+      "After moving to Germany, I kept running into the same problem: goods, services, jobs and other offers were scattered across dozens of groups, channels and platforms.",
+      "Finding the right specialist, the right item, or simply selling something quickly turned out harder than it should be.",
+      "Then a simple idea appeared — gather it all in one place and make discovery familiar and clear.",
+    ],
+    storyReveal: "THAT’S HOW TRADEGROUND BEGAN.",
+    founderName: "Vasyl Zhuravlov",
+    founderRole: "Founder, TradeGround",
+    buyTitle: "BUY. SELL. FIND.",
+    buyDesc:
+      "Buy and sell. Find specialists, jobs, housing and local offers — without searching across dozens of different sources.",
+    simpleTitle: "NO FRICTION.",
+    simpleTitleAccent: "NO LANGUAGE BARRIER.",
+    simpleDesc:
+      "Familiar Telegram. Clear language. Direct connection between people. Nothing extra to download. Found what you need — message the seller or specialist right away.",
+    futureTitle: "MARKETPLACE —",
+    futureTitleAccent: "IS ONLY THE BEGINNING.",
+    futureDesc:
+      "Today — Marketplace. Next — more opportunities for everyday life, community and business.",
+    ctaLine1: "GERMANY TODAY.",
+    ctaLine2: "MORE TOMORROW.",
+    cta: "Join",
+  },
   notFound: {
     title: "Page not found",
     description: "This page doesn’t exist. Head back to the TradeGround home page.",
@@ -1111,7 +1231,7 @@ const de: Dictionary = {
     ],
   },
   nav: {
-    about: "Über TradeGround",
+    about: "Über uns",
     marketplace: "Marketplace",
     business: "Für Business",
     contacts: "Kontakt",
@@ -1390,6 +1510,38 @@ const de: Dictionary = {
     openTitle: "ÖFFNEN SIE TRADEGROUND.",
     openDesc: "Waren, Services und Möglichkeiten warten schon.",
     openCta: "Marketplace öffnen",
+  },
+  about: {
+    metaTitle: "Über uns — TradeGround",
+    metaDescription:
+      "Mehr als ein Marketplace. TradeGround wurde für russisch- und ukrainischsprachige Menschen in Deutschland geschaffen — um das Nötige zu finden, eigenes anzubieten und sich direkt zu verbinden.",
+    title: "MEHR ALS",
+    titleAccent: "EIN MARKETPLACE.",
+    lead: "TradeGround wurde für russisch- und ukrainischsprachige Menschen in Deutschland geschaffen — um das Nötige zu finden, eigenes anzubieten und sich direkt miteinander zu verbinden.",
+    storyTitle: "ES BEGANN",
+    storyTitleAccent: "MIT EINEM EINFACHEN BEDÜRFNIS.",
+    storyParagraphs: [
+      "Nach dem Umzug nach Deutschland stieß ich immer wieder auf dasselbe Problem: Waren, Services, Jobs und andere Angebote waren über Dutzende Gruppen, Kanäle und Plattformen verstreut.",
+      "Den richtigen Fachmann, den passenden Gegenstand oder einfach etwas schnell zu verkaufen war komplizierter, als es sein sollte.",
+      "Dann entstand eine einfache Idee — alles an einem Ort zu bündeln und die Suche vertraut und verständlich zu machen.",
+    ],
+    storyReveal: "SO ENTSTAND TRADEGROUND.",
+    founderName: "Vasyl Zhuravlov",
+    founderRole: "Founder, TradeGround",
+    buyTitle: "BUY. SELL. FIND.",
+    buyDesc:
+      "Kaufen und verkaufen. Fachleute, Jobs, Wohnungen und lokale Angebote finden — ohne in Dutzenden Quellen zu suchen.",
+    simpleTitle: "OHNE UMSTÄNDE.",
+    simpleTitleAccent: "OHNE SPRACHBARRIERE.",
+    simpleDesc:
+      "Vertrautes Telegram. Verständliche Sprache. Direkter Kontakt zwischen Menschen. Nichts Extra herunterladen. Gefunden — direkt mit Verkäufer oder Fachkraft schreiben.",
+    futureTitle: "MARKETPLACE —",
+    futureTitleAccent: "IST NUR DER ANFANG.",
+    futureDesc:
+      "Heute — Marketplace. Als Nächstes — mehr Möglichkeiten für Alltag, Community und Business.",
+    ctaLine1: "GERMANY TODAY.",
+    ctaLine2: "MORE TOMORROW.",
+    cta: "Beitreten",
   },
   notFound: {
     title: "Seite nicht gefunden",
