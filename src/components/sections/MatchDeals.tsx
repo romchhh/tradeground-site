@@ -40,10 +40,7 @@ export default function MatchDeals() {
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(320px,0.88fr)_minmax(0,1.22fr)] lg:gap-16 xl:gap-24">
           {/* Left — sticky */}
           <aside className="lg:sticky lg:top-28 lg:z-10 lg:self-start lg:pb-8">
-            <div className="mb-6 flex items-center gap-3">
-              <span className="font-body text-[13px] text-[#656B4D]">
-                {t.matches.sectionLabel}
-              </span>
+            <div className="mb-6">
               <a
                 href="#matches-list"
                 className="inline-flex items-center gap-1.5 rounded-full bg-[#000100] px-3.5 py-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.06em] text-white transition-transform hover:scale-[1.03]"
@@ -141,10 +138,10 @@ export default function MatchDeals() {
             {m.items.map((item, i) => (
               <motion.article
                 key={`${item.seekTitle}-${item.offerTitle}`}
-                initial={{ opacity: 0, y: 56 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.28 }}
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative overflow-hidden rounded-[28px] bg-white p-5 shadow-[0_16px_48px_rgba(0,1,0,0.06)] ring-1 ring-black/[0.04] transition-shadow duration-500 hover:shadow-[0_24px_60px_rgba(0,1,0,0.1)] md:rounded-[32px] md:p-7"
               >
                 <div className="mb-6 flex items-start justify-between gap-4">

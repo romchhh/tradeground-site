@@ -3,6 +3,8 @@ import { isLocale, type Locale, defaultLocale } from "@/i18n/config";
 import { buildLocaleMetadata } from "@/lib/seo";
 import { htmlLang } from "@/lib/site";
 import JsonLd from "@/components/seo/JsonLd";
+import SiteFX from "@/components/fx/SiteFX";
+import { CoverEngine } from "@/components/fx/CoverPin";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -42,6 +44,8 @@ export default async function LocaleLayout({
     <LanguageProvider locale={locale}>
       <div lang={lang}>
         <JsonLd locale={locale} />
+        <SiteFX />
+        <CoverEngine />
         {children}
       </div>
     </LanguageProvider>

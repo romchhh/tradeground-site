@@ -75,10 +75,9 @@ export default function GermanyMap() {
                 >
                   <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                     <span
-                      className="h-2 w-2 shrink-0 rounded-full"
-                      style={{
-                        background: isActive ? "#656B4D" : "#C5CBCB",
-                      }}
+                      className={`h-2 w-2 shrink-0 rounded-full ${
+                        isActive ? "animate-pulse bg-olive" : "bg-[#C5CBCB]"
+                      }`}
                     />
                     <span
                       className={`truncate font-body text-[13px] sm:text-sm ${

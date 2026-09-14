@@ -1,5 +1,6 @@
 "use client";
 import { useI18n } from "@/i18n/LanguageContext";
+import Magnetic from "@/components/fx/Magnetic";
 
 export default function TelegramSection() {
   const { t, marketplace } = useI18n();
@@ -27,32 +28,55 @@ export default function TelegramSection() {
               {t.telegram.powered}
             </p>
 
-            <a
-              href={marketplace}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative hidden h-[160px] w-[160px] shrink-0 items-center justify-center rounded-full bg-accent transition-transform duration-300 hover:scale-105 hover:bg-accent-light lg:flex xl:h-[180px] xl:w-[180px]"
-            >
-              <span className="flex flex-col items-center gap-2 text-center font-display text-[15px] font-bold leading-tight text-bg xl:text-base">
-                {openLines.map((line) => (
-                  <span key={line}>
-                    {line}
-                    <br />
-                  </span>
-                ))}
-                <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-bg/10 transition-transform duration-300 group-hover:translate-x-1">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <Magnetic className="hidden self-start lg:block" strength={0.18}>
+              <a
+                href={marketplace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex h-[160px] w-[160px] shrink-0 items-center justify-center rounded-full bg-accent shadow-[0_0_50px_rgba(192,219,154,0.28)] transition-colors duration-300 hover:bg-accent-light xl:h-[180px] xl:w-[180px]"
+              >
+                <svg
+                  className="pointer-events-none absolute inset-[-22px] animate-spin-slow text-accent/80"
+                  viewBox="0 0 220 220"
+                  fill="none"
+                  aria-hidden
+                >
+                  <defs>
                     <path
-                      d="M3.5 9h11M9 3.5l5.5 5.5-5.5 5.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      id="tg-orbit"
+                      d="M110,110 m-96,0 a96,96 0 1,1 192,0 a96,96 0 1,1 -192,0"
                     />
-                  </svg>
+                  </defs>
+                  <text
+                    className="fill-muted"
+                    style={{ fontSize: 11, letterSpacing: 4 }}
+                  >
+                    <textPath href="#tg-orbit">
+                      TRADEGROUND · TELEGRAM · MARKETPLACE · LIVE ·
+                    </textPath>
+                  </text>
+                </svg>
+                <span className="flex flex-col items-center gap-2 text-center font-display text-[15px] font-bold leading-tight text-bg xl:text-base">
+                  {openLines.map((line) => (
+                    <span key={line}>
+                      {line}
+                      <br />
+                    </span>
+                  ))}
+                  <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-bg/10 transition-transform duration-300 group-hover:rotate-[-18deg]">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path
+                        d="M3.5 9h11M9 3.5l5.5 5.5-5.5 5.5"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
                 </span>
-              </span>
-            </a>
+              </a>
+            </Magnetic>
           </div>
 
           <div className="flex flex-col">
@@ -77,7 +101,7 @@ export default function TelegramSection() {
               {t.telegram.features.map((f) => (
                 <div
                   key={f.title}
-                  className="flex flex-col rounded-[22px] bg-surface-2 p-5 transition-transform duration-300 hover:-translate-y-1 md:rounded-[28px] md:p-7"
+                  className="card-shine flex flex-col rounded-[22px] bg-surface-2 p-5 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(192,219,154,0.08)] md:rounded-[28px] md:p-7"
                 >
                   <span className="mb-4 block text-[36px] leading-none md:mb-6 md:text-[48px]">
                     {f.icon}

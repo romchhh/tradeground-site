@@ -1,12 +1,30 @@
 "use client";
+import { useRef, useState } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
+import Magnetic from "@/components/fx/Magnetic";
+import CountUp from "@/components/fx/CountUp";
 
 export default function Hero() {
   const { t, marketplace } = useI18n();
+  const wrapRef = useRef<HTMLElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const onMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = wrapRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    setTilt({ x, y });
+  };
 
   return (
     <section
       id="hero"
+      ref={wrapRef}
+      onMouseMove={onMove}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
       className="snap-section relative overflow-hidden"
     >
       <div className="absolute inset-0">
@@ -15,10 +33,23 @@ export default function Hero() {
           src="/media/hero-bg.jpg"
           alt=""
           className="h-full w-full object-cover object-[center_30%] sm:object-center"
+          style={{
+            transform: `scale(1.08) translate(${tilt.x * -18}px, ${tilt.y * -12}px)`,
+            transition: "transform 0.4s ease-out",
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-bg/80 via-bg/55 to-bg/95" />
         <div className="absolute inset-0 bg-gradient-to-r from-bg/70 via-transparent to-bg/40" />
+        <div
+          className="pointer-events-none absolute inset-0 hidden lg:block"
+          style={{
+            background: `radial-gradient(42% 48% at ${52 + tilt.x * 18}% ${40 + tilt.y * 14}%, rgba(192,219,154,0.22), transparent 62%)`,
+          }}
+        />
       </div>
+
+      <div className="orb orb-a" aria-hidden />
+      <div className="orb orb-b" aria-hidden />
 
       <div className="site-container relative z-10 flex min-h-[100svh] flex-col pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[calc(4.5rem+env(safe-area-inset-top))] sm:pb-10 lg:pb-14 lg:pt-28">
         <div className="flex flex-1 flex-col gap-6 sm:gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
@@ -28,38 +59,45 @@ export default function Hero() {
               <br />
               <span className="text-accent">{t.hero.line2}</span>
             </h1>
-            <p className="section-subtitle mt-4 max-w-lg sm:mt-6">
+            <p className="section-subtitle mt-3 max-w-lg sm:mt-5">
               {t.hero.subtitle}
             </p>
             <div className="mt-6 sm:mt-8">
-              <a
-                href={marketplace}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex w-full max-w-[320px] items-center justify-between gap-4 rounded-full bg-accent py-2.5 pl-6 pr-2.5 text-[14px] font-semibold text-bg transition-transform duration-300 hover:bg-accent-light sm:w-[274px] sm:pl-7 sm:hover:scale-[1.02]"
-              >
-                {t.hero.cta}
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-300 group-hover:translate-x-0.5">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path
-                      d="M3 8h10M8 3l5 5-5 5"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </a>
+              <Magnetic>
+                <a
+                  href={marketplace}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex w-full max-w-[320px] items-center justify-between gap-4 rounded-full bg-accent py-2.5 pl-6 pr-2.5 text-[14px] font-semibold text-bg shadow-[0_0_40px_rgba(192,219,154,0.28)] transition-transform duration-300 hover:bg-accent-light sm:w-[274px] sm:pl-7"
+                >
+                  {t.hero.cta}
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-300 group-hover:rotate-[-18deg]">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3 8h10M8 3l5 5-5 5"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              </Magnetic>
             </div>
           </div>
 
           <div className="animate-fadeUp delay-100 relative mx-auto flex w-full max-w-[340px] flex-1 items-center justify-center sm:max-w-[420px] lg:mx-0 lg:max-w-[54%] lg:justify-end lg:self-center">
+            <div className="absolute h-[70%] w-[70%] rounded-full bg-accent/15 blur-3xl" aria-hidden />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/media/hero-phones.png"
               alt="TradeGround"
-              className="relative z-10 h-auto w-full max-h-[38vh] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)] sm:max-h-none lg:max-w-[600px] lg:translate-x-6 xl:translate-x-10"
+              className="relative z-10 h-auto w-full max-h-[38vh] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.45)] sm:max-h-none lg:max-w-[600px]"
+              style={{
+                transform: `translate3d(${tilt.x * 28}px, ${tilt.y * 18}px, 0) rotate(${tilt.x * 4}deg)`,
+                transition: "transform 0.35s ease-out",
+              }}
             />
           </div>
         </div>
@@ -84,9 +122,10 @@ export default function Hero() {
                 </span>
               </div>
               <div>
-                <div className="font-display text-[36px] font-extrabold leading-none tracking-tight sm:text-[64px]">
-                  {t.hero.cardStats}
-                </div>
+                <CountUp
+                  value={t.hero.cardStats}
+                  className="font-display text-[36px] font-extrabold leading-none tracking-tight sm:text-[64px]"
+                />
                 <p className="mt-1.5 font-body text-[11px] leading-snug text-bg/80 sm:mt-2 sm:text-[12px]">
                   {t.hero.cardStatsDesc}
                 </p>

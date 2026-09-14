@@ -45,6 +45,13 @@ export type Dictionary = {
     open: string;
     features: { icon: string; title: string; desc: string }[];
   };
+  flow: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    live: string;
+    steps: { num: string; title: string; desc: string }[];
+  };
   audience: {
     title: string;
     titleAccent: string;
@@ -290,6 +297,29 @@ const ua: Dictionary = {
         icon: "🌐",
         title: "Зрозуміла мова",
         desc: "Шукайте, продавайте й спілкуйтесь без мовного бар'єру.",
+      },
+    ],
+  },
+  flow: {
+    eyebrow: "Як це працює",
+    title: "ВІД ІДЕЇ",
+    titleAccent: "ДО УГОДИ.",
+    live: "Live in Telegram",
+    steps: [
+      {
+        num: "01",
+        title: "Відкрийте Telegram",
+        desc: "TradeGround живе там, де ви вже спілкуєтесь. Жодного нового додатка — лише бот.",
+      },
+      {
+        num: "02",
+        title: "Підлаштуйте стрічку",
+        desc: "Місто, інтереси, збережені оголошення. Marketplace поступово стає вашим простором.",
+      },
+      {
+        num: "03",
+        title: "Пишіть напряму",
+        desc: "Знайшли потрібне — одразу зв’язок із продавцем або спеціалістом. Без посередників.",
       },
     ],
   },
@@ -629,6 +659,29 @@ const ru: Dictionary = {
       },
     ],
   },
+  flow: {
+    eyebrow: "Как это работает",
+    title: "ОТ ИДЕИ",
+    titleAccent: "ДО СДЕЛКИ.",
+    live: "Live in Telegram",
+    steps: [
+      {
+        num: "01",
+        title: "Откройте Telegram",
+        desc: "TradeGround живёт там, где вы уже общаетесь. Никакого нового приложения — только бот.",
+      },
+      {
+        num: "02",
+        title: "Настройте ленту",
+        desc: "Город, интересы, сохранённые объявления. Marketplace постепенно становится вашим пространством.",
+      },
+      {
+        num: "03",
+        title: "Пишите напрямую",
+        desc: "Нашли нужное — сразу связь с продавцом или специалистом. Без посредников.",
+      },
+    ],
+  },
   audience: {
     title: "Private /",
     titleAccent: "Business",
@@ -965,6 +1018,29 @@ const en: Dictionary = {
       },
     ],
   },
+  flow: {
+    eyebrow: "How it works",
+    title: "FROM IDEA",
+    titleAccent: "TO A DEAL.",
+    live: "Live in Telegram",
+    steps: [
+      {
+        num: "01",
+        title: "Open Telegram",
+        desc: "TradeGround lives where you already chat. No extra app — just the bot.",
+      },
+      {
+        num: "02",
+        title: "Shape your feed",
+        desc: "City, interests, saved listings. The marketplace gradually becomes your space.",
+      },
+      {
+        num: "03",
+        title: "Message directly",
+        desc: "Found what you need — talk to the seller or specialist right away. No middlemen.",
+      },
+    ],
+  },
   audience: {
     title: "Private /",
     titleAccent: "Business",
@@ -1298,6 +1374,29 @@ const de: Dictionary = {
         icon: "🌐",
         title: "Klare Sprache",
         desc: "Suchen, verkaufen und chatten ohne Sprachbarriere.",
+      },
+    ],
+  },
+  flow: {
+    eyebrow: "So funktioniert’s",
+    title: "VON DER IDEE",
+    titleAccent: "ZUM DEAL.",
+    live: "Live in Telegram",
+    steps: [
+      {
+        num: "01",
+        title: "Telegram öffnen",
+        desc: "TradeGround lebt dort, wo Sie schon schreiben. Keine Extra-App — nur der Bot.",
+      },
+      {
+        num: "02",
+        title: "Feed formen",
+        desc: "Stadt, Interessen, gespeicherte Anzeigen. Der Marketplace wird nach und nach Ihr Raum.",
+      },
+      {
+        num: "03",
+        title: "Direkt schreiben",
+        desc: "Gefunden — sofort Kontakt zum Verkäufer oder zur Fachkraft. Ohne Umwege.",
       },
     ],
   },

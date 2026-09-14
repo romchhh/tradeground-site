@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { CoverPin } from "@/components/fx/CoverPin";
 
 function BrandArrow({ className }: { className?: string }) {
   return (
@@ -48,6 +49,8 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
   };
 
   return (
+    <>
+    <CoverPin z={1} round={false} pin={false}>
     <section className="relative min-h-[100svh] bg-bg text-text">
       <div
         className="pointer-events-none absolute inset-0"
@@ -182,8 +185,15 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
               );
             })}
           </div>
+        </div>
+      </div>
+    </section>
+    </CoverPin>
 
-          <div className="mt-14 md:mt-20">
+    <CoverPin z={2} fill>
+      <section className="relative bg-bg text-text">
+        <div className="site-container py-16 md:py-24">
+          <div className="mx-auto max-w-4xl">
             <p className="mb-6 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
               {dict.otherTitle}
             </p>
@@ -228,7 +238,8 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </CoverPin>
+    </>
   );
 }

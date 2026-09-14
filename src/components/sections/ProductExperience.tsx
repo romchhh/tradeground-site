@@ -24,7 +24,7 @@ export default function ProductExperience() {
           </div>
 
           <div className="grid flex-1 grid-cols-1 gap-3 sm:auto-rows-[200px] sm:grid-cols-2 md:auto-rows-[220px] md:grid-cols-4 md:gap-4 lg:auto-rows-[240px]">
-            <div className="group relative col-span-1 min-h-[260px] overflow-hidden rounded-[22px] sm:col-span-2 sm:row-span-2 sm:min-h-0 md:rounded-[28px]">
+            <div className="group relative col-span-1 min-h-[260px] overflow-hidden rounded-[22px] sm:col-span-2 sm:row-span-2 sm:min-h-0 md:rounded-[28px] card-shine">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/media/pe-main.jpg"
