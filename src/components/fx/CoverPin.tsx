@@ -6,7 +6,6 @@ import type { ReactNode } from "react";
 export function CoverEngine() {
   useEffect(() => {
     const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mq = window.matchMedia("(min-width: 768px)");
     if (!motionOk) return;
 
     let raf = 0;
@@ -14,14 +13,11 @@ export function CoverEngine() {
       const pins = Array.from(
         document.querySelectorAll<HTMLElement>('[data-cover-pin="pin"]')
       );
-      if (!mq.matches) {
-        pins.forEach((el) => {
-          el.style.transform = "";
-          el.style.filter = "";
-        });
-        return;
-      }
       const vh = window.innerHeight;
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const lift = isMobile ? 18 : 28;
+      const shrink = isMobile ? 0.03 : 0.04;
+
       pins.forEach((el, i) => {
         const next = pins[i + 1];
         if (!next) {
@@ -31,11 +27,14 @@ export function CoverEngine() {
         }
         const top = next.getBoundingClientRect().top;
         if (top > vh + 80 || top < -vh) {
-          if (top > vh + 80) el.style.transform = "";
+          if (top > vh + 80) {
+            el.style.transform = "";
+            el.style.filter = "";
+          }
           return;
         }
         const p = Math.min(1, Math.max(0, 1 - top / vh));
-        el.style.transform = `translate3d(0, ${p * 28}px, 0) scale(${1 - p * 0.04})`;
+        el.style.transform = `translate3d(0, ${p * lift}px, 0) scale(${1 - p * shrink})`;
       });
     };
 
@@ -49,10 +48,10 @@ export function CoverEngine() {
 
     tick();
     window.addEventListener("scroll", onScroll, { passive: true });
-    mq.addEventListener("change", tick);
+    window.addEventListener("resize", tick, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
-      mq.removeEventListener("change", tick);
+      window.removeEventListener("resize", tick);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);

@@ -404,18 +404,16 @@ canvas {
   transform-origin: center top;
 }
 
-@media (min-width: 768px) {
-  .cover-pin-sticky {
-    position: sticky;
-    top: 0;
-  }
+.cover-pin-sticky {
+  position: sticky;
+  top: 0;
+}
 
-  .cover-pin-fill {
-    display: flex;
-    min-height: 100svh;
-    flex-direction: column;
-    justify-content: center;
-  }
+.cover-pin-fill {
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .cover-pin-round {
