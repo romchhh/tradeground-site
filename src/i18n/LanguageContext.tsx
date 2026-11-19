@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import { getDictionary, type Dictionary } from "./dictionaries";
+import { getHomeDictionary, type HomeDictionary } from "./home";
 import {
   marketplaceUrl,
   type Locale,
@@ -16,6 +17,7 @@ import {
 type I18nContextValue = {
   locale: Locale;
   t: Dictionary;
+  home: HomeDictionary;
   marketplace: string;
   href: (hash?: string) => string;
 };
@@ -33,6 +35,7 @@ export function LanguageProvider({
     () => ({
       locale,
       t: getDictionary(locale),
+      home: getHomeDictionary(locale),
       marketplace: marketplaceUrl(locale),
       href: (hash = "") => localePath(locale, hash),
     }),

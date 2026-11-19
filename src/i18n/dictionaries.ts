@@ -147,6 +147,8 @@ export type Dictionary = {
     submit: string;
     successTitle: string;
     successDesc: string;
+    errorTitle: string;
+    errorDesc: string;
     otherTitle: string;
     emailLabel: string;
     emailValue: string;
@@ -199,6 +201,7 @@ export type Dictionary = {
     simpleTitle: string;
     simpleTitleAccent: string;
     simpleDesc: string;
+    simpleNote: string;
     futureTitle: string;
     futureTitleAccent: string;
     futureDesc: string;
@@ -464,6 +467,8 @@ const ua: Dictionary = {
     submit: "Надіслати",
     successTitle: "MESSAGE SENT.",
     successDesc: "Дякуємо. Ми отримали ваше повідомлення.",
+    errorTitle: "NOT SENT.",
+    errorDesc: "Не вдалося надіслати. Спробуйте ще раз або напишіть нам у Telegram.",
     otherTitle: "OTHER WAYS TO CONNECT",
     emailLabel: "EMAIL",
     emailValue: "tradegrnd@gmail.com",
@@ -555,8 +560,9 @@ const ua: Dictionary = {
       "Купуйте і продавайте. Знаходьте спеціалістів, роботу, житло та локальні пропозиції — без потреби шукати в десятках різних джерел.",
     simpleTitle: "БЕЗ СКЛАДНОСТЕЙ.",
     simpleTitleAccent: "БЕЗ МОВНОГО БАР’ЄРА.",
-    simpleDesc:
-      "Звичний Telegram. Зрозуміла мова. Прямий зв’язок між людьми. Нічого додатково завантажувати не потрібно. Знайшли потрібне — одразу зв’язались із продавцем або спеціалістом.",
+    simpleDesc: "Звичний Telegram. Зрозуміла мова. Прямий зв’язок між людьми.",
+    simpleNote:
+      "Нічого додатково завантажувати не потрібно. Знайшли потрібне — одразу зв’язались із продавцем або спеціалістом.",
     futureTitle: "MARKETPLACE —",
     futureTitleAccent: "ЦЕ ЛИШЕ ПОЧАТОК.",
     futureDesc:
@@ -823,6 +829,8 @@ const ru: Dictionary = {
     submit: "Отправить",
     successTitle: "MESSAGE SENT.",
     successDesc: "Спасибо. Мы получили ваше сообщение.",
+    errorTitle: "NOT SENT.",
+    errorDesc: "Не удалось отправить. Попробуйте снова или напишите нам в Telegram.",
     otherTitle: "OTHER WAYS TO CONNECT",
     emailLabel: "EMAIL",
     emailValue: "tradegrnd@gmail.com",
@@ -914,8 +922,9 @@ const ru: Dictionary = {
       "Покупайте и продавайте. Находите специалистов, работу, жильё и локальные предложения — без необходимости искать по десяткам разных источников.",
     simpleTitle: "БЕЗ СЛОЖНОСТЕЙ.",
     simpleTitleAccent: "БЕЗ ЯЗЫКОВОГО БАРЬЕРА.",
-    simpleDesc:
-      "Привычный Telegram. Понятный язык. Прямая связь между людьми. Ничего дополнительно скачивать не нужно. Нашли нужное — сразу связались с продавцом или специалистом.",
+    simpleDesc: "Привычный Telegram. Понятный язык. Прямая связь между людьми.",
+    simpleNote:
+      "Ничего дополнительно скачивать не нужно. Нашли нужное — сразу связались с продавцом или специалистом.",
     futureTitle: "MARKETPLACE —",
     futureTitleAccent: "ЭТО ТОЛЬКО НАЧАЛО.",
     futureDesc:
@@ -1182,6 +1191,8 @@ const en: Dictionary = {
     submit: "Send",
     successTitle: "MESSAGE SENT.",
     successDesc: "Thank you. We’ve received your message.",
+    errorTitle: "NOT SENT.",
+    errorDesc: "Could not send your message. Try again or reach us on Telegram.",
     otherTitle: "OTHER WAYS TO CONNECT",
     emailLabel: "EMAIL",
     emailValue: "tradegrnd@gmail.com",
@@ -1273,8 +1284,9 @@ const en: Dictionary = {
       "Buy and sell. Find specialists, jobs, housing and local offers — without searching across dozens of different sources.",
     simpleTitle: "NO FRICTION.",
     simpleTitleAccent: "NO LANGUAGE BARRIER.",
-    simpleDesc:
-      "Familiar Telegram. Clear language. Direct connection between people. Nothing extra to download. Found what you need — message the seller or specialist right away.",
+    simpleDesc: "Familiar Telegram. Clear language. Direct connection between people.",
+    simpleNote:
+      "Nothing extra to download. Found what you need — message the seller or specialist right away.",
     futureTitle: "MARKETPLACE —",
     futureTitleAccent: "IS ONLY THE BEGINNING.",
     futureDesc:
@@ -1541,6 +1553,8 @@ const de: Dictionary = {
     submit: "Senden",
     successTitle: "MESSAGE SENT.",
     successDesc: "Danke. Wir haben Ihre Nachricht erhalten.",
+    errorTitle: "NOT SENT.",
+    errorDesc: "Senden fehlgeschlagen. Bitte erneut versuchen oder uns per Telegram kontaktieren.",
     otherTitle: "OTHER WAYS TO CONNECT",
     emailLabel: "EMAIL",
     emailValue: "tradegrnd@gmail.com",
@@ -1632,8 +1646,9 @@ const de: Dictionary = {
       "Kaufen und verkaufen. Fachleute, Jobs, Wohnungen und lokale Angebote finden — ohne in Dutzenden Quellen zu suchen.",
     simpleTitle: "OHNE UMSTÄNDE.",
     simpleTitleAccent: "OHNE SPRACHBARRIERE.",
-    simpleDesc:
-      "Vertrautes Telegram. Verständliche Sprache. Direkter Kontakt zwischen Menschen. Nichts Extra herunterladen. Gefunden — direkt mit Verkäufer oder Fachkraft schreiben.",
+    simpleDesc: "Vertrautes Telegram. Verständliche Sprache. Direkter Kontakt zwischen Menschen.",
+    simpleNote:
+      "Nichts Extra herunterladen. Gefunden — direkt mit Verkäufer oder Fachkraft schreiben.",
     futureTitle: "MARKETPLACE —",
     futureTitleAccent: "IST NUR DER ANFANG.",
     futureDesc:

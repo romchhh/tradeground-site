@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/sections/Footer";
 import AboutView from "@/components/sections/AboutView";
 import { isLocale, type Locale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -66,10 +65,9 @@ export default async function AboutPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main id="main">
+      <main id="main" className="about-page">
         <AboutView dict={dict.about} />
       </main>
-      <Footer cornerBg="dark" />
     </>
   );
 }

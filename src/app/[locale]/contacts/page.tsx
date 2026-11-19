@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/sections/Footer";
 import ContactsView from "@/components/sections/ContactsView";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -67,10 +66,9 @@ export default async function ContactsPage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main id="main">
+      <main id="main" className="contacts-page">
         <ContactsView dict={dict.contacts} />
       </main>
-      <Footer cornerBg="dark" />
     </>
   );
 }

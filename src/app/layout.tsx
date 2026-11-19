@@ -53,6 +53,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Unbounded:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
           rel="stylesheet"
         />
+        <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+        <link
+          href="https://fonts.cdnfonts.com/css/proxima-nova-2"
+          rel="stylesheet"
+        />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
