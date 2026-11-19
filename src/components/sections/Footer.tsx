@@ -62,13 +62,18 @@ export function Footer(_props?: {
           </a>
         </div>
 
-        <div className="footer__qr">
+        <a
+          href={marketplace}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer__qr"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/media/footer/qr.png"
             alt={f.qrAlt}
-            width={92}
-            height={92}
+            width={184}
+            height={184}
             className="footer__qr-code"
           />
           <div>
@@ -79,7 +84,7 @@ export function Footer(_props?: {
               {f.qrTextLine2}
             </p>
           </div>
-        </div>
+        </a>
 
         <div className="footer__bar">
           <div className="footer__social">
