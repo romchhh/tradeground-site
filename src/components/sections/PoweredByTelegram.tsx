@@ -61,7 +61,7 @@ export function PoweredByTelegram() {
     const total = Math.max(0, el.offsetHeight - window.innerHeight);
     const top =
       el.getBoundingClientRect().top + window.scrollY + (total / count) * next + 12;
-    const root = document.scrollingElement;
+    const root = document.scrollingElement as HTMLElement | null;
     if (root) root.style.scrollBehavior = "auto";
     window.scrollTo({ top, behavior: "smooth" });
   };

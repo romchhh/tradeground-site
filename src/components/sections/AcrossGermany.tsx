@@ -1,10 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
 import { GERMANY_CITIES } from "@/data/germanyCities";
-import { GermanyLeafletMap } from "@/components/sections/GermanyLeafletMap";
+
+const GermanyLeafletMap = dynamic(
+  () =>
+    import("@/components/sections/GermanyLeafletMap").then(
+      (m) => m.GermanyLeafletMap
+    ),
+  {
+    ssr: false,
+    loading: () => <div className="germany__map-leaflet" aria-hidden />,
+  }
+);
 
 export function AcrossGermany() {
   const { home, marketplace } = useI18n();
