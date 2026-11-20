@@ -5,9 +5,14 @@ import type { ReactNode } from "react";
 
 export function CoverEngine() {
   useEffect(() => {
-    const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)")
+      .matches;
+    if (!motionOk) return;
+
     const pinEls = () =>
-      Array.from(document.querySelectorAll<HTMLElement>('[data-cover-pin="pin"]'));
+      Array.from(
+        document.querySelectorAll<HTMLElement>('[data-cover-pin="pin"]')
+      );
 
     // Stick only after the whole block has scrolled through.
     // Tall sections get a negative top so their bottom reaches the viewport first.
@@ -21,23 +26,25 @@ export function CoverEngine() {
     };
 
     let raf = 0;
+    let lastScrollY = -1;
+
     const tick = () => {
-      if (!motionOk) return;
       const pins = pinEls();
       const vh = window.innerHeight;
       const isMobile = window.matchMedia("(max-width: 900px)").matches;
-      const lift = isMobile ? 12 : 28;
-      const shrink = isMobile ? 0.02 : 0.04;
+      const lift = isMobile ? 8 : 18;
+      const shrink = isMobile ? 0.012 : 0.025;
 
       pins.forEach((el, i) => {
         const next = pins[i + 1];
         if (!next) {
-          el.style.transform = "";
+          if (el.style.transform) el.style.transform = "";
           return;
         }
         const top = next.getBoundingClientRect().top;
-        if (top > vh + 80 || top < -vh) {
-          if (top > vh + 80) el.style.transform = "";
+        // Skip work when the next pin is far from the viewport
+        if (top > vh + 120 || top < -vh) {
+          if (top > vh + 120 && el.style.transform) el.style.transform = "";
           return;
         }
         const p = Math.min(1, Math.max(0, 1 - top / vh));
@@ -46,6 +53,9 @@ export function CoverEngine() {
     };
 
     const onScroll = () => {
+      const y = window.scrollY | 0;
+      if (y === lastScrollY) return;
+      lastScrollY = y;
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
@@ -53,25 +63,24 @@ export function CoverEngine() {
       });
     };
 
-    const ro = new ResizeObserver(() => applyTops());
-    const watch = () => {
-      pinEls().forEach((el) => ro.observe(el));
-      applyTops();
+    let resizeTimer = 0;
+    const onResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        applyTops();
+        tick();
+      }, 100);
     };
 
-    watch();
+    applyTops();
     tick();
-    const mo = new MutationObserver(watch);
-    mo.observe(document.body, { childList: true, subtree: true });
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", applyTops, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+
     return () => {
-      ro.disconnect();
-      mo.disconnect();
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", applyTops);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.clearTimeout(resizeTimer);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);

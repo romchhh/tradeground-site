@@ -253,8 +253,8 @@ const ru: HomeDictionary = {
   },
   germany: {
     tag: "06 — ACROSS GERMANY",
-    mapAlt: "Карта Германии",
-    mapHint: "Тяните карту · Колесо — масштаб",
+    mapAlt: "Карта охвата TradeGround",
+    mapHint: "Наведите на город · Тяните карту",
     activeAds: "активных объявлений",
     newWeek: "новых за неделю",
     view: "СМОТРЕТЬ",
@@ -434,8 +434,8 @@ const ua: HomeDictionary = {
   },
   germany: {
     tag: "06 — ACROSS GERMANY",
-    mapAlt: "Карта Німеччини",
-    mapHint: "Тягніть карту · Коліщатко — масштаб",
+    mapAlt: "Карта охоплення TradeGround",
+    mapHint: "Наведіть на місто · Тягніть карту",
     activeAds: "активних оголошень",
     newWeek: "нових за тиждень",
     view: "ДИВИТИСЬ",
@@ -615,8 +615,8 @@ const en: HomeDictionary = {
   },
   germany: {
     tag: "06 — ACROSS GERMANY",
-    mapAlt: "Map of Germany",
-    mapHint: "Drag the map · Scroll to zoom",
+    mapAlt: "TradeGround coverage map",
+    mapHint: "Hover a city · Drag the map",
     activeAds: "active listings",
     newWeek: "new this week",
     view: "VIEW",
@@ -796,8 +796,8 @@ const de: HomeDictionary = {
   },
   germany: {
     tag: "06 — ACROSS GERMANY",
-    mapAlt: "Karte von Deutschland",
-    mapHint: "Karte ziehen · Mausrad zum Zoomen",
+    mapAlt: "TradeGround Abdeckungskarte",
+    mapHint: "Stadt anfahren · Karte ziehen",
     activeAds: "aktive Anzeigen",
     newWeek: "neu diese Woche",
     view: "ANSEHEN",

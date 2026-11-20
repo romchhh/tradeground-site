@@ -15,11 +15,11 @@ export default function Home() {
           <Hero />
         </CoverPin>
 
-        <CoverPin z={2} tone="light">
+        <CoverPin z={2} tone="light" pin={false} round clip>
           <OnePlace />
         </CoverPin>
 
-        <CoverPin z={4} pin={false} round={false} clip={false}>
+        <CoverPin z={4} round={false} clip={false}>
           <PoweredByTelegram />
         </CoverPin>
 

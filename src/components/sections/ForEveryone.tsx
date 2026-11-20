@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useI18n } from "@/i18n/LanguageContext";
 
 export function ForEveryone() {
-  const { home, marketplace } = useI18n();
+  const { home, marketplace, locale } = useI18n();
   const e = home.everyone;
 
   return (
@@ -124,7 +124,7 @@ export function ForEveryone() {
             </a>
           </article>
 
-          <article className="everyone-card" id="business">
+          <article className="everyone-card" id="for-business">
             <Image
               src="/media/everyone/business/everyone-2.png"
               alt=""
@@ -191,7 +191,7 @@ export function ForEveryone() {
               </div>
             </div>
 
-            <Link href="#contacts" className="btn btn--accent everyone-card__btn">
+            <Link href={`/${locale}/business`} className="btn btn--accent everyone-card__btn">
               {e.more}
               <Image
                 src="/media/hero/button-down-black.svg"

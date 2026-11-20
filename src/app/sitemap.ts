@@ -4,7 +4,7 @@ import { localeUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
-  const paths = ["", "contacts", "marketplace", "about"];
+  const paths = ["", "contacts", "marketplace", "about", "business", "privacy"];
 
   return paths.flatMap((path) =>
     locales.map((locale) => ({

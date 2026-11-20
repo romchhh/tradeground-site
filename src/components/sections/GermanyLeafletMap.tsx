@@ -6,22 +6,24 @@ import "leaflet/dist/leaflet.css";
 import {
   GERMANY_CITIES,
   GERMANY_MAP_SIZE,
+  citiesBySpreadOrder,
   cityToMapPoint,
   type GermanyCity,
 } from "@/data/germanyCities";
 
-function pinHtml(city: GermanyCity, isActive: boolean) {
+function pinHtml(city: GermanyCity, isActive: boolean, appearing: boolean) {
   const active = isActive ? " is-active" : "";
+  const appear = appearing ? " is-appearing" : "";
   if (city.featured) {
-    return `<span class="germany-leaflet-pin germany-leaflet-pin--featured${active}" role="presentation"><span class="germany-leaflet-pin__icon" aria-hidden="true"></span><span class="germany-leaflet-pin__label">${city.name}</span></span>`;
+    return `<span class="germany-leaflet-pin germany-leaflet-pin--featured${active}${appear}" role="presentation"><span class="germany-leaflet-pin__icon" aria-hidden="true"></span><span class="germany-leaflet-pin__label">${city.name}</span></span>`;
   }
-  return `<span class="germany-leaflet-pin${active}" role="presentation"><span class="germany-leaflet-pin__dot" aria-hidden="true"></span><span class="germany-leaflet-pin__name">${city.name}</span></span>`;
+  return `<span class="germany-leaflet-pin${active}${appear}" role="presentation"><span class="germany-leaflet-pin__dot" aria-hidden="true"></span><span class="germany-leaflet-pin__name">${city.name}</span></span>`;
 }
 
-function makeIcon(city: GermanyCity, isActive: boolean) {
+function makeIcon(city: GermanyCity, isActive: boolean, appearing = false) {
   return L.divIcon({
     className: "germany-leaflet-icon",
-    html: pinHtml(city, isActive),
+    html: pinHtml(city, isActive, appearing),
     iconSize: [0, 0],
     iconAnchor: [0, 0],
   });
@@ -29,23 +31,49 @@ function makeIcon(city: GermanyCity, isActive: boolean) {
 
 export function GermanyLeafletMap({
   cities = GERMANY_CITIES,
-  activeId,
+  highlightId,
+  selectedId,
   mapLabel,
+  revealed,
   onSelect,
+  onHover,
 }: {
   cities?: GermanyCity[];
-  activeId: string;
+  highlightId: string | null;
+  selectedId: string | null;
   mapLabel: string;
+  revealed: boolean;
   onSelect: (id: string) => void;
+  onHover: (id: string | null) => void;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
-  const markersRef = useRef<L.Marker[]>([]);
+  const markersRef = useRef<Map<string, L.Marker>>(new Map());
+  const timersRef = useRef<number[]>([]);
   const onSelectRef = useRef(onSelect);
+  const onHoverRef = useRef(onHover);
+  const highlightIdRef = useRef(highlightId);
+  const revealedOnceRef = useRef(false);
 
   useEffect(() => {
     onSelectRef.current = onSelect;
   }, [onSelect]);
+
+  useEffect(() => {
+    onHoverRef.current = onHover;
+  }, [onHover]);
+
+  useEffect(() => {
+    highlightIdRef.current = highlightId;
+    markersRef.current.forEach((marker, id) => {
+      const city = cities.find((c) => c.id === id);
+      if (!city) return;
+      marker.setIcon(makeIcon(city, id === highlightId));
+      marker.setZIndexOffset(
+        id === highlightId ? 1000 : city.featured ? 400 : 0
+      );
+    });
+  }, [highlightId, cities]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -84,55 +112,74 @@ export function GermanyLeafletMap({
     map.setMinZoom(map.getZoom());
     mapRef.current = map;
 
-    const ro = new ResizeObserver(() => {
+    // One invalidate after layout — avoid ResizeObserver thrash
+    const sizeTimer = window.setTimeout(() => {
       map.invalidateSize();
-      const z = map.getZoom();
       const min = map.getBoundsZoom(bounds, false);
-      if (map.getMinZoom() !== min) map.setMinZoom(min);
-      if (z < min) map.setZoom(min);
-    });
-    ro.observe(el);
+      map.setMinZoom(min);
+      if (map.getZoom() < min) map.setZoom(min);
+    }, 80);
+    timersRef.current.push(sizeTimer);
 
     return () => {
-      ro.disconnect();
+      timersRef.current.forEach((t) => window.clearTimeout(t));
+      timersRef.current = [];
       markersRef.current.forEach((m) => m.remove());
-      markersRef.current = [];
+      markersRef.current.clear();
       map.remove();
       mapRef.current = null;
+      revealedOnceRef.current = false;
     };
   }, []);
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
+    if (!map || !revealed || revealedOnceRef.current) return;
+    revealedOnceRef.current = true;
 
-    markersRef.current.forEach((m) => m.remove());
-    markersRef.current = [];
+    const ordered = citiesBySpreadOrder(cities);
 
-    cities.forEach((city) => {
-      const isActive = city.id === activeId;
-      const point = cityToMapPoint(city);
-      const marker = L.marker(point, {
-        icon: makeIcon(city, isActive),
-        riseOnHover: true,
-        zIndexOffset: isActive ? 1000 : city.featured ? 400 : 0,
-      })
-        .addTo(map)
-        .on("click", () => onSelectRef.current(city.id));
+    ordered.forEach((city, index) => {
+      const timer = window.setTimeout(() => {
+        if (markersRef.current.has(city.id)) return;
 
-      markersRef.current.push(marker);
+        const isActive = city.id === highlightIdRef.current;
+        const point = cityToMapPoint(city);
+        const marker = L.marker(point, {
+          icon: makeIcon(city, isActive, true),
+          riseOnHover: true,
+          zIndexOffset: isActive ? 1000 : city.featured ? 400 : 0,
+        })
+          .addTo(map)
+          .on("click", () => onSelectRef.current(city.id))
+          .on("mouseover", () => onHoverRef.current(city.id))
+          .on("mouseout", () => onHoverRef.current(null));
+
+        markersRef.current.set(city.id, marker);
+
+        // Drop appearing class after animation
+        window.setTimeout(() => {
+          marker.setIcon(makeIcon(city, city.id === highlightIdRef.current));
+        }, 500);
+      }, 120 + index * 90);
+
+      timersRef.current.push(timer);
     });
-  }, [cities, activeId]);
+  }, [revealed, cities]);
 
   useEffect(() => {
     const map = mapRef.current;
-    const city = cities.find((c) => c.id === activeId);
-    if (!map || !city) return;
+    if (!map || !selectedId || !revealedOnceRef.current) return;
+    const city = cities.find((c) => c.id === selectedId);
+    if (!city) return;
 
     const point = cityToMapPoint(city);
-    const targetZoom = Math.min(map.getMaxZoom(), Math.max(map.getZoom(), map.getMinZoom() + 0.55));
-    map.flyTo(point, targetZoom, { duration: 0.55, easeLinearity: 0.25 });
-  }, [activeId, cities]);
+    const targetZoom = Math.min(
+      map.getMaxZoom(),
+      Math.max(map.getZoom(), map.getMinZoom() + 0.45)
+    );
+    map.flyTo(point, targetZoom, { duration: 0.45, easeLinearity: 0.25 });
+  }, [selectedId, cities]);
 
   return (
     <div

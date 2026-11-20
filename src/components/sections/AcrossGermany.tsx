@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
 import { GERMANY_CITIES } from "@/data/germanyCities";
 
@@ -20,12 +20,46 @@ const GermanyLeafletMap = dynamic(
 export function AcrossGermany() {
   const { home, marketplace } = useI18n();
   const g = home.germany;
-  const [activeId, setActiveId] = useState("hamburg");
-  const active = GERMANY_CITIES.find((c) => c.id === activeId) ?? GERMANY_CITIES[0];
-  const cityMarketplace = `${marketplace}&city=${encodeURIComponent(active.name)}`;
+  const sectionRef = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
+  const focusId = hoveredId ?? activeId;
+  const focus =
+    GERMANY_CITIES.find((c) => c.id === focusId) ?? null;
+  const cityMarketplace = focus
+    ? `${marketplace}&city=${encodeURIComponent(focus.filter)}`
+    : marketplace;
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setRevealed(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "80px 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const onSelect = useCallback((id: string) => {
+    setActiveId(id);
+    setHoveredId(id);
+  }, []);
+
+  const onHover = useCallback((id: string | null) => {
+    setHoveredId(id);
+  }, []);
 
   return (
-    <section className="germany screen" id="germany">
+    <section className="germany screen" id="germany" ref={sectionRef}>
       <div className="container germany__inner">
         <span className="section-tag section-tag--dark">
           06 <i /> ACROSS GERMANY
@@ -35,42 +69,54 @@ export function AcrossGermany() {
           <p className="germany__map-hint">{g.mapHint}</p>
           <GermanyLeafletMap
             cities={GERMANY_CITIES}
-            activeId={activeId}
+            highlightId={focusId}
+            selectedId={activeId}
             mapLabel={g.mapAlt}
-            onSelect={setActiveId}
+            revealed={revealed}
+            onSelect={onSelect}
+            onHover={onHover}
           />
 
-          <div className="germany__tooltip" role="status" aria-live="polite">
-            <div className="germany__tooltip-icon">
-              <Image
-                src="/media/germany/map-block-inside.svg"
-                alt=""
-                width={23}
-                height={29}
-              />
-            </div>
-            <div className="germany__tooltip-copy">
-              <h3>{active.name}</h3>
-              <p>
-                {active.ads ?? 120} {g.activeAds}
-                <br />+{active.weekly ?? 24} {g.newWeek}
-              </p>
-            </div>
-            <a
-              href={cityMarketplace}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="germany__tooltip-btn"
-            >
-              {g.view}
-              <Image
-                src="/media/hero/button-down-black.svg"
-                alt=""
-                width={8}
-                height={8}
-                className="chev chev--tr"
-              />
-            </a>
+          <div
+            className={`germany__tooltip${focus ? " is-visible" : ""}`}
+            role="status"
+            aria-live="polite"
+            aria-hidden={!focus}
+          >
+            {focus ? (
+              <>
+                <div className="germany__tooltip-icon">
+                  <Image
+                    src="/media/germany/map-block-inside.svg"
+                    alt=""
+                    width={23}
+                    height={29}
+                  />
+                </div>
+                <div className="germany__tooltip-copy">
+                  <h3>{focus.name}</h3>
+                  <p>
+                    {focus.ads} {g.activeAds}
+                    <br />+{focus.weekly} {g.newWeek}
+                  </p>
+                </div>
+                <a
+                  href={cityMarketplace}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="germany__tooltip-btn"
+                >
+                  {g.view}
+                  <Image
+                    src="/media/hero/button-down-black.svg"
+                    alt=""
+                    width={8}
+                    height={8}
+                    className="chev chev--tr"
+                  />
+                </a>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

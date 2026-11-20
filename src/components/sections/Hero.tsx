@@ -30,7 +30,7 @@ export function Hero() {
   const marketplacePage = `/${locale}/marketplace`;
   const contactsPage = `/${locale}/contacts`;
   const aboutPage = `/${locale}/about`;
-  const businessPage = `/${locale}#business`;
+  const businessPage = `/${locale}/business`;
 
   useEffect(() => {
     setMounted(true);

@@ -33,7 +33,7 @@ export default function Navbar({
   const links = [
     { label: home.nav.about, to: `/${locale}/about`, external: false },
     { label: home.nav.marketplace, to: marketplacePage, external: false },
-    { label: home.nav.business, to: `/${locale}#business`, external: false },
+    { label: home.nav.business, to: `/${locale}/business`, external: false },
     { label: home.nav.contacts, to: `/${locale}/contacts`, external: false },
   ];
 
