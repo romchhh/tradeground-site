@@ -1,221 +1,345 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { useI18n } from "@/i18n/LanguageContext";
 import { CoverPin } from "@/components/fx/CoverPin";
-import Magnetic from "@/components/fx/Magnetic";
+import { Footer } from "@/components/sections/Footer";
 
-function BrandArrow({ className }: { className?: string }) {
+function Tag({ n, label, tone }: { n: string; label: string; tone: "light" | "dark" }) {
   return (
-    <svg
-      className={className}
-      width="14"
-      height="14"
-      viewBox="0 0 16 16"
-      fill="none"
-      aria-hidden
-    >
-      <path
-        d="M4 4l8 8M12 5v7H5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    <span className={`section-tag section-tag--${tone}`}>
+      {n} <i /> {label}
+    </span>
   );
 }
+
+const categoryPhotos: Record<string, string> = {
+  goods: "/media/connects/02/photo-connects-5.png",
+  services: "/media/connects/02/photo-connects-3.png",
+  jobs: "/media/connects/03/photo-connects-6.png",
+  realestate: "/media/connects/03/photo-connects-5.png",
+  free: "/media/connects/01/photo-connects-2.png",
+};
+
+const personalShots = [
+  "/media/everyone/private/everyone-1.png",
+  "/media/connects/01/photo-connects-1.png",
+  "/media/connects/02/photo-connects-5.png",
+  "/media/everyone/business/everyone-2.png",
+];
 
 export default function MarketplaceView({
   dict,
 }: {
   dict: Dictionary["marketplace"];
 }) {
-  const { marketplace, href, locale } = useI18n();
+  const { marketplace, locale, home } = useI18n();
+  const e = home.everyone;
 
   return (
-    <>
+    <div className="cover-stack">
+      {/* 01 HERO */}
       <CoverPin z={1} round={false}>
-        <section className="relative overflow-hidden bg-bg text-text">
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 50% 35% at 80% 0%, rgba(192,219,154,0.16), transparent 55%)",
-            }}
-          />
-          <div className="site-container relative z-10 pb-16 pt-[calc(6.5rem+env(safe-area-inset-top))] md:pb-24 md:pt-36">
-            <div className="flex flex-row items-center gap-5 sm:gap-8 lg:gap-14 xl:gap-20">
-              <div className="order-2 min-w-0 flex-1 lg:order-1">
-                <h1 className="section-title max-w-[16ch]">
-                  {dict.title}
-                  <br />
-                  <span className="text-accent">{dict.titleAccent}</span>
-                </h1>
-                <p className="section-subtitle mt-4 max-w-xl sm:mt-6">{dict.lead}</p>
-              </div>
-              <div className="order-1 w-[38%] max-w-[160px] shrink-0 self-center sm:max-w-[200px] md:w-[42%] md:max-w-[260px] lg:order-2 lg:w-auto lg:max-w-[320px] xl:max-w-[360px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/media/marketplace-hero.png"
-                  alt="TradeGround Marketplace"
-                  className="h-auto w-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.45)]"
+        <section className="about-block about-block--dark mkt-hero" id="hero">
+          <div className="about-block__glow" aria-hidden />
+          <div className="container about-block__split">
+            <div className="about-block__copy">
+              <Tag n="01" label="MARKETPLACE" tone="light" />
+              <h1 className="about-title">
+                {dict.title}
+                <br />
+                <em>{dict.titleAccent}</em>
+              </h1>
+              <p className="about-lead">{dict.lead}</p>
+              <a
+                href={marketplace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--accent about-join"
+              >
+                {dict.openCta}
+                <Image
+                  src="/media/hero/button-down-black.svg"
+                  alt=""
+                  width={9}
+                  height={9}
+                  className="chev chev--bl"
                 />
+              </a>
+            </div>
+
+            <div className="mkt-hero__visual" aria-hidden>
+              <div className="mkt-hero__phone">
+                <Image
+                  src="/media/marketplace-hero.png"
+                  alt=""
+                  width={360}
+                  height={720}
+                  priority
+                  className="mkt-hero__phone-img"
+                />
+              </div>
+              <div className="mkt-hero__float mkt-hero__float--sofa">
+                <span className="mkt-hero__thumb mkt-hero__thumb--dark">
+                  <Image
+                    src="/media/everyone/private/photo-sofa.png"
+                    alt=""
+                    width={72}
+                    height={56}
+                  />
+                </span>
+                <div>
+                  <strong>{e.sofa}</strong>
+                  <span>280 €</span>
+                </div>
+              </div>
+              <div className="mkt-hero__float mkt-hero__float--pro">
+                <Image
+                  src="/media/everyone/private/photo-electrician.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="mkt-hero__avatar"
+                />
+                <div>
+                  <strong>{e.electrician}</strong>
+                  <span>5.0 ★</span>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </CoverPin>
 
-      <CoverPin z={2} fill>
-        <section className="relative bg-bg text-text">
-          <div className="site-container py-16 md:py-24">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {dict.categories.map((cat) => (
-                <a
-                  key={cat.id}
-                  href={`${marketplace}&category=${cat.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="card-shine group flex flex-col justify-between rounded-[24px] border border-white/8 bg-surface p-6 transition-colors duration-300 hover:border-accent/35 hover:bg-surface-2 md:min-h-[200px] md:rounded-[28px] md:p-7"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={cat.icon}
+      {/* 02 CATEGORIES */}
+      <CoverPin z={2} tone="light">
+        <section className="about-block about-block--light mkt-cats">
+          <div className="container">
+            <Tag n="02" label="CATEGORIES" tone="dark" />
+            <h2 className="about-title">
+              {dict.categoriesTitle}
+              <br />
+              <em>{dict.categoriesTitleAccent}</em>
+            </h2>
+            <p className="about-lead about-lead--ink mkt-cats__lead">{dict.lead}</p>
+
+            <div className="mkt-cat-grid">
+              {dict.categories.map((cat) => {
+                const photo = categoryPhotos[cat.id] ?? categoryPhotos.goods;
+                return (
+                  <a
+                    key={cat.id}
+                    href={`${marketplace}&category=${cat.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mkt-cat"
+                  >
+                    <div className="mkt-cat__photo">
+                      <Image
+                        src={photo}
+                        alt=""
+                        fill
+                        sizes="(max-width: 900px) 100vw, 33vw"
+                        style={{ objectFit: "cover", objectPosition: "center" }}
+                      />
+                      <span className="mkt-cat__icon">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={cat.icon} alt="" width={28} height={28} />
+                      </span>
+                    </div>
+                    <div className="mkt-cat__body">
+                      <h3>{cat.title}</h3>
+                      <p>{cat.desc}</p>
+                    </div>
+                  </a>
+                );
+              })}
+
+              <Link href={`/${locale}#one-place`} className="mkt-cat mkt-cat--more">
+                <div className="mkt-cat__photo mkt-cat__photo--more">
+                  <Image
+                    src="/media/one-place/12-fashion.png"
                     alt=""
-                    className="mb-8 h-10 w-10 transition-transform duration-300 group-hover:scale-110 md:h-12 md:w-12"
+                    fill
+                    sizes="33vw"
+                    style={{ objectFit: "contain", objectPosition: "center" }}
                   />
-                  <div>
-                    <h2 className="font-display text-[15px] font-bold uppercase tracking-[0.08em] text-text md:text-[16px]">
-                      {cat.title}
-                    </h2>
-                    <p className="mt-2 font-body text-[14px] leading-relaxed text-muted md:text-[15px]">
-                      {cat.desc}
-                    </p>
-                  </div>
-                </a>
-              ))}
-              <a
-                href={`/${locale}#categories`}
-                className="group flex flex-col justify-between rounded-[24px] border border-dashed border-white/15 bg-transparent p-6 transition-colors duration-300 hover:border-accent/40 hover:bg-white/[0.03] md:min-h-[200px] md:rounded-[28px] md:p-7"
-              >
-                <span className="mb-8 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-accent transition-transform duration-300 group-hover:rotate-[-20deg] md:h-12 md:w-12">
-                  <BrandArrow />
-                </span>
-                <div>
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-                    {dict.moreLabel}
-                  </p>
-                  <h2 className="mt-2 font-display text-[15px] font-bold uppercase tracking-[0.08em] text-text md:text-[16px]">
-                    {dict.moreCta}
-                  </h2>
                 </div>
+                <div className="mkt-cat__body">
+                  <span className="mkt-cat__eyebrow">{dict.moreLabel}</span>
+                  <h3>{dict.moreCta}</h3>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </CoverPin>
+
+      {/* 03 PERSONAL */}
+      <CoverPin z={3}>
+        <section className="about-block about-block--dark mkt-personal">
+          <div className="about-block__glow about-block__glow--right" aria-hidden />
+          <div className="container about-block__split">
+            <div className="about-block__copy">
+              <Tag n="03" label="PERSONAL" tone="light" />
+              <h2 className="about-title">{dict.personalTitle}</h2>
+              <p className="about-lead">{dict.personalDesc}</p>
+            </div>
+            <div className="mkt-personal__shots" aria-hidden>
+              {personalShots.map((src, i) => (
+                <div
+                  key={src}
+                  className={`mkt-personal__shot mkt-personal__shot--${i + 1}`}
+                >
+                  <Image src={src} alt="" fill sizes="240px" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </CoverPin>
+
+      {/* 04 BUSINESS */}
+      <CoverPin z={4} tone="light">
+        <section className="about-block about-block--light mkt-biz">
+          <div className="container about-block__split about-block__split--reverse">
+            <div className="about-block__copy">
+              <Tag n="04" label="BUSINESS" tone="dark" />
+              <h2 className="about-title">
+                {dict.businessTitle}
+                <br />
+                <em>{dict.businessTitleAccent}</em>
+              </h2>
+              <p className="about-lead about-lead--ink">{dict.businessDesc}</p>
+              <ul className="mkt-biz__list">
+                {dict.businessFeatures.map((feature) => (
+                  <li key={feature}>{feature}</li>
+                ))}
+              </ul>
+              <Link
+                href={`/${locale}/business`}
+                className="btn btn--accent about-join"
+              >
+                {dict.businessCta}
+                <Image
+                  src="/media/hero/button-down-black.svg"
+                  alt=""
+                  width={9}
+                  height={9}
+                  className="chev chev--bl"
+                />
+              </Link>
+            </div>
+
+            <div className="mkt-biz__card-wrap" aria-hidden>
+              <article className="everyone-card everyone-card--business mkt-biz__card">
+                <div className="everyone-card__media">
+                  <Image
+                    src="/media/everyone/business/everyone-2.png"
+                    alt=""
+                    fill
+                    className="everyone-card__bg"
+                    sizes="480px"
+                  />
+                  <div className="everyone-card__overlay" />
+                </div>
+                <div className="everyone-card__content">
+                  <h3>{e.businessTitle}</h3>
+                  <p>{e.businessText}</p>
+                </div>
+                <div className="everyone-card__widget everyone-card__widget--stats">
+                  <div className="everyone-card__widget-top">
+                    <Image
+                      src="/media/everyone/business/stats.svg"
+                      alt=""
+                      width={22}
+                      height={26}
+                    />
+                    <Image
+                      src="/media/everyone/business/arrow-up.svg"
+                      alt=""
+                      width={14}
+                      height={14}
+                    />
+                  </div>
+                  <strong>+230%</strong>
+                  <span>{e.views}</span>
+                </div>
+                <div className="everyone-card__widget everyone-card__widget--clients">
+                  <div className="everyone-card__clients-copy">
+                    <span>{e.newClients}</span>
+                    <strong>+12</strong>
+                  </div>
+                  <div className="everyone-card__avatars">
+                    <Image
+                      src="/media/everyone/business/photo-client-1.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <Image
+                      src="/media/everyone/business/photo-client-2.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <Image
+                      src="/media/everyone/business/photo-client-3.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <span className="everyone-card__plus">
+                      <Image
+                        src="/media/everyone/business/plus.svg"
+                        alt=""
+                        width={12}
+                        height={12}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </CoverPin>
+
+      {/* 05 OPEN */}
+      <CoverPin z={5} tone="light">
+        <section className="about-block about-block--light about-block--close">
+          <div className="container about-block__inner about-close">
+            <div className="about-close__copy">
+              <Tag n="05" label="OPEN" tone="dark" />
+              <h2 className="about-title">
+                {dict.openTitle}
+              </h2>
+              <p className="about-lead about-lead--ink">{dict.openDesc}</p>
+              <a
+                href={marketplace}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--accent about-join"
+              >
+                {dict.openCta}
+                <Image
+                  src="/media/hero/button-down-black.svg"
+                  alt=""
+                  width={9}
+                  height={9}
+                  className="chev chev--bl"
+                />
               </a>
             </div>
           </div>
         </section>
       </CoverPin>
 
-      <CoverPin z={3} fill>
-        <section className="relative bg-bg text-text">
-          <div className="site-container py-16 md:py-24">
-            <div className="max-w-3xl">
-              <h2 className="section-title">{dict.personalTitle}</h2>
-              <p className="section-subtitle mt-6">{dict.personalDesc}</p>
-            </div>
-          </div>
-        </section>
+      <CoverPin z={6} pin={false}>
+        <Footer />
       </CoverPin>
-
-      <CoverPin z={4} fill>
-        <section className="relative bg-bg text-text">
-          <div className="site-container py-16 md:py-24">
-            <div className="relative overflow-hidden rounded-[28px] border border-white/8 bg-surface md:rounded-[36px]">
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 60% 80% at 100% 0%, rgba(192,219,154,0.16), transparent 55%)",
-                }}
-              />
-              <div className="relative grid gap-10 px-6 py-10 md:grid-cols-[1.2fr_1fr] md:gap-14 md:px-12 md:py-14 lg:px-16">
-                <div>
-                  <h2 className="section-title">
-                    {dict.businessTitle}{" "}
-                    <span className="text-accent">{dict.businessTitleAccent}</span>
-                  </h2>
-                  <p className="section-subtitle mt-5 max-w-xl">{dict.businessDesc}</p>
-                  <Magnetic className="mt-8 inline-block">
-                    <a
-                      href={href("#private")}
-                      className="group inline-flex items-center gap-2 rounded-full bg-white py-2.5 pl-6 pr-2 font-body text-[13px] font-semibold uppercase tracking-[0.04em] text-black transition-transform hover:scale-[1.02] sm:text-[14px]"
-                    >
-                      {dict.businessCta}
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-bg text-accent transition-transform duration-300 group-hover:rotate-[-15deg]">
-                        <BrandArrow />
-                      </span>
-                    </a>
-                  </Magnetic>
-                </div>
-                <ul className="flex flex-col justify-center gap-3 md:gap-4">
-                  {dict.businessFeatures.map((feature) => (
-                    <li
-                      key={feature}
-                      className="flex items-center gap-3 border-b border-white/8 pb-3 font-display text-[15px] font-bold tracking-[-0.01em] text-text last:border-0 last:pb-0 md:text-[18px]"
-                    >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-                          <path
-                            d="M2.5 6.2l2.2 2.2L9.5 3.5"
-                            stroke="currentColor"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-      </CoverPin>
-
-      <CoverPin z={5} tone="light" pin={false}>
-        <section className="relative bg-white px-0 pb-6 pt-2 md:pb-8 md:pt-4">
-          <div className="relative overflow-hidden px-6 py-14 text-center md:px-12 md:py-20 lg:py-24">
-            <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(ellipse 55% 50% at 50% 0%, rgba(192,219,154,0.22), transparent 60%)",
-              }}
-            />
-            <div className="relative z-10 mx-auto max-w-2xl">
-              <h2 className="section-title section-title-dark">{dict.openTitle}</h2>
-              <p className="section-subtitle section-subtitle-dark section-subtitle-center mx-auto mt-5">
-                {dict.openDesc}
-              </p>
-              <Magnetic className="mt-8 inline-block">
-                <a
-                  href={marketplace}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-full bg-[#000100] py-2.5 pl-7 pr-2.5 font-body text-[14px] font-semibold text-white transition-all duration-300 hover:scale-[1.03]"
-                >
-                  {dict.openCta}
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-bg transition-transform duration-300 group-hover:rotate-[-15deg]">
-                    <BrandArrow />
-                  </span>
-                </a>
-              </Magnetic>
-            </div>
-          </div>
-        </section>
-      </CoverPin>
-    </>
+    </div>
   );
 }

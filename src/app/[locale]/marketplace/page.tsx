@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/sections/Footer";
 import MarketplaceView from "@/components/sections/MarketplaceView";
 import { isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -67,10 +66,9 @@ export default async function MarketplacePage({ params }: Props) {
   return (
     <>
       <Navbar />
-      <main id="main">
+      <main id="main" className="about-page marketplace-page">
         <MarketplaceView dict={dict.marketplace} />
       </main>
-      <Footer cornerBg="dark" />
     </>
   );
 }

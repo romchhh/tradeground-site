@@ -17,7 +17,8 @@ function SectionTag({ label, tone }: { label: string; tone: "light" | "dark" }) 
 }
 
 export default function BusinessView({ dict }: { dict: BusinessDictionary }) {
-  const { locale } = useI18n();
+  const { locale, home } = useI18n();
+  const e = home.everyone;
   const createHref = `https://t.me/TradeGroundBot?start=business_${locale}`;
   const createProHref = `https://t.me/TradeGroundBot?start=business_pro_${locale}`;
 
@@ -53,65 +54,79 @@ export default function BusinessView({ dict }: { dict: BusinessDictionary }) {
               </a>
             </div>
 
-            <div className="biz-device" aria-hidden>
-              <div className="biz-device__frame">
-                <div className="biz-profile">
-                  <div className="biz-profile__cover">
+            <div className="biz-visual" aria-hidden>
+              <article className="everyone-card everyone-card--business biz-visual__card">
+                <div className="everyone-card__media">
+                  <Image
+                    src="/media/everyone/business/everyone-2.png"
+                    alt=""
+                    fill
+                    className="everyone-card__bg"
+                    sizes="(max-width: 900px) 100vw, 48vw"
+                    priority
+                  />
+                  <div className="everyone-card__overlay" />
+                </div>
+
+                <div className="everyone-card__content">
+                  <h3>{e.businessTitle}</h3>
+                  <p>{e.businessText}</p>
+                </div>
+
+                <div className="everyone-card__widget everyone-card__widget--stats">
+                  <div className="everyone-card__widget-top">
                     <Image
-                      src="/media/everyone/business/everyone-2.png"
+                      src="/media/everyone/business/stats.svg"
                       alt=""
-                      fill
-                      sizes="420px"
-                      className="biz-profile__cover-img"
+                      width={22}
+                      height={26}
+                    />
+                    <Image
+                      src="/media/everyone/business/arrow-up.svg"
+                      alt=""
+                      width={14}
+                      height={14}
                     />
                   </div>
-                  <div className="biz-profile__body">
-                    <div className="biz-profile__head">
+                  <strong>+230%</strong>
+                  <span>{e.views}</span>
+                </div>
+
+                <div className="everyone-card__widget everyone-card__widget--clients">
+                  <div className="everyone-card__clients-copy">
+                    <span>{e.newClients}</span>
+                    <strong>+12</strong>
+                  </div>
+                  <div className="everyone-card__avatars">
+                    <Image
+                      src="/media/everyone/business/photo-client-1.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <Image
+                      src="/media/everyone/business/photo-client-2.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <Image
+                      src="/media/everyone/business/photo-client-3.png"
+                      alt=""
+                      width={34}
+                      height={34}
+                    />
+                    <span className="everyone-card__plus">
                       <Image
-                        src="/media/connects/02/connects-3.png"
+                        src="/media/everyone/business/plus.svg"
                         alt=""
-                        width={52}
-                        height={52}
-                        className="biz-profile__avatar"
+                        width={12}
+                        height={12}
                       />
-                      <div>
-                        <strong>{dict.profileName}</strong>
-                        <span>
-                          {dict.profileRole} · {dict.profileCity}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="biz-profile__meta">
-                      <span className="biz-profile__open">{dict.profileOpen}</span>
-                      <span>{dict.profileHours}</span>
-                    </div>
-                    <div className="biz-profile__tags">
-                      {dict.profileDirections.map((d) => (
-                        <span key={d}>{d}</span>
-                      ))}
-                    </div>
-                    <div className="biz-profile__gallery">
-                      {[
-                        "/media/connects/01/photo-connects-1.png",
-                        "/media/connects/02/photo-connects-3.png",
-                        "/media/connects/03/photo-connects-5.png",
-                      ].map((src) => (
-                        <div key={src} className="biz-profile__shot">
-                          <Image src={src} alt="" fill sizes="120px" />
-                        </div>
-                      ))}
-                    </div>
+                    </span>
                   </div>
                 </div>
-              </div>
-              <div className="biz-device__phone">
-                <Image
-                  src="/media/telegram/slider-phone-2.png"
-                  alt=""
-                  width={180}
-                  height={360}
-                />
-              </div>
+              </article>
             </div>
           </div>
         </section>
@@ -164,10 +179,11 @@ export default function BusinessView({ dict }: { dict: BusinessDictionary }) {
               <div className="biz-showcase__card">
                 <div className="biz-showcase__cover">
                   <Image
-                    src="/media/everyone/private/everyone-1.png"
+                    src="/media/everyone/business/everyone-2.png"
                     alt=""
                     fill
                     sizes="480px"
+                    style={{ objectFit: "cover", objectPosition: "center 30%" }}
                   />
                 </div>
                 <div className="biz-showcase__row">
@@ -185,13 +201,19 @@ export default function BusinessView({ dict }: { dict: BusinessDictionary }) {
                 </div>
                 <div className="biz-showcase__grid">
                   {[
-                    "/media/one-place/02-furniture.png",
-                    "/media/one-place/09-house.png",
-                    "/media/one-place/08-services.png",
+                    "/media/connects/02/photo-connects-3.png",
                     "/media/connects/02/photo-connects-5.png",
+                    "/media/connects/03/photo-connects-5.png",
+                    "/media/connects/03/photo-connects-6.png",
                   ].map((src) => (
                     <div key={src} className="biz-showcase__thumb">
-                      <Image src={src} alt="" fill sizes="110px" />
+                      <Image
+                        src={src}
+                        alt=""
+                        fill
+                        sizes="110px"
+                        style={{ objectFit: "cover", objectPosition: "center" }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -232,13 +254,17 @@ export default function BusinessView({ dict }: { dict: BusinessDictionary }) {
                         src={
                           [
                             "/media/everyone/business/everyone-2.png",
-                            "/media/everyone/private/photo-electrician.png",
+                            "/media/connects/03/photo-connects-5.png",
                             "/media/connects/03/photo-connects-6.png",
                           ][i]
                         }
                         alt=""
                         fill
                         sizes="280px"
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: i === 0 ? "center 28%" : "center",
+                        }}
                       />
                     </div>
                     <div className="biz-discover-card__body">

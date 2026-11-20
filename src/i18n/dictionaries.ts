@@ -165,6 +165,8 @@ export type Dictionary = {
     title: string;
     titleAccent: string;
     lead: string;
+    categoriesTitle: string;
+    categoriesTitleAccent: string;
     categories: {
       id: string;
       title: string;
@@ -486,6 +488,8 @@ const ua: Dictionary = {
     title: "MARKETPLACE,",
     titleAccent: "ЯКИЙ ПІДЛАШТОВУЄТЬСЯ ПІД ВАС.",
     lead: "Обирайте те, що цікавить саме вас — TradeGround збере потрібні товари, послуги й пропозиції в одному просторі.",
+    categoriesTitle: "ОБЕРІТЬ СВІЙ",
+    categoriesTitleAccent: "НАПРЯМ.",
     categories: [
       {
         id: "goods",
@@ -848,6 +852,8 @@ const ru: Dictionary = {
     title: "MARKETPLACE,",
     titleAccent: "КОТОРЫЙ ПОДСТРАИВАЕТСЯ ПОД ВАС.",
     lead: "Выбирайте то, что интересно именно вам — TradeGround соберёт нужные товары, услуги и предложения в одном пространстве.",
+    categoriesTitle: "ВЫБЕРИТЕ СВОЁ",
+    categoriesTitleAccent: "НАПРАВЛЕНИЕ.",
     categories: [
       {
         id: "goods",
@@ -1210,6 +1216,8 @@ const en: Dictionary = {
     title: "MARKETPLACE,",
     titleAccent: "THAT ADAPTS TO YOU.",
     lead: "Choose what matters to you — TradeGround gathers the right goods, services and offers in one place.",
+    categoriesTitle: "PICK YOUR",
+    categoriesTitleAccent: "DIRECTION.",
     categories: [
       {
         id: "goods",
@@ -1572,6 +1580,8 @@ const de: Dictionary = {
     title: "MARKETPLACE,",
     titleAccent: "DER SICH AN SIE ANPASST.",
     lead: "Wählen Sie, was Sie wirklich interessiert — TradeGround bündelt passende Waren, Services und Angebote an einem Ort.",
+    categoriesTitle: "WÄHLEN SIE IHRE",
+    categoriesTitleAccent: "RICHTUNG.",
     categories: [
       {
         id: "goods",

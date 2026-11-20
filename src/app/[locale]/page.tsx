@@ -15,10 +15,12 @@ export default function Home() {
           <Hero />
         </CoverPin>
 
-        <CoverPin z={2} tone="light" pin={false} round clip>
+        {/* sticky: Telegram slides over this */}
+        <CoverPin z={2} tone="light">
           <OnePlace />
         </CoverPin>
 
+        {/* sticky + higher z: covers One Place, then ForEveryone covers this */}
         <CoverPin z={4} round={false} clip={false}>
           <PoweredByTelegram />
         </CoverPin>

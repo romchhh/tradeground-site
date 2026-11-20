@@ -4,12 +4,17 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
+  GERMANY_BOUNDS,
   GERMANY_CITIES,
-  GERMANY_MAP_SIZE,
   citiesBySpreadOrder,
-  cityToMapPoint,
   type GermanyCity,
 } from "@/data/germanyCities";
+
+/** Esri dark canvas — no API key required */
+const TILE_URL =
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}";
+const LABELS_URL =
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}";
 
 function pinHtml(city: GermanyCity, isActive: boolean, appearing: boolean) {
   const active = isActive ? " is-active" : "";
@@ -79,20 +84,17 @@ export function GermanyLeafletMap({
     const el = containerRef.current;
     if (!el || mapRef.current) return;
 
-    const { width: W, height: H } = GERMANY_MAP_SIZE;
-    const bounds = L.latLngBounds([0, 0], [H, W]);
+    const bounds = L.latLngBounds(GERMANY_BOUNDS);
 
     const map = L.map(el, {
-      crs: L.CRS.Simple,
       zoomControl: false,
       attributionControl: false,
-      minZoom: -1.2,
-      maxZoom: 1.6,
-      zoomSnap: 0.1,
-      zoomDelta: 0.4,
-      wheelPxPerZoomLevel: 90,
-      maxBounds: bounds.pad(0.02),
-      maxBoundsViscosity: 1,
+      minZoom: 5,
+      maxZoom: 11,
+      zoomSnap: 0.25,
+      zoomDelta: 0.5,
+      maxBounds: bounds.pad(0.4),
+      maxBoundsViscosity: 0.75,
       scrollWheelZoom: true,
       touchZoom: true,
       dragging: true,
@@ -103,27 +105,39 @@ export function GermanyLeafletMap({
 
     L.control.zoom({ position: "topright" }).addTo(map);
 
-    L.imageOverlay("/media/germany/map.png", bounds, {
-      interactive: false,
-      opacity: 1,
+    L.tileLayer(TILE_URL, {
+      maxZoom: 16,
+      className: "germany__map-tiles",
+      updateWhenIdle: true,
+      keepBuffer: 2,
+      attribution: "Esri",
     }).addTo(map);
 
-    map.fitBounds(bounds, { padding: [8, 8] });
-    map.setMinZoom(map.getZoom());
+    L.tileLayer(LABELS_URL, {
+      maxZoom: 16,
+      className: "germany__map-tiles germany__map-tiles--labels",
+      updateWhenIdle: true,
+      keepBuffer: 2,
+      opacity: 0.85,
+    }).addTo(map);
+
+    map.fitBounds(bounds, { padding: [28, 28] });
     mapRef.current = map;
 
-    // One invalidate after layout — avoid ResizeObserver thrash
     const sizeTimer = window.setTimeout(() => {
       map.invalidateSize();
-      const min = map.getBoundsZoom(bounds, false);
-      map.setMinZoom(min);
-      if (map.getZoom() < min) map.setZoom(min);
-    }, 80);
+    }, 100);
     timersRef.current.push(sizeTimer);
+
+    const ro = new ResizeObserver(() => {
+      map.invalidateSize({ animate: false });
+    });
+    ro.observe(el);
 
     return () => {
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
+      ro.disconnect();
       markersRef.current.forEach((m) => m.remove());
       markersRef.current.clear();
       map.remove();
@@ -137,6 +151,9 @@ export function GermanyLeafletMap({
     if (!map || !revealed || revealedOnceRef.current) return;
     revealedOnceRef.current = true;
 
+    // Ensure tiles layout after section becomes visible
+    map.invalidateSize({ animate: false });
+
     const ordered = citiesBySpreadOrder(cities);
 
     ordered.forEach((city, index) => {
@@ -144,8 +161,7 @@ export function GermanyLeafletMap({
         if (markersRef.current.has(city.id)) return;
 
         const isActive = city.id === highlightIdRef.current;
-        const point = cityToMapPoint(city);
-        const marker = L.marker(point, {
+        const marker = L.marker([city.lat, city.lng], {
           icon: makeIcon(city, isActive, true),
           riseOnHover: true,
           zIndexOffset: isActive ? 1000 : city.featured ? 400 : 0,
@@ -157,11 +173,10 @@ export function GermanyLeafletMap({
 
         markersRef.current.set(city.id, marker);
 
-        // Drop appearing class after animation
         window.setTimeout(() => {
           marker.setIcon(makeIcon(city, city.id === highlightIdRef.current));
-        }, 500);
-      }, 120 + index * 90);
+        }, 450);
+      }, 100 + index * 85);
 
       timersRef.current.push(timer);
     });
@@ -173,12 +188,14 @@ export function GermanyLeafletMap({
     const city = cities.find((c) => c.id === selectedId);
     if (!city) return;
 
-    const point = cityToMapPoint(city);
     const targetZoom = Math.min(
       map.getMaxZoom(),
-      Math.max(map.getZoom(), map.getMinZoom() + 0.45)
+      Math.max(map.getZoom(), 7)
     );
-    map.flyTo(point, targetZoom, { duration: 0.45, easeLinearity: 0.25 });
+    map.flyTo([city.lat, city.lng], targetZoom, {
+      duration: 0.5,
+      easeLinearity: 0.25,
+    });
   }, [selectedId, cities]);
 
   return (

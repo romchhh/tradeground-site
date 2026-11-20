@@ -3,10 +3,8 @@ export type GermanyCity = {
   name: string;
   /** Marketplace filter value */
   filter: string;
-  /** Vertical position on map.png (0–100) */
-  top: number;
-  /** Horizontal position on map.png (0–100) */
-  left: number;
+  lat: number;
+  lng: number;
   featured?: boolean;
   ads: number;
   weekly: number;
@@ -17,8 +15,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "hamburg",
     name: "HAMBURG",
     filter: "Hamburg",
-    top: 7,
-    left: 36,
+    lat: 53.5511,
+    lng: 9.9937,
     featured: true,
     ads: 487,
     weekly: 112,
@@ -27,8 +25,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "bremen",
     name: "BREMEN",
     filter: "Bremen",
-    top: 18,
-    left: 32,
+    lat: 53.0793,
+    lng: 8.8017,
     ads: 142,
     weekly: 31,
   },
@@ -36,8 +34,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "hannover",
     name: "HANNOVER",
     filter: "Hannover",
-    top: 28,
-    left: 40,
+    lat: 52.3759,
+    lng: 9.732,
     ads: 198,
     weekly: 44,
   },
@@ -45,8 +43,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "berlin",
     name: "BERLIN",
     filter: "Berlin",
-    top: 26,
-    left: 68,
+    lat: 52.52,
+    lng: 13.405,
     featured: true,
     ads: 920,
     weekly: 204,
@@ -55,8 +53,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "leipzig",
     name: "LEIPZIG",
     filter: "Leipzig",
-    top: 42,
-    left: 62,
+    lat: 51.3397,
+    lng: 12.3731,
     ads: 176,
     weekly: 39,
   },
@@ -64,8 +62,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "dresden",
     name: "DRESDEN",
     filter: "Dresden",
-    top: 48,
-    left: 74,
+    lat: 51.0504,
+    lng: 13.7373,
     ads: 154,
     weekly: 33,
   },
@@ -73,8 +71,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "koln",
     name: "KÖLN",
     filter: "Köln",
-    top: 48,
-    left: 18,
+    lat: 50.9375,
+    lng: 6.9603,
     featured: true,
     ads: 356,
     weekly: 88,
@@ -83,8 +81,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "frankfurt",
     name: "FRANKFURT AM MAIN",
     filter: "Frankfurt am Main",
-    top: 54,
-    left: 36,
+    lat: 50.1109,
+    lng: 8.6821,
     featured: true,
     ads: 410,
     weekly: 97,
@@ -93,8 +91,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "stuttgart",
     name: "STUTTGART",
     filter: "Stuttgart",
-    top: 70,
-    left: 34,
+    lat: 48.7758,
+    lng: 9.1829,
     ads: 268,
     weekly: 61,
   },
@@ -102,8 +100,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "nurnberg",
     name: "NÜRNBERG",
     filter: "Nürnberg",
-    top: 62,
-    left: 52,
+    lat: 49.4521,
+    lng: 11.0767,
     ads: 187,
     weekly: 42,
   },
@@ -111,33 +109,33 @@ export const GERMANY_CITIES: GermanyCity[] = [
     id: "munchen",
     name: "MÜNCHEN",
     filter: "München",
-    top: 82,
-    left: 58,
+    lat: 48.1351,
+    lng: 11.582,
     featured: true,
     ads: 640,
     weekly: 151,
   },
 ];
 
-/** Pixel size of /media/germany/map.png */
-export const GERMANY_MAP_SIZE = { width: 1699, height: 1163 } as const;
+/** Geographic center of Germany — spread animation origin */
+export const GERMANY_CENTER = { lat: 51.1657, lng: 10.4515 } as const;
 
-export function cityToMapPoint(city: GermanyCity): [number, number] {
-  return [
-    (GERMANY_MAP_SIZE.height * city.top) / 100,
-    (GERMANY_MAP_SIZE.width * city.left) / 100,
-  ];
+/** Initial view: Germany + neighbors */
+export const GERMANY_BOUNDS: [[number, number], [number, number]] = [
+  [47.2, 5.7],
+  [55.1, 15.1],
+];
+
+export function cityDistanceFromCenter(city: GermanyCity): number {
+  const dLat = city.lat - GERMANY_CENTER.lat;
+  const dLng = city.lng - GERMANY_CENTER.lng;
+  return Math.hypot(dLat, dLng);
 }
 
 export function citiesBySpreadOrder(
   cities: GermanyCity[] = GERMANY_CITIES
 ): GermanyCity[] {
-  // Spread from geographic center of the artwork (~middle of Germany)
-  const cx = 50;
-  const cy = 48;
-  return [...cities].sort((a, b) => {
-    const da = Math.hypot(a.left - cx, a.top - cy);
-    const db = Math.hypot(b.left - cx, b.top - cy);
-    return da - db;
-  });
+  return [...cities].sort(
+    (a, b) => cityDistanceFromCenter(a) - cityDistanceFromCenter(b)
+  );
 }

@@ -14,6 +14,7 @@ export function ForEveryone() {
         <div className="everyone__header">
           <div>
             <div className="everyone__labels">
+              <span>{e.labelDiscover}</span>
               <span className="is-active">{e.labelActive}</span>
             </div>
             <h2 className="everyone__title">
@@ -32,15 +33,18 @@ export function ForEveryone() {
         </div>
 
         <div className="everyone__grid">
-          <article className="everyone-card">
-            <Image
-              src="/media/everyone/private/everyone-1.png"
-              alt=""
-              fill
-              className="everyone-card__bg"
-              sizes="(max-width: 900px) 100vw, 50vw"
-            />
-            <div className="everyone-card__overlay" />
+          <article className="everyone-card everyone-card--private">
+            <div className="everyone-card__media">
+              <Image
+                src="/media/everyone/private/everyone-1.png"
+                alt=""
+                fill
+                className="everyone-card__bg"
+                sizes="(max-width: 900px) 100vw, 50vw"
+                priority={false}
+              />
+              <div className="everyone-card__overlay" />
+            </div>
 
             <div className="everyone-card__content">
               <h3>{e.privateTitle}</h3>
@@ -48,13 +52,15 @@ export function ForEveryone() {
             </div>
 
             <div className="everyone-card__float everyone-card__float--sofa">
-              <Image
-                src="/media/everyone/private/photo-sofa.png"
-                alt=""
-                width={88}
-                height={68}
-              />
-              <div>
+              <span className="everyone-card__thumb">
+                <Image
+                  src="/media/everyone/private/photo-sofa.png"
+                  alt=""
+                  width={72}
+                  height={56}
+                />
+              </span>
+              <div className="everyone-card__meta">
                 <strong>{e.sofa}</strong>
                 <span>280 €</span>
               </div>
@@ -63,6 +69,7 @@ export function ForEveryone() {
                 alt=""
                 width={16}
                 height={16}
+                className="everyone-card__heart"
               />
             </div>
 
@@ -70,11 +77,11 @@ export function ForEveryone() {
               <Image
                 src="/media/everyone/private/photo-electrician.png"
                 alt=""
-                width={52}
-                height={52}
+                width={48}
+                height={48}
                 className="everyone-card__avatar"
               />
-              <div>
+              <div className="everyone-card__meta">
                 <strong>{e.electrician}</strong>
                 <span className="everyone-card__rating">
                   <Image
@@ -89,13 +96,15 @@ export function ForEveryone() {
             </div>
 
             <div className="everyone-card__float everyone-card__float--shoes">
-              <Image
-                src="/media/everyone/private/photo-sneakers.png"
-                alt=""
-                width={88}
-                height={68}
-              />
-              <div>
+              <span className="everyone-card__thumb">
+                <Image
+                  src="/media/everyone/private/photo-sneakers.png"
+                  alt=""
+                  width={72}
+                  height={56}
+                />
+              </span>
+              <div className="everyone-card__meta">
                 <strong>{e.sneakers}</strong>
                 <span>120 €</span>
               </div>
@@ -104,6 +113,7 @@ export function ForEveryone() {
                 alt=""
                 width={16}
                 height={16}
+                className="everyone-card__heart"
               />
             </div>
 
@@ -124,15 +134,17 @@ export function ForEveryone() {
             </a>
           </article>
 
-          <article className="everyone-card" id="for-business">
-            <Image
-              src="/media/everyone/business/everyone-2.png"
-              alt=""
-              fill
-              className="everyone-card__bg"
-              sizes="(max-width: 900px) 100vw, 50vw"
-            />
-            <div className="everyone-card__overlay" />
+          <article className="everyone-card everyone-card--business" id="for-business">
+            <div className="everyone-card__media">
+              <Image
+                src="/media/everyone/business/everyone-2.png"
+                alt=""
+                fill
+                className="everyone-card__bg"
+                sizes="(max-width: 900px) 100vw, 50vw"
+              />
+              <div className="everyone-card__overlay" />
+            </div>
 
             <div className="everyone-card__content">
               <h3>{e.businessTitle}</h3>
@@ -144,8 +156,8 @@ export function ForEveryone() {
                 <Image
                   src="/media/everyone/business/stats.svg"
                   alt=""
-                  width={21}
-                  height={25}
+                  width={22}
+                  height={26}
                 />
                 <Image
                   src="/media/everyone/business/arrow-up.svg"
@@ -159,26 +171,28 @@ export function ForEveryone() {
             </div>
 
             <div className="everyone-card__widget everyone-card__widget--clients">
-              <span>{e.newClients}</span>
-              <strong>+12</strong>
+              <div className="everyone-card__clients-copy">
+                <span>{e.newClients}</span>
+                <strong>+12</strong>
+              </div>
               <div className="everyone-card__avatars">
                 <Image
                   src="/media/everyone/business/photo-client-1.png"
                   alt=""
-                  width={32}
-                  height={32}
+                  width={34}
+                  height={34}
                 />
                 <Image
                   src="/media/everyone/business/photo-client-2.png"
                   alt=""
-                  width={32}
-                  height={32}
+                  width={34}
+                  height={34}
                 />
                 <Image
                   src="/media/everyone/business/photo-client-3.png"
                   alt=""
-                  width={32}
-                  height={32}
+                  width={34}
+                  height={34}
                 />
                 <span className="everyone-card__plus">
                   <Image
@@ -191,7 +205,10 @@ export function ForEveryone() {
               </div>
             </div>
 
-            <Link href={`/${locale}/business`} className="btn btn--accent everyone-card__btn">
+            <Link
+              href={`/${locale}/business`}
+              className="btn btn--accent everyone-card__btn"
+            >
               {e.more}
               <Image
                 src="/media/hero/button-down-black.svg"

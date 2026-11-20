@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
 
 const categoryMeta: Record<
@@ -20,25 +19,6 @@ const categoryMeta: Record<
   c10: { image: "/media/one-place/09-house.png" },
   c11: { image: "/media/one-place/08-services.png", dark: true },
   c12: { image: "/media/one-place/07-animals.png" },
-};
-
-/** Final offsets from stage center (cqi/cqh) + rotation — kept tight so cards stay in frame */
-const flyLayout: Record<
-  string,
-  { x: number; y: number; rot: number; z?: number }
-> = {
-  c1: { x: -34, y: -28, rot: -6, z: 2 },
-  c2: { x: -12, y: -30, rot: 4, z: 2 },
-  c3: { x: 12, y: -29, rot: -3, z: 2 },
-  c4: { x: 34, y: -27, rot: 5, z: 2 },
-  c5: { x: -38, y: -4, rot: -7, z: 4 },
-  c6: { x: 38, y: -2, rot: 6, z: 2 },
-  c7: { x: -36, y: 18, rot: 4, z: 2 },
-  c8: { x: 36, y: 20, rot: -4, z: 2 },
-  c9: { x: -28, y: 30, rot: -5, z: 2 },
-  c10: { x: -8, y: 32, rot: 3, z: 2 },
-  c11: { x: 12, y: 31, rot: -4, z: 3 },
-  c12: { x: 30, y: 29, rot: 5, z: 2 },
 };
 
 function PlaceCard({
@@ -60,7 +40,13 @@ function PlaceCard({
         .join(" ")}
     >
       <div className="card__photo">
-        <Image src={meta.image} alt={cat.title} fill sizes="240px" className="card__img" />
+        <Image
+          src={meta.image}
+          alt={cat.title}
+          fill
+          sizes="240px"
+          className="card__img"
+        />
       </div>
       <h3 className="card__title">{cat.title}</h3>
       <p className="card__count">{cat.count}</p>
@@ -70,13 +56,12 @@ function PlaceCard({
 
 export function OnePlace() {
   const { home, marketplace } = useI18n();
-  const fieldRef = useRef<HTMLDivElement>(null);
-
   const cards = home.onePlace.categories.map((cat) => ({
     cat,
     meta: categoryMeta[cat.id],
-    layout: flyLayout[cat.id],
   }));
+  const rowA = cards.filter((_, i) => i % 2 === 0);
+  const rowB = cards.filter((_, i) => i % 2 === 1);
 
   return (
     <section className="one-place screen" id="one-place">
@@ -92,22 +77,33 @@ export function OnePlace() {
           02 <i /> ONE PLACE
         </span>
 
-        <div className="one-place__field" ref={fieldRef} aria-hidden>
-          {cards.map(({ cat, meta, layout }, i) => (
+        {/* Desktop: fixed scatter matching design screenshot */}
+        <div className="one-place__orbit" aria-hidden>
+          {cards.map(({ cat, meta }) => (
+            <PlaceCard key={cat.id} cat={cat} meta={meta} />
+          ))}
+        </div>
+
+        {/* Mobile: scrolling marquees */}
+        <div className="one-place__marquees">
+          {[rowA, rowB].map((row, rowIndex) => (
             <div
-              key={cat.id}
-              className="one-place__fly"
-              data-fly-slot
-              style={{
-                ["--i" as string]: i,
-                ["--tx" as string]: `${layout.x}cqi`,
-                ["--ty" as string]: `${layout.y}cqh`,
-                ["--rot" as string]: `${layout.rot}deg`,
-                ["--z" as string]: layout.z ?? 2,
-                zIndex: layout.z ?? 2,
-              }}
+              key={rowIndex}
+              className={`one-place__marquee${
+                rowIndex === 1 ? " one-place__marquee--back" : ""
+              }`}
             >
-              <PlaceCard cat={cat} meta={meta} />
+              <div className="one-place__track">
+                {[0, 1].map((copy) =>
+                  row.map(({ cat, meta }) => (
+                    <PlaceCard
+                      key={`${cat.id}-${copy}`}
+                      cat={cat}
+                      meta={meta}
+                    />
+                  ))
+                )}
+              </div>
             </div>
           ))}
         </div>
