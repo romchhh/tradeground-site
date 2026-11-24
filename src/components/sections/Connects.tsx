@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
 
 const pairMedia = [
@@ -68,9 +69,37 @@ function Pin() {
 export function Connects() {
   const { home } = useI18n();
   const c = home.connects;
+  const sectionRef = useRef<HTMLElement>(null);
+  const [matched, setMatched] = useState(0);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setMatched(c.pairs.length);
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        c.pairs.forEach((_, index) => {
+          window.setTimeout(() => {
+            setMatched((n) => Math.max(n, index + 1));
+          }, 180 + index * 420);
+        });
+        io.disconnect();
+      },
+      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [c.pairs]);
 
   return (
-    <section className="connects screen" id="connects">
+    <section className="connects screen" id="connects" ref={sectionRef}>
       <div className="container connects__inner">
         <div className="connects__left">
           <div className="connects__intro">
@@ -120,56 +149,61 @@ export function Connects() {
         </div>
 
         <div className="connects__collage">
-          {c.pairs.map((pair, index) => (
-            <div
-              key={pair.badge}
-              className={`connects__pair connects__pair--${index + 1}`}
-            >
-              <span className="connects__badge">
-                <Image
-                  src="/media/connects/smiling-face.svg"
-                  alt=""
-                  width={16}
-                  height={16}
-                />
-                {pair.badge}
-              </span>
-              {pair.cards.map((card, cardIndex) => {
-                const media = pairMedia[index].cards[cardIndex];
-                return (
-                  <article
-                    key={`${card.role}-${media.side}`}
-                    className={`connects-card connects-card--${media.side}`}
-                  >
-                    <div className="connects-card__meta">
-                      <Image
-                        src={media.avatar}
-                        alt=""
-                        width={28}
-                        height={28}
-                        className="connects-card__avatar"
-                      />
-                      <div className="connects-card__text">
-                        <span className="connects-card__role">{card.role}</span>
-                        <div className="connects-card__title-row">
-                          <strong>{card.title}</strong>
-                          {card.price ? <em>{card.price}</em> : null}
+          {c.pairs.map((pair, index) => {
+            const isMatched = matched > index;
+            return (
+              <div
+                key={pair.badge}
+                className={`connects__pair connects__pair--${index + 1}${
+                  isMatched ? " is-matched" : ""
+                }`}
+              >
+                <span className="connects__badge">
+                  <Image
+                    src="/media/connects/smiling-face.svg"
+                    alt=""
+                    width={16}
+                    height={16}
+                  />
+                  {pair.badge}
+                </span>
+                {pair.cards.map((card, cardIndex) => {
+                  const media = pairMedia[index].cards[cardIndex];
+                  return (
+                    <article
+                      key={`${card.role}-${media.side}`}
+                      className={`connects-card connects-card--${media.side}`}
+                    >
+                      <div className="connects-card__meta">
+                        <Image
+                          src={media.avatar}
+                          alt=""
+                          width={28}
+                          height={28}
+                          className="connects-card__avatar"
+                        />
+                        <div className="connects-card__text">
+                          <span className="connects-card__role">{card.role}</span>
+                          <div className="connects-card__title-row">
+                            <strong>{card.title}</strong>
+                            {card.price ? <em>{card.price}</em> : null}
+                          </div>
+                          <span className="connects-card__detail">
+                            <Pin />
+                            {card.location}
+                          </span>
                         </div>
-                        <span className="connects-card__detail">
-                          <Pin />
-                          {card.location}
-                        </span>
                       </div>
-                    </div>
-                    <div className="connects-card__photo">
-                      <Image src={media.photo} alt="" fill sizes="220px" />
-                    </div>
-                    <p className="connects-card__caption">{card.caption}</p>
-                  </article>
-                );
-              })}
-            </div>
-          ))}
+                      <div className="connects-card__photo">
+                        <Image src={media.photo} alt="" fill sizes="220px" />
+                      </div>
+                      <p className="connects-card__caption">{card.caption}</p>
+                    </article>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

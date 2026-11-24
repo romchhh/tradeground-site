@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { Footer } from "@/components/sections/Footer";
 
@@ -49,30 +49,74 @@ function InstagramIcon() {
 }
 
 type Topic = Dictionary["contacts"]["topics"][number];
+type FieldKey = Topic["fields"][number];
 
 const tones = ["general", "business", "ads", "support"] as const;
+
+const emptyForm = {
+  name: "",
+  company: "",
+  city: "",
+  contact: "",
+  budget: "",
+  platform: "",
+  message: "",
+};
 
 export default function ContactsView({ dict }: { dict: Dictionary["contacts"] }) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [sentTopic, setSentTopic] = useState<string | null>(null);
   const [errorTopic, setErrorTopic] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
-  const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [message, setMessage] = useState("");
+  const [form, setForm] = useState(emptyForm);
+
+  const labelMap = useMemo(
+    () =>
+      ({
+        name: { label: dict.formNameLabel, placeholder: dict.formNamePlaceholder },
+        company: {
+          label: dict.formCompanyLabel,
+          placeholder: dict.formCompanyPlaceholder,
+        },
+        city: { label: dict.formCityLabel, placeholder: dict.formCityPlaceholder },
+        contact: {
+          label: dict.formContactLabel,
+          placeholder: dict.formContactPlaceholder,
+        },
+        budget: {
+          label: dict.formBudgetLabel,
+          placeholder: dict.formBudgetPlaceholder,
+        },
+        platform: {
+          label: dict.formPlatformLabel,
+          placeholder: dict.formPlatformOptions[0],
+        },
+        message: {
+          label: dict.formMessageLabel,
+          placeholder: dict.formMessagePlaceholder,
+        },
+      }) as Record<FieldKey, { label: string; placeholder: string }>,
+    [dict]
+  );
 
   const toggle = (id: string) => {
     setSentTopic(null);
     setErrorTopic(null);
-    setName("");
-    setContact("");
-    setMessage("");
+    setForm(emptyForm);
     setOpenId((prev) => (prev === id ? null : id));
+  };
+
+  const setField = (key: keyof typeof emptyForm, value: string) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
   };
 
   const onSubmit = async (e: FormEvent, topic: Topic) => {
     e.preventDefault();
-    if (sending || !name.trim() || !contact.trim() || !message.trim()) return;
+    if (sending) return;
+
+    for (const key of topic.fields) {
+      if (!form[key].trim()) return;
+    }
 
     setSending(true);
     setErrorTopic(null);
@@ -82,9 +126,13 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: name.trim(),
-          contact: contact.trim(),
-          message: message.trim(),
+          name: form.name.trim(),
+          contact: form.contact.trim(),
+          message: form.message.trim(),
+          company: form.company.trim() || undefined,
+          city: form.city.trim() || undefined,
+          budget: form.budget.trim() || undefined,
+          platform: form.platform.trim() || undefined,
           topicId: topic.id,
           topicTitle: topic.title,
         }),
@@ -101,6 +149,60 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
     } finally {
       setSending(false);
     }
+  };
+
+  const renderField = (key: FieldKey) => {
+    const meta = labelMap[key];
+    if (key === "message") {
+      return (
+        <label key={key}>
+          <span>{meta.label}</span>
+          <textarea
+            required
+            name={key}
+            rows={3}
+            value={form.message}
+            placeholder={meta.placeholder}
+            onChange={(e) => setField("message", e.target.value)}
+          />
+        </label>
+      );
+    }
+    if (key === "platform") {
+      return (
+        <label key={key}>
+          <span>{meta.label}</span>
+          <select
+            required
+            name={key}
+            value={form.platform}
+            onChange={(e) => setField("platform", e.target.value)}
+          >
+            <option value="" disabled>
+              {meta.placeholder}
+            </option>
+            {dict.formPlatformOptions.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
+          </select>
+        </label>
+      );
+    }
+    return (
+      <label key={key}>
+        <span>{meta.label}</span>
+        <input
+          required
+          name={key}
+          autoComplete={key === "name" ? "name" : key === "contact" ? "email" : "off"}
+          value={form[key]}
+          placeholder={meta.placeholder}
+          onChange={(e) => setField(key, e.target.value)}
+        />
+      </label>
+    );
   };
 
   return (
@@ -155,39 +257,7 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
                         </div>
                       ) : isOpen ? (
                         <form className="talk-form" onSubmit={(e) => onSubmit(e, topic)}>
-                          <label>
-                            <span>{dict.formNameLabel}</span>
-                            <input
-                              required
-                              name="name"
-                              autoComplete="name"
-                              value={name}
-                              placeholder={dict.formNamePlaceholder}
-                              onChange={(e) => setName(e.target.value)}
-                            />
-                          </label>
-                          <label>
-                            <span>{dict.formContactLabel}</span>
-                            <input
-                              required
-                              name="contact"
-                              autoComplete="email"
-                              value={contact}
-                              placeholder={dict.formContactPlaceholder}
-                              onChange={(e) => setContact(e.target.value)}
-                            />
-                          </label>
-                          <label>
-                            <span>{dict.formMessageLabel}</span>
-                            <textarea
-                              required
-                              name="message"
-                              rows={3}
-                              value={message}
-                              placeholder={dict.formMessagePlaceholder}
-                              onChange={(e) => setMessage(e.target.value)}
-                            />
-                          </label>
+                          {topic.fields.map((field) => renderField(field))}
                           <button
                             type="submit"
                             className="btn btn--light talk-form__submit"
@@ -210,15 +280,25 @@ export default function ContactsView({ dict }: { dict: Dictionary["contacts"] })
           <div className="container">
             <h2>{dict.otherTitle}</h2>
             <div className="talk__links">
-              <a href={`mailto:${dict.emailValue}`}>
+              <a className="talk-link talk-link--mail" href={`mailto:${dict.emailValue}`}>
                 <MailIcon />
                 {dict.emailValue}
               </a>
-              <a href={dict.telegramUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                className="talk-link talk-link--tg"
+                href={dict.telegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <TelegramIcon />
                 {dict.telegramValue}
               </a>
-              <a href={dict.instagramUrl} target="_blank" rel="noopener noreferrer">
+              <a
+                className="talk-link talk-link--ig"
+                href={dict.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <InstagramIcon />
                 {dict.instagramValue}
               </a>

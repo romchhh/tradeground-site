@@ -27,6 +27,10 @@ export async function POST(request: Request) {
   const message = trimField(body.message, MAX_LEN);
   const topicId = trimField(body.topicId, 40);
   const topicTitle = trimField(body.topicTitle, 200);
+  const company = trimField(body.company, 200) || undefined;
+  const city = trimField(body.city, 120) || undefined;
+  const budget = trimField(body.budget, 200) || undefined;
+  const platform = trimField(body.platform, 120) || undefined;
 
   if (!name || !contact || !message || !topicId || !topicTitle) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -38,6 +42,10 @@ export async function POST(request: Request) {
     message,
     topicId,
     topicTitle,
+    company,
+    city,
+    budget,
+    platform,
   });
 
   const result = await sendTelegramMessage(text);

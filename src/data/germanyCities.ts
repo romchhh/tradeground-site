@@ -5,6 +5,9 @@ export type GermanyCity = {
   filter: string;
   lat: number;
   lng: number;
+  /** Position on static map.png (percent) */
+  x: number;
+  y: number;
   featured?: boolean;
   ads: number;
   weekly: number;
@@ -17,6 +20,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Hamburg",
     lat: 53.5511,
     lng: 9.9937,
+    x: 42,
+    y: 14,
     featured: true,
     ads: 487,
     weekly: 112,
@@ -27,6 +32,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Bremen",
     lat: 53.0793,
     lng: 8.8017,
+    x: 34,
+    y: 18,
     ads: 142,
     weekly: 31,
   },
@@ -36,6 +43,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Hannover",
     lat: 52.3759,
     lng: 9.732,
+    x: 40,
+    y: 28,
     ads: 198,
     weekly: 44,
   },
@@ -45,6 +54,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Berlin",
     lat: 52.52,
     lng: 13.405,
+    x: 68,
+    y: 26,
     featured: true,
     ads: 920,
     weekly: 204,
@@ -55,6 +66,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Leipzig",
     lat: 51.3397,
     lng: 12.3731,
+    x: 60,
+    y: 42,
     ads: 176,
     weekly: 39,
   },
@@ -64,6 +77,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Dresden",
     lat: 51.0504,
     lng: 13.7373,
+    x: 72,
+    y: 46,
     ads: 154,
     weekly: 33,
   },
@@ -73,6 +88,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Köln",
     lat: 50.9375,
     lng: 6.9603,
+    x: 18,
+    y: 48,
     featured: true,
     ads: 356,
     weekly: 88,
@@ -83,6 +100,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Frankfurt am Main",
     lat: 50.1109,
     lng: 8.6821,
+    x: 34,
+    y: 54,
     featured: true,
     ads: 410,
     weekly: 97,
@@ -93,6 +112,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Stuttgart",
     lat: 48.7758,
     lng: 9.1829,
+    x: 38,
+    y: 72,
     ads: 268,
     weekly: 61,
   },
@@ -102,6 +123,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "Nürnberg",
     lat: 49.4521,
     lng: 11.0767,
+    x: 52,
+    y: 64,
     ads: 187,
     weekly: 42,
   },
@@ -111,6 +134,8 @@ export const GERMANY_CITIES: GermanyCity[] = [
     filter: "München",
     lat: 48.1351,
     lng: 11.582,
+    x: 56,
+    y: 82,
     featured: true,
     ads: 640,
     weekly: 151,
@@ -120,7 +145,7 @@ export const GERMANY_CITIES: GermanyCity[] = [
 /** Geographic center of Germany — spread animation origin */
 export const GERMANY_CENTER = { lat: 51.1657, lng: 10.4515 } as const;
 
-/** Initial view: Germany + neighbors */
+/** Initial view: Germany + neighbors (legacy leaflet) */
 export const GERMANY_BOUNDS: [[number, number], [number, number]] = [
   [47.2, 5.7],
   [55.1, 15.1],

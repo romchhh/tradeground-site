@@ -11,19 +11,26 @@ export type ContactPayload = {
   message: string;
   topicId: string;
   topicTitle: string;
+  company?: string;
+  city?: string;
+  budget?: string;
+  platform?: string;
 };
 
 export function formatContactMessage(data: ContactPayload): string {
-  return [
+  const lines = [
     "<b>📩 Нове звернення з сайту TradeGround</b>",
     "",
     `<b>Тема:</b> ${escapeHtml(data.topicTitle)} <i>(${escapeHtml(data.topicId)})</i>`,
     `<b>Ім'я:</b> ${escapeHtml(data.name)}`,
-    `<b>Контакт:</b> ${escapeHtml(data.contact)}`,
-    "",
-    `<b>Повідомлення:</b>`,
-    escapeHtml(data.message),
-  ].join("\n");
+  ];
+  if (data.company) lines.push(`<b>Компанія:</b> ${escapeHtml(data.company)}`);
+  if (data.city) lines.push(`<b>Місто:</b> ${escapeHtml(data.city)}`);
+  lines.push(`<b>Контакт:</b> ${escapeHtml(data.contact)}`);
+  if (data.budget) lines.push(`<b>Бюджет:</b> ${escapeHtml(data.budget)}`);
+  if (data.platform) lines.push(`<b>Платформа:</b> ${escapeHtml(data.platform)}`);
+  lines.push("", `<b>Повідомлення:</b>`, escapeHtml(data.message));
+  return lines.join("\n");
 }
 
 export async function sendTelegramMessage(
