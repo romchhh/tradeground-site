@@ -22,7 +22,6 @@ export function Hero() {
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const langRef = useRef<HTMLDivElement>(null);
 
@@ -44,13 +43,6 @@ export function Hero() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
     if (!langOpen) return;
     const onPointer = (e: MouseEvent | TouchEvent) => {
       if (!langRef.current?.contains(e.target as Node)) setLangOpen(false);
@@ -70,7 +62,7 @@ export function Hero() {
 
   const headerBar = (
     <>
-      <div className={`hero-nav${scrolled ? " is-scrolled" : ""}`}>
+      <div className="hero-nav">
         <div className="container">
           <nav className="nav">
             <Link href={`/${locale}`} className="nav__logo">

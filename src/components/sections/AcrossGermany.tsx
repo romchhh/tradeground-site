@@ -14,12 +14,10 @@ export function AcrossGermany() {
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [activeId, setActiveId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const ordered = useMemo(() => citiesBySpreadOrder(GERMANY_CITIES), []);
-  const focusId = hoveredId ?? activeId;
-  const focus = GERMANY_CITIES.find((c) => c.id === focusId) ?? null;
+  const focus = GERMANY_CITIES.find((c) => c.id === hoveredId) ?? null;
   const cityMarketplace = focus
     ? `${marketplace}&city=${encodeURIComponent(focus.filter)}`
     : marketplace;
@@ -55,8 +53,7 @@ export function AcrossGermany() {
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [revealed, ordered]);
 
-  const onSelect = useCallback((id: string) => {
-    setActiveId(id);
+  const showCity = useCallback((id: string) => {
     setHoveredId(id);
   }, []);
 
@@ -67,9 +64,16 @@ export function AcrossGermany() {
           06 <i /> ACROSS GERMANY
         </span>
 
-        <div className="germany__map-card">
-          <p className="germany__map-hint">{g.mapHint}</p>
-
+        <div
+          className="germany__map-card"
+          onMouseLeave={() => setHoveredId(null)}
+          onClick={(event) => {
+            const target = event.target as HTMLElement;
+            if (!target.closest(".germany-pin, .germany__tooltip")) {
+              setHoveredId(null);
+            }
+          }}
+        >
           <div className="germany__map-photo" role="img" aria-label={g.mapAlt}>
             <Image
               src="/media/germany/map.png"
@@ -82,7 +86,7 @@ export function AcrossGermany() {
 
             {ordered.map((city, index) => {
               const shown = index < visibleCount;
-              const isFocus = focusId === city.id;
+              const isFocus = hoveredId === city.id;
               return (
                 <button
                   key={city.id}
@@ -92,12 +96,12 @@ export function AcrossGermany() {
                   }${isFocus ? " is-active" : ""}`}
                   style={{ left: `${city.x}%`, top: `${city.y}%` }}
                   aria-label={city.name}
-                  aria-pressed={activeId === city.id}
-                  onClick={() => onSelect(city.id)}
-                  onMouseEnter={() => setHoveredId(city.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onFocus={() => setHoveredId(city.id)}
-                  onBlur={() => setHoveredId(null)}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    showCity(city.id);
+                  }}
+                  onMouseEnter={() => showCity(city.id)}
+                  onFocus={() => showCity(city.id)}
                 >
                   <span className="germany-pin__dot" aria-hidden />
                   <span className="germany-pin__name">{city.name}</span>

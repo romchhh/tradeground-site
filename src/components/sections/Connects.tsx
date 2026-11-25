@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useI18n } from "@/i18n/LanguageContext";
 
 const pairMedia = [
@@ -70,33 +70,48 @@ export function Connects() {
   const { home } = useI18n();
   const c = home.connects;
   const sectionRef = useRef<HTMLElement>(null);
-  const [matched, setMatched] = useState(0);
 
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
+    const root = sectionRef.current;
+    if (!root) return;
+    const pairs = [...root.querySelectorAll<HTMLElement>(".connects__pair")];
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const apply = (progress: number, el: HTMLElement) => {
+      const value = Math.min(1, Math.max(0, progress));
+      el.style.setProperty("--in", value.toFixed(3));
+      el.classList.toggle("is-settled", value > 0.96);
+    };
+
     if (reduce) {
-      setMatched(c.pairs.length);
+      pairs.forEach((el) => apply(1, el));
       return;
     }
 
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        c.pairs.forEach((_, index) => {
-          window.setTimeout(() => {
-            setMatched((n) => Math.max(n, index + 1));
-          }, 180 + index * 420);
-        });
-        io.disconnect();
-      },
-      { threshold: 0.22, rootMargin: "0px 0px -8% 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [c.pairs]);
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      const start = vh * 0.92;
+      const end = vh * 0.36;
+      pairs.forEach((el) => {
+        const top = el.getBoundingClientRect().top;
+        apply((start - top) / (start - end), el);
+      });
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
 
   return (
     <section className="connects screen" id="connects" ref={sectionRef}>
@@ -150,13 +165,11 @@ export function Connects() {
 
         <div className="connects__collage">
           {c.pairs.map((pair, index) => {
-            const isMatched = matched > index;
             return (
               <div
                 key={pair.badge}
-                className={`connects__pair connects__pair--${index + 1}${
-                  isMatched ? " is-matched" : ""
-                }`}
+                className={`connects__pair connects__pair--${index + 1}`}
+                style={{ ["--in" as string]: 0 }}
               >
                 <span className="connects__badge">
                   <Image

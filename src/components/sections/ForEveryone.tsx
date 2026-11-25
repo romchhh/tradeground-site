@@ -23,13 +23,6 @@ export function ForEveryone() {
               <span>{e.titleAccent}</span>
             </h2>
           </div>
-          <p className="everyone__script">
-            {e.script[0]}
-            <br />
-            {e.script[1]}
-            <br />
-            {e.script[2]}
-          </p>
         </div>
 
         <div className="everyone__grid">

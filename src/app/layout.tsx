@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Preloader } from "@/components/fx/Preloader";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -62,6 +63,7 @@ export default function RootLayout({
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
       <body>
+        <Preloader />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:font-body focus:text-sm focus:font-semibold focus:text-bg"

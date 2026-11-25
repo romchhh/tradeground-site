@@ -5,7 +5,9 @@ const nextConfig = {
   compress: true,
   productionBrowserSourceMaps: false,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // WebP at 90. AVIF was mapped to ~47 and made every photo look soft.
+    formats: ["image/webp"],
+    qualities: [90],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   compiler: {

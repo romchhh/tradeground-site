@@ -20,16 +20,15 @@ const AUTO_MS = 4200;
 const RESUME_MS = 6500;
 
 export function PoweredByTelegram() {
-  const { home, marketplace } = useI18n();
+  const { home } = useI18n();
   const slides = home.telegram.slides;
   const features = home.telegram.features;
   const count = slides.length;
 
   const sectionRef = useRef<HTMLElement>(null);
+  const progressRef = useRef<HTMLSpanElement>(null);
   const [active, setActive] = useState(0);
-  const [progress, setProgress] = useState(0);
   const [inView, setInView] = useState(false);
-  const [paused, setPaused] = useState(false);
   const resumeAtRef = useRef(0);
   const lastTickRef = useRef(0);
   const elapsedRef = useRef(0);
@@ -39,10 +38,11 @@ export function PoweredByTelegram() {
       const next = ((index % count) + count) % count;
       setActive(next);
       elapsedRef.current = 0;
-      setProgress(0);
+      if (progressRef.current) {
+        progressRef.current.style.width = `${(next / count) * 100}%`;
+      }
       if (manual) {
         resumeAtRef.current = performance.now() + RESUME_MS;
-        setPaused(true);
       }
     },
     [count]
@@ -61,10 +61,7 @@ export function PoweredByTelegram() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduce.matches || !inView) {
-      setProgress(active === count - 1 ? 1 : (active + 1) / count);
-      return;
-    }
+    if (reduce.matches || !inView) return;
 
     let raf = 0;
     lastTickRef.current = performance.now();
@@ -73,16 +70,16 @@ export function PoweredByTelegram() {
       const dt = now - lastTickRef.current;
       lastTickRef.current = now;
 
-      if (paused) {
-        if (now >= resumeAtRef.current) setPaused(false);
-      } else {
+      const holding = now < resumeAtRef.current;
+      if (!holding) {
         elapsedRef.current += dt;
         const p = Math.min(1, elapsedRef.current / AUTO_MS);
-        setProgress(p);
+        if (progressRef.current) {
+          progressRef.current.style.width = `${((active + p) / count) * 100}%`;
+        }
         if (p >= 1) {
           elapsedRef.current = 0;
           setActive((prev) => (prev + 1) % count);
-          setProgress(0);
         }
       }
 
@@ -91,29 +88,13 @@ export function PoweredByTelegram() {
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [active, count, inView, paused]);
+  }, [active, count, inView]);
 
   return (
     <section
       ref={sectionRef}
       className="telegram screen"
       id="marketplace"
-      onMouseEnter={() => {
-        resumeAtRef.current = Number.POSITIVE_INFINITY;
-        setPaused(true);
-      }}
-      onMouseLeave={() => {
-        resumeAtRef.current = performance.now() + 900;
-      }}
-      onFocusCapture={() => {
-        resumeAtRef.current = Number.POSITIVE_INFINITY;
-        setPaused(true);
-      }}
-      onBlurCapture={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) {
-          resumeAtRef.current = performance.now() + 900;
-        }
-      }}
     >
       <div className="telegram__frame">
         <div className="telegram__glow" aria-hidden />
@@ -134,22 +115,9 @@ export function PoweredByTelegram() {
 
             <p className="telegram__subtitle">{home.telegram.subtitle}</p>
 
-            <div className="telegram__features" role="tablist" aria-label="Telegram features">
+            <div className="telegram__features">
               {features.map((f, i) => (
-                <article
-                  key={f.title}
-                  className={`telegram-card${i === active ? " is-active" : ""}`}
-                  onClick={() => goTo(i, true)}
-                  role="tab"
-                  tabIndex={0}
-                  aria-selected={i === active}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      goTo(i, true);
-                    }
-                  }}
-                >
+                <article key={f.title} className="telegram-card">
                   <div className="telegram-card__icon">
                     <Image src={featureIcons[i]} alt="" width={36} height={36} />
                   </div>
@@ -159,21 +127,6 @@ export function PoweredByTelegram() {
               ))}
             </div>
 
-            <a
-              href={marketplace}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn--light"
-            >
-              {home.telegram.cta}
-              <Image
-                src="/media/hero/button-down-black.svg"
-                alt=""
-                width={9}
-                height={9}
-                className="chev chev--bl"
-              />
-            </a>
           </div>
 
           <div className="telegram__phone" aria-live="polite">
@@ -228,18 +181,8 @@ export function PoweredByTelegram() {
               <span className="telegram__count">
                 {active + 1} / {count}
               </span>
-              <span
-                className="telegram__progress"
-                aria-hidden
-                style={{ ["--n" as string]: count }}
-              >
-                <span
-                  className="telegram__progress-fill"
-                  style={{
-                    width: `${((active + progress) / count) * 100}%`,
-                    transition: paused ? "none" : undefined,
-                  }}
-                />
+              <span className="telegram__progress" aria-hidden>
+                <span ref={progressRef} className="telegram__progress-fill" />
               </span>
               <button
                 type="button"

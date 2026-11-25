@@ -309,13 +309,6 @@ export function OnePlace() {
       ref={sectionRef}
       style={{ ["--one-place-rate" as string]: 1.35 }}
     >
-      <div
-        className="one-place__bg"
-        style={{
-          backgroundImage: "url('/media/one-place/background-one-place.jpg')",
-        }}
-      />
-
       <div className="one-place__stage">
         <span className="section-tag section-tag--dark one-place__tag">
           02 <i /> ONE PLACE
