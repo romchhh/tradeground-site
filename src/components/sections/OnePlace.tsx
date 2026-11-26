@@ -7,18 +7,18 @@ import { useI18n } from "@/i18n/LanguageContext";
 /** Resting orbit layout (% of orbit box) — must match globals.css */
 const ORBIT_LAYOUT: Record<string, { left: number; top: number; w: number; h: number }> =
   {
-    c1: { left: 5.5, top: 4.5, w: 16.2, h: 20.4 },
-    c2: { left: 25.5, top: 2.8, w: 16.2, h: 20.4 },
-    c3: { left: 48.5, top: 4, w: 16.2, h: 20.4 },
-    c4: { left: 72, top: 3.6, w: 16.2, h: 20.4 },
-    c5: { left: 1.2, top: 26, w: 18.6, h: 23.4 },
-    c6: { left: 76.5, top: 29, w: 16.2, h: 20.4 },
-    c7: { left: 2.4, top: 57, w: 16.2, h: 20.4 },
-    c8: { left: 77, top: 57.5, w: 16.2, h: 20.4 },
-    c9: { left: 12, top: 72, w: 16.2, h: 20.4 },
-    c10: { left: 31.5, top: 70.5, w: 16.2, h: 20.4 },
-    c11: { left: 51.5, top: 69.5, w: 16.2, h: 20.4 },
-    c12: { left: 73, top: 73, w: 16.2, h: 20.4 },
+    c1: { left: 18, top: 8, w: 16.2, h: 20.4 },
+    c2: { left: 34, top: 5, w: 16.2, h: 20.4 },
+    c3: { left: 52, top: 6, w: 16.2, h: 20.4 },
+    c4: { left: 68, top: 8, w: 16.2, h: 20.4 },
+    c5: { left: 8, top: 30, w: 18.6, h: 23.4 },
+    c6: { left: 74, top: 32, w: 16.2, h: 20.4 },
+    c7: { left: 10, top: 52, w: 16.2, h: 20.4 },
+    c8: { left: 74, top: 52, w: 16.2, h: 20.4 },
+    c9: { left: 18, top: 72, w: 16.2, h: 20.4 },
+    c10: { left: 34, top: 74, w: 16.2, h: 20.4 },
+    c11: { left: 50, top: 72, w: 16.2, h: 20.4 },
+    c12: { left: 66, top: 74, w: 16.2, h: 20.4 },
   };
 
 const STAGE_CENTER_X = 0.5;
@@ -117,18 +117,16 @@ export function OnePlace() {
       })
       .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
-    const FLIGHT = 1.15;
-    const GAP = 0.32;
-    const easeOut = (t: number) => 1 - (1 - t) ** 3;
-    const easeIn = (t: number) => t ** 3;
+    const FLIGHT = 2.8;
+    const GAP = 0.46;
 
     let raf = 0;
     let last = 0;
     let clock = 0;
     let rate = 1;
     let rateTarget = 1;
-    const idleRate = 1;
-    const maxRate = 2.05;
+    const idleRate = 0.72;
+    const maxRate = 1.55;
     let running = false;
 
     const hideCard = (card: HTMLElement) => {
@@ -144,7 +142,7 @@ export function OnePlace() {
       if (!last) last = now;
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
-      rate += (rateTarget - rate) * 0.12;
+      rate += (rateTarget - rate) * 0.2;
       clock += dt * rate;
 
       const box = orbit.getBoundingClientRect();
@@ -157,8 +155,6 @@ export function OnePlace() {
 
       const cx = w * STAGE_CENTER_X;
       const cy = h * STAGE_CENTER_Y;
-      const viewR = window.innerWidth;
-      const viewB = window.innerHeight;
       const n = specs.length;
       const cycle = Math.max(n * GAP, FLIGHT + GAP);
 
@@ -171,60 +167,18 @@ export function OnePlace() {
         }
 
         const { left, top, w: cw, h: ch } = layout;
-        const cardW = (cw / 100) * w;
-        const cardH = (ch / 100) * h;
         const cardCx = ((left + cw / 2) / 100) * w;
         const cardCy = ((top + ch / 2) / 100) * h;
         const ox = cx - cardCx;
         const oy = cy - cardCy;
-
-        let vx = cardCx - cx;
-        let vy = cardCy - cy;
-        const len = Math.hypot(vx, vy) || 1;
-        vx /= len;
-        vy /= len;
-
-        const seatVx = box.left + cardCx;
-        const seatVy = box.top + cardCy;
-        const pad = 48;
-        let travel = 2400;
-        if (vx > 0.02) travel = Math.min(travel, (viewR + cardW / 2 + pad - seatVx) / vx);
-        if (vx < -0.02) travel = Math.min(travel, (0 - cardW / 2 - pad - seatVx) / vx);
-        if (vy > 0.02) travel = Math.min(travel, (viewB + cardH / 2 + pad - seatVy) / vy);
-        if (vy < -0.02) travel = Math.min(travel, (0 - cardH / 2 - pad - seatVy) / vy);
-        travel = Math.max(travel, Math.hypot(ox, oy) * 0.35);
-
-        let x = 0;
-        let y = 0;
-        let opacity = 1;
-        let blur = 0;
-        let scale = 1;
-        let spin = rot;
-
-        if (u < 0.46) {
-          const p = easeOut(u / 0.46);
-          x = ox * (1 - p);
-          y = oy * (1 - p);
-          opacity = Math.min(1, p * 1.35);
-          blur = (1 - p) * 8;
-          scale = 0.62 + 0.38 * p;
-          spin = rot * p;
-        } else if (u < 0.62) {
-          x = 0;
-          y = 0;
-          opacity = 1;
-          blur = 0;
-          scale = 1;
-          spin = rot;
-        } else {
-          const p = easeIn((u - 0.62) / 0.38);
-          x = vx * travel * p;
-          y = vy * travel * p;
-          opacity = p < 0.78 ? 1 : 1 - (p - 0.78) / 0.22;
-          blur = p * 4;
-          scale = 1 + p * 0.06;
-          spin = rot;
-        }
+        const p = u;
+        const along = p * 1.16;
+        const x = ox * (1 - along);
+        const y = oy * (1 - along);
+        const scale = 0.42 + 0.7 * p;
+        const blur = Math.max(0, 14 * (1 - p / 0.72));
+        const opacity = p < 0.1 ? p / 0.1 : p > 0.86 ? Math.max(0, (1 - p) / 0.14) : 1;
+        const spin = rot * Math.min(1, along);
 
         card.style.visibility = "visible";
         card.style.zIndex = String(30 - Math.round(u * 20));
@@ -248,11 +202,11 @@ export function OnePlace() {
       const vy = Math.abs(y - lastY) / dt;
       lastY = y;
       lastScrollT = now;
-      rateTarget = Math.min(maxRate, idleRate + vy * 8);
+      rateTarget = Math.min(maxRate, idleRate + vy * 12);
       window.clearTimeout(settle);
       settle = window.setTimeout(() => {
         rateTarget = idleRate;
-      }, 180);
+      }, 220);
     };
 
     let inView = false;

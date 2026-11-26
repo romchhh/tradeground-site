@@ -630,7 +630,7 @@ select {
   position: relative;
   height: 100%;
   width: 100%;
-  max-width: 1480px;
+  max-width: none;
   margin: 0 auto;
   z-index: 1;
 }
@@ -874,71 +874,71 @@ select {
 
 /* Desktop scatter — matches design screenshot, clear of title */
 .one-place__orbit .card--c1 {
-  left: 5.5%;
-  top: 4.5%;
+  left: 18%;
+  top: 8%;
   --card-rot: -7deg;
   z-index: 3;
 }
 .one-place__orbit .card--c2 {
-  left: 25.5%;
-  top: 2.8%;
+  left: 34%;
+  top: 5%;
   --card-rot: 5deg;
   z-index: 3;
 }
 .one-place__orbit .card--c3 {
-  left: 48.5%;
-  top: 4%;
+  left: 52%;
+  top: 6%;
   --card-rot: -4deg;
   z-index: 3;
 }
 .one-place__orbit .card--c4 {
-  left: 72%;
-  top: 3.6%;
+  left: 68%;
+  top: 8%;
   --card-rot: 6deg;
   z-index: 3;
 }
 .one-place__orbit .card--c5 {
-  left: 1.2%;
-  top: 26%;
+  left: 8%;
+  top: 30%;
   --card-rot: -8deg;
   z-index: 5;
 }
 .one-place__orbit .card--c6 {
-  left: 76.5%;
-  top: 29%;
+  left: 74%;
+  top: 32%;
   --card-rot: 7deg;
 }
 .one-place__orbit .card--c7 {
-  left: 2.4%;
-  top: 57%;
+  left: 10%;
+  top: 52%;
   --card-rot: 5deg;
 }
 .one-place__orbit .card--c8 {
-  left: 77%;
-  top: 57.5%;
+  left: 74%;
+  top: 52%;
   --card-rot: -5deg;
 }
 .one-place__orbit .card--c9 {
-  left: 12%;
+  left: 18%;
   top: 72%;
   --card-rot: -6deg;
   z-index: 3;
 }
 .one-place__orbit .card--c10 {
-  left: 31.5%;
-  top: 70.5%;
+  left: 34%;
+  top: 74%;
   --card-rot: 4deg;
   z-index: 3;
 }
 .one-place__orbit .card--c11 {
-  left: 51.5%;
-  top: 69.5%;
+  left: 50%;
+  top: 72%;
   --card-rot: -5deg;
   z-index: 4;
 }
 .one-place__orbit .card--c12 {
-  left: 73%;
-  top: 73%;
+  left: 66%;
+  top: 74%;
   --card-rot: 6deg;
   z-index: 3;
 }
