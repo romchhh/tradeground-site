@@ -79,7 +79,7 @@ export function AcrossGermany() {
               src="/media/germany/map.png"
               alt=""
               fill
-              sizes="(max-width: 900px) 100vw, 1100px"
+              sizes="(max-width: 900px) 100vw, 1699px"
               className="germany__map-img"
               priority={false}
             />

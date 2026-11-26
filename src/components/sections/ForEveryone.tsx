@@ -13,10 +13,9 @@ export function ForEveryone() {
       <div className="container everyone__inner">
         <div className="everyone__header">
           <div>
-            <div className="everyone__labels">
-              <span>{e.labelDiscover}</span>
-              <span className="is-active">{e.labelActive}</span>
-            </div>
+            <span className="section-tag section-tag--light">
+              04 <i /> FOR EVERYONE
+            </span>
             <h2 className="everyone__title">
               {e.title}
               <br />

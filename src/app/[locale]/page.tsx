@@ -11,8 +11,10 @@ export default function Home() {
     <main id="main" className="home-flow">
       <Hero />
       <OnePlace />
-      <PoweredByTelegram />
-      <ForEveryone />
+      <div className="messenger-band">
+        <PoweredByTelegram />
+        <ForEveryone />
+      </div>
       <Connects />
       <AcrossGermany />
       <Footer />

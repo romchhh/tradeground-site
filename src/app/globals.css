@@ -327,17 +327,12 @@ select {
   overflow: hidden;
 }
 
-.chev {
+.chev,
+.chev--tr,
+.chev--bl {
   width: 9px;
   height: 9px;
-}
-
-.chev--tr {
-  transform: rotate(-90deg);
-}
-
-.chev--bl {
-  transform: rotate(90deg);
+  transform: none;
 }
 
 .btn {
@@ -980,11 +975,22 @@ select {
 }
 
 /* ===================================================================
+   03–04 SHARED DARK BAND (Telegram + For Everyone)
+=================================================================== */
+.messenger-band {
+  position: relative;
+  background: #050505;
+  border-radius: 40px 40px 0 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ===================================================================
    03 TELEGRAM
 =================================================================== */
 .telegram {
   position: relative;
-  background: var(--bg-dark);
+  background: transparent;
   color: var(--white);
 }
 
@@ -992,7 +998,7 @@ select {
   height: 100dvh;
   min-height: 100dvh;
   max-height: 100dvh;
-  padding: 20px;
+  padding: 28px 0 0;
   box-sizing: border-box;
   display: flex;
   overflow: hidden;
@@ -1014,9 +1020,9 @@ select {
 .telegram__frame {
   position: relative;
   height: 100%;
-  border-radius: var(--radius-xl);
-  background: #050505;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0;
+  background: transparent;
+  border: none;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -1294,10 +1300,11 @@ select {
 =================================================================== */
 .everyone {
   position: relative;
-  background: var(--bg-dark);
+  background: transparent;
   color: var(--white);
   display: flex;
   align-items: stretch;
+  margin-top: 0;
 }
 
 .everyone.screen {
@@ -1307,26 +1314,10 @@ select {
   overflow: hidden;
 }
 
-.everyone::before {
-  content: "";
-  position: absolute;
-  top: -12%;
-  left: -6%;
-  width: 42%;
-  height: 58%;
-  background: radial-gradient(circle, rgba(120, 160, 70, 0.14), transparent 72%);
-  pointer-events: none;
-}
-
+.everyone::before,
 .everyone::after {
-  content: "";
-  position: absolute;
-  top: -8%;
-  right: -4%;
-  width: 38%;
-  height: 50%;
-  background: radial-gradient(circle, rgba(100, 140, 60, 0.1), transparent 70%);
-  pointer-events: none;
+  content: none;
+  display: none;
 }
 
 .everyone__inner {
@@ -1351,20 +1342,8 @@ select {
   flex-shrink: 0;
 }
 
-.everyone__labels {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.everyone__header .section-tag {
   margin-bottom: 16px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
-}
-
-.everyone__labels .is-active {
-  color: rgba(255, 255, 255, 0.92);
 }
 
 .everyone__title {
@@ -1679,7 +1658,7 @@ select {
 .connects.screen {
   position: relative;
   background: #ffffff;
-  border-radius: 0;
+  border-radius: 40px 40px 0 0;
   margin-top: 0;
   z-index: 2;
   display: flex;
@@ -2008,9 +1987,9 @@ select {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 28px;
-  padding-bottom: 40px;
-  gap: 18px;
+  padding-top: 20px;
+  padding-bottom: 24px;
+  gap: 14px;
 }
 
 .germany__inner > .section-tag {
@@ -2024,9 +2003,10 @@ select {
 .germany__map-wrap {
   position: relative;
   flex: 0 1 auto;
-  width: min(100%, calc((100dvh - 188px) * 1.461));
+  width: min(100%, 1699px, calc((100dvh - 120px) * 1699 / 1163));
   aspect-ratio: 1699 / 1163;
-  max-height: calc(100dvh - 188px);
+  max-height: min(1163px, calc(100dvh - 120px));
+  height: auto;
   min-height: 0;
   margin-inline: auto;
   border-radius: 28px;
@@ -2066,7 +2046,7 @@ select {
 }
 
 .germany__map-img {
-  object-fit: fill;
+  object-fit: contain;
   object-position: center;
   pointer-events: none;
   user-select: none;
@@ -2293,7 +2273,7 @@ select {
 }
 
 .footer__top-icon {
-  transform: rotate(-135deg);
+  transform: none;
 }
 
 .footer__content {
@@ -2493,7 +2473,11 @@ select {
   }
 
   .telegram.screen {
-    padding: 12px;
+    padding: 16px 0 0;
+  }
+
+  .messenger-band {
+    border-radius: 28px 28px 0 0;
   }
 
   .everyone__header {
@@ -2563,7 +2547,7 @@ select {
 
   .germany__map-card,
   .germany__map-wrap {
-    min-height: 520px;
+    min-height: 0;
   }
 
   .footer__shell {
@@ -4154,11 +4138,15 @@ select {
     font-size: 11px;
   }
 
+  .messenger-band {
+    border-radius: 24px 24px 0 0;
+  }
+
   .telegram.screen {
     height: auto;
     min-height: 100svh;
     max-height: none;
-    padding: 76px 10px 12px;
+    padding: 56px 0 0;
     overflow: visible;
   }
 
@@ -4166,7 +4154,8 @@ select {
     height: auto;
     min-height: calc(100svh - 88px);
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 0;
+    border: none;
   }
 
   .telegram__inner {
@@ -4413,6 +4402,7 @@ select {
     height: auto;
     min-height: 0;
     overflow: visible;
+    border-radius: 24px 24px 0 0;
   }
 
   .connects__inner {
